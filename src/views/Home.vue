@@ -16,6 +16,7 @@
                 <p>view history photos</p> <!--this should be a route instead-->
             </div>
         </div>
+
         <div id="lower-section">
             <!--<button>Change Tree Name</button>
             <button>Request for a Leaf</button>
@@ -46,7 +47,7 @@
 </script>
 
 <style scoped>
-    #tree-number {
+   /* #tree-number {
         padding: 20px 20px 20px 100px;
         font-size: 50px;
     }
@@ -70,5 +71,5 @@
     }
     #lower-section {
 
-    }
+    }*/
 </style>
