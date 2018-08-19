@@ -1,18 +1,17 @@
 <template>
   <div>
     <Header/>
-    <p>Home</p>
+    <p>Register</p>
   </div>
 </template>
 
 <script>
-  import Header from "../views/Header";
+  import Header from '../views/Header'
 
   export default {
-    name: "Home",
-
+    name: "Register",
     components: {
-      Header
+      Header,
     }
   }
 </script>
