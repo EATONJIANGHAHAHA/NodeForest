@@ -4,7 +4,10 @@
 
 <script>
     export default {
-        name: "MyAccount"
+        name: "MyAccount",
+        components:{
+            
+        }
     }
 </script>
 
