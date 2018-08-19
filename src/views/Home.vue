@@ -1,20 +1,20 @@
 <template>
-  <div>
-    <Header/>
-    <p>Home</p>
-  </div>
+    <div>
+        <Header/>
+        <p>Home</p>
+    </div>
 </template>
 
 <script>
-  import Header from "../views/Header";
+    import Header from "../views/Header"
 
-  export default {
-    name: "Home",
+    export default {
+        name: "Home",
 
-    components: {
-      Header
+        components: {
+            Header
+        }
     }
-  }
 </script>
 
 <style scoped>
