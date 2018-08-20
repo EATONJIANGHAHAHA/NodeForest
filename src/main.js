@@ -7,7 +7,7 @@ import theme from 'muse-ui/lib/theme'
 
 Vue.config.productionTip = true
 
-theme.use('dark')
+
 Vue.use(MuseUI)
 
 new Vue({
