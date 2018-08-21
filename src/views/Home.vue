@@ -14,7 +14,9 @@
                 <p>Height: {{height}}cm</p><br/>
                 <p>Health: {{health}}</p><br/>
                 <p>Location: {{location}}</p><br/>
-                <p>view history photos</p> <!--this should be a route instead-->
+                <input type="button" value="Historical photos"/> <!--this should be a route instead-->
+                <input type="button" value="Post cards"/>
+                <router-link to="/myaccount" id="myaccount">My account</router-link>
             </div>
         </mu-flex>
 
@@ -27,7 +29,7 @@
 </template>
 
 <script>
-    import Header from "../views/Header"
+    import Header from "../components/Header"
 
     export default {
         name: "Home",

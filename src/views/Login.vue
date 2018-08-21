@@ -6,19 +6,20 @@
             <p v-if="!hide">descriptions</p>
             <form v-if="!hide">
                 USERNAME:<br>
-                <input type="text" name="username" v-model="userName">
+                <input type="text" name="username" v-model="userName"/>
                 <br>
                 PASSWORD:<br>
-                <input type="text" name="password" v-model="passWord">
+                <input type="text" name="password" v-model="passWord"/>
                 <br><br>
-                <input type="button" @click="checkUser" value="Login">
+                <router-link to="/home" id="home">Log in as user</router-link>
+                <router-link to="/treemanagement" id="staff">Log in as staff</router-link>
             </form>
         </div>
     </div>
 </template>
 
 <script>
-    import Header from '../views/Header'
+    import Header from '../components/Header'
 
     export default {
         name: "Login",

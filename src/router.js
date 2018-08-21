@@ -6,6 +6,7 @@ import Home from './views/Home'
 import Login from './views/Login'
 import MyAccount from './views/MyAccount'
 import Register from './views/Register'
+import TreeManagement from './views/TreeManagement'
 
 Vue.use(Router)
 
@@ -34,6 +35,10 @@ export default new Router({
       {
           path: '/myaccount',
           component: MyAccount,
+      },
+      {
+          path: '/treemanagement',
+          component: TreeManagement,
       },
   ]
 })
