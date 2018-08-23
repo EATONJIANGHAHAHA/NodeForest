@@ -1,23 +1,29 @@
 <template>
     <div >
         <Header/>
-        <div>
-            <p>Tree No. {{treeNumber}}</p>
-        </div>
+        <h1>Tree No. {{treeNumber}}</h1>
         <mu-flex class="flex-wrapper" justify-content="center" fill>
             <mu-flex justify-content="end" fill>
                 <img src="../../public/tree.jpg" height="200px" width="200px"/>
-                <p>Updated at: {{date}}th, {{month}}, {{year}}</p>
+                <!--<p>Updated at: {{date}}th, {{month}}, {{year}}</p>-->
             </mu-flex>
 
-            <div id="tree-info">
-                <p>Height: {{height}}cm</p><br/>
-                <p>Health: {{health}}</p><br/>
-                <p>Location: {{location}}</p><br/>
-                <input type="button" value="Historical photos"/> <!--this should be a route instead-->
-                <input type="button" value="Post cards"/>
-                <router-link to="/myaccount" id="myaccount">My account</router-link>
-            </div>
+            <mu-list nested-indent="true">
+                <mu-list-item  v-for="item in infos" v-bind="item.id">
+                    <mu-list-item-title>{{item.label}}</mu-list-item-title>
+                    <mu-list-item-content>{{item.value}}</mu-list-item-content>
+                </mu-list-item>
+                <mu-button>Historical Photos</mu-button>
+                <mu-button>Postcards</mu-button>
+            </mu-list>
+            <!--<div id="tree-info">-->
+                <!--<p>Height: {{height}}cm</p><br/>-->
+                <!--<p>Health: {{health}}</p><br/>-->
+                <!--<p>Location: {{location}}</p><br/>-->
+                <!--<input type="button" value="Historical photos"/> &lt;!&ndash;this should be a route instead&ndash;&gt;-->
+                <!--<input type="button" value="Post cards"/>-->
+                <!--<router-link to="/myaccount" id="myaccount">My account</router-link>-->
+            <!--</div>-->
         </mu-flex>
 
         <div id="lower-section">
@@ -34,14 +40,22 @@
     export default {
         name: "Home",
 
-        data() {
+        data(){
             return {
                 treeNumber: 123456,
                 date: 32,
                 month: 'Jun',
-                year: 2020
+                year: 2020,
+                infos: [
+                    {id: 1, label: 'Height: ', value:'100cm'},
+                    {id: 2, label: 'Health: ', value:'Good'},
+                    {id: 3, label: 'Location: ', value:'Africa'},
+                    {id: 4, label: 'Updated: ', value: new Date()},
+             ]
             }
+
         },
+
 
         components: {
             Header
