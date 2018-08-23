@@ -26,6 +26,7 @@
 <script>
     import Header from '../components/Header'
     import Router from '../router'
+    import store from "../store";
 
     export default {
         name: "Login",
@@ -58,7 +59,7 @@
                 if (this.form.userName === '123' && this.form.passWord === '456') {
                     if (this.form.select === 'User') {
                         Router.push('home')
-                        this.clear()
+                        store.commit("SET_USER", userName)
                     }
                     else {
                         //TODO: jump to staff main page.
@@ -67,8 +68,8 @@
             },
 
             clear() {
-                this.form.userName = '';
-                this.form.passWord = '';
+                this.form.userName = ''
+                this.form.passWord = ''
             },
         }
     }
