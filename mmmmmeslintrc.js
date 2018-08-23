@@ -1,4 +1,5 @@
 module.exports = {
+    "root": false,
     "env": {
         "browser": true,
         "es6": true,
@@ -27,7 +28,7 @@ module.exports = {
         // 分号结尾
         "semi": [
             "error",
-            "always"
+            "never"
         ],
         "no-unused-vars": [2, {
             // 允许声明未使用变量
