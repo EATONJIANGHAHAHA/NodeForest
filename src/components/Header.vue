@@ -11,12 +11,10 @@
 </template>
 
 <script>
-    import Button from "muse-ui/es5/internal/mixins/button"
 
     export default {
         name: "Header",
         components: {
-            Button
         }
     }
 </script>

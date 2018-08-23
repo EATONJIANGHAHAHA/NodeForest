@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import MuseUI from 'muse-ui'
-import theme from 'muse-ui/lib/theme'
+import 'muse-ui/dist/muse-ui.css'
 
 Vue.config.productionTip = true
 
