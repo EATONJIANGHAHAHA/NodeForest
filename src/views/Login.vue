@@ -1,9 +1,9 @@
 <template>
     <div>
         <Header/>
-        <mu-container>
+        <mu-container class="main">
             <h1>Welcome</H1>
-            <p v-if="!hide">descriptions</p>
+            <p>descriptions</p>
             <mu-form :model="form" class="mu-login-form" :label-position="labelPosition" label-width="100">
                 <mu-form-item prop="input" label="Username" >
                     <mu-text-field v-model="form.userName"></mu-text-field>
@@ -18,7 +18,7 @@
                     </mu-select>
                 </mu-form-item>
             </mu-form>
-            <mu-button @click="check">Login</mu-button>
+            <mu-button round @click="check" color="primary">Login</mu-button>
         </mu-container>
     </div>
 </template>
@@ -56,10 +56,10 @@
         },
         methods: {
             check() {
-                if (this.form.userName === '123' && this.form.passWord === '456') {
+                if (this.form.passWord === '123') {
                     if (this.form.select === 'User') {
+                        store.commit("setUserName", this.form.userName)
                         Router.push('home')
-                        store.commit("SET_USER", userName)
                     }
                     else {
                         //TODO: jump to staff main page.

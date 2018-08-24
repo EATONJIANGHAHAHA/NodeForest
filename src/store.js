@@ -4,18 +4,23 @@ import Vuex from 'vuex'
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+    //defines application-wise variable.
     state: {
-        user_name: ''
+        userName: ''
     },
+    /*
+    this function are used for changing states. All states must changed using commit only
+    so that the real time refreshments for all components shell work.
+     */
     mutations: {
-        "SET_USER": function (state, user_name) {
-            state.user_name = user_name
+        setUserName(state, userName) {
+            state.userName = userName;
         }
     },
     getters: {
-        "GET_USER": function(state) {
-            return state.user_name
-        }
+
     },
-    actions: {}
+    actions: {
+
+    }
 })
