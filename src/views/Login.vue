@@ -9,7 +9,7 @@
                     <mu-text-field v-model="form.userName"></mu-text-field>
                 </mu-form-item>
                 <mu-form-item prop="input" label="Password" >
-                    <mu-text-field v-model="form.passWord"></mu-text-field>
+                    <mu-text-field type="password" v-model="form.passWord"></mu-text-field>
                 </mu-form-item>
                 <mu-form-item prop="select" label="Login as: ">
                     <mu-select v-model="form.select">
@@ -56,9 +56,9 @@
         },
         methods: {
             check() {
-                if (this.form.passWord === '123') {
+                if (this.form.passWord === this.form.userName) {
                     if (this.form.select === 'User') {
-                        store.commit("setUserName", this.form.userName)
+                        store.commit("setUserName", this.form.userName);
                         Router.push('home')
                     }
                     else {
@@ -68,8 +68,8 @@
             },
 
             clear() {
-                this.form.userName = ''
-                this.form.passWord = ''
+                this.form.userName = '';
+                this.form.passWord = '';
             },
         }
     }
