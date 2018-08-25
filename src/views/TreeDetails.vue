@@ -21,6 +21,7 @@
 
 <script>
     import Header from "../components/Header"
+    import treeInfos from "../components/SudoTreeInfos"
 
     export default {
         name: "TreeDetails",
@@ -36,11 +37,21 @@
                     {id: 2, label: 'Health: ', value: 'Good'},
                     {id: 3, label: 'Location: ', value: 'Africa'},
                     {id: 4, label: 'Updated: ', value: new Date()},
-                ]
+                ],
+                //this syntax will define a object.
+                treeInfo: {},
             }
         },
         components: {
             Header
+        },
+        mounted() {
+            treeInfos.forEach(function(treeInfo) {
+                if(treeInfo.headerTitle === this.$route.params.headerTitle){
+                    console.log(this.$route.params.headerTitle);
+                    this.treeInfo = treeInfo;
+                }
+            })
         }
     }
 </script>

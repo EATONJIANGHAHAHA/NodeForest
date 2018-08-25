@@ -1,7 +1,11 @@
 <template>
     <div>
         <Header/>
-        <p>About</p>
+        <mu-container>
+            <mu-flex justify-content="center">
+                <p>There will be more information available soon.</p>
+            </mu-flex>
+        </mu-container>
     </div>
 </template>
 

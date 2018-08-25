@@ -16,8 +16,8 @@
                     {{contentText}}
                 </mu-card-text>
                 <mu-card-actions>
-                    <mu-button flat>Action 1</mu-button>
-                    <mu-button flat>Action 2</mu-button>
+                    <mu-button flat v-bind:to="routePath">View</mu-button>
+                    <mu-button flat v-bind:to="routePath">Edit</mu-button>
                 </mu-card-actions>
             </mu-card>
         </mu-container>
@@ -42,7 +42,12 @@
             'contentText'
         ],
         data() {
-            return {}
+            return {
+                routePath: '/'
+            }
+        },
+        mounted() {
+            this.routePath = this.routePath + "tree-details/" + this.headerTitle;
         }
     }
 </script>

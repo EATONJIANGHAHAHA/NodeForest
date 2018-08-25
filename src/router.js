@@ -7,8 +7,9 @@ import Login from './views/Login'
 import MyAccount from './views/MyAccount'
 import Register from './views/Register'
 import TreeManagement from './views/TreeManagement'
+import TreeDetails from './views/TreeDetails'
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
   routes: [
@@ -31,6 +32,11 @@ export default new Router({
       {
           path: '/register',
           component: Register,
+      },
+      {
+          //dynamic routing passing headerTitle value into TreeDetails component.
+          path: '/tree-details/:headerTitle',
+          component: TreeDetails,
       },
       {
           path: '/myaccount',

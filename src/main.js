@@ -6,13 +6,20 @@ import MuseUI from 'muse-ui'
 import Theme from 'muse-ui/lib/theme'
 import 'muse-ui/dist/muse-ui.css'
 
-Vue.config.productionTip = true
+Vue.config.productionTip = true;
 
-Theme.use('light');
+Theme.add('project', {
+    primary: '#a5d6a7'
+}, 'light');
+
+Theme.use('project');
 Vue.use(MuseUI);
 
 new Vue({
+    el: '#app',
     router,
     store,
-    render: h => h(App)
-}).$mount('#app');
+    render: h => h(App),
+    template: '<App/>',
+    components: { App }
+});
