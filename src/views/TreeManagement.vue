@@ -3,7 +3,7 @@
     <h1>Tree Management</h1>
     <p>Tree No. {{treeNumber}}</p>
 
-    <img src="../../public/tree1.jpg" height="200px" width="200px"/>
+    <img src="../img/tree1.jpg" height="200px" width="200px"/>
     <p>Updated at: {{date}}th, {{month}}, {{year}}</p>
 
     <div>

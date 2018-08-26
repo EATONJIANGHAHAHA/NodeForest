@@ -4,7 +4,7 @@
         <h1>Tree No. {{treeNumber}}</h1>
         <mu-flex class="flex-wrapper" justify-content="center" fill>
             <mu-flex justify-content="end" fill>
-                <img src="../../public/tree1.jpg" height="200px" width="200px"/>
+                <img src="../img/tree1.jpg" height="200px" width="200px"/>
             </mu-flex>
 
             <mu-list nested-indent="true">
