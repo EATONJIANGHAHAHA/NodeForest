@@ -6,10 +6,10 @@
             <p>descriptions</p>
             <mu-form :model="form" class="mu-login-form" :label-position="labelPosition" label-width="100">
                 <mu-form-item prop="input" label="Username" >
-                    <mu-text-field v-model="form.userName"></mu-text-field>
+                    <mu-text-field v-model="form.user.username"></mu-text-field>
                 </mu-form-item>
                 <mu-form-item prop="input" label="Password" >
-                    <mu-text-field type="password" v-model="form.passWord"></mu-text-field>
+                    <mu-text-field type="password" v-model="form.user.password"></mu-text-field>
                 </mu-form-item>
                 <mu-form-item prop="select" label="Login as: ">
                     <mu-select v-model="form.select">
@@ -26,7 +26,7 @@
 <script>
     import Header from '../components/Header'
     import Router from '../router'
-    import store from "../store";
+    import User from "../model/User";
 
     export default {
         name: "Login",
@@ -45,10 +45,8 @@
                 ],
                 labelPosition: 'top',
                 form: {
-                    userName: '',
-                    passWord: '',
+                    user: new User,
                 }
-
             }
         },
         components: {
@@ -56,9 +54,15 @@
         },
         methods: {
             check() {
+                //TODO: express api called here.
                 if (this.form.passWord === this.form.userName) {
                     if (this.form.select === 'User') {
-                        store.commit("setUserName", this.form.userName);
+                        this.form.user.id = 1;
+                        this.form.user.address = 'some where on earth';
+                        this.form.user.email = 'eatonjiangtonlei@gmail.com';
+                        this.form.user.balance = 100;
+                        this.form.user.phone = 415030592;
+                        this.$store.dispatch("setUser", this.form.user);
                         Router.push('home')
                     }
                     else {

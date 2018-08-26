@@ -21,7 +21,7 @@
         components: {},
         data() {
             return {
-                userName: ''
+                /*userName: ''*/
             }
         },
         mounted() {
@@ -30,7 +30,7 @@
         computed: {
             isLoggedIn() {
                 //use this syntax to get state from the store for observable.
-                return this.$store.state.userName;
+                return this.$store.state.user.username;
             }
         },
         methods: {
