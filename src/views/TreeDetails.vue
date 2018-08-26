@@ -46,12 +46,12 @@
             Header
         },
         mounted() {
-            treeInfos.forEach(function(treeInfo) {
-                if(treeInfo.headerTitle === this.$route.params.headerTitle){
-                    console.log(this.$route.params.headerTitle);
-                    this.treeInfo = treeInfo;
+            console.log(this.$route.params.location);
+            for (let i = 0; i < treeInfos.length; i++) {
+                if(treeInfos[i].location === this.$route.params.location) {
+                    this.treeInfo = treeInfos[i];
                 }
-            })
+            }
         }
     }
 </script>

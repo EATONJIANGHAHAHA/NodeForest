@@ -12,39 +12,39 @@ import TreeDetails from './views/TreeDetails'
 Vue.use(Router);
 
 export default new Router({
-  routes: [
-      {
-          path: '/',
-          component: Index,
-      },
-      {
-          path: '/about',
-          component: About,
-      },
-      {
-          path: '/home',
-          component: Home,
-      },
-      {
-          path: '/login',
-          component: Login,
-      },
-      {
-          path: '/register',
-          component: Register,
-      },
-      {
-          //dynamic routing passing headerTitle value into TreeDetails component.
-          path: '/tree-details/:headerTitle',
-          component: TreeDetails,
-      },
-      {
-          path: '/myaccount',
-          component: MyAccount,
-      },
-      {
-          path: '/treemanagement',
-          component: TreeManagement,
-      },
-  ]
+    routes: [
+        {
+            path: '/',
+            component: Index,
+        },
+        {
+            path: '/about',
+            component: About,
+        },
+        {
+            path: '/home',
+            component: Home,
+        },
+        {
+            path: '/login',
+            component: Login,
+        },
+        {
+            path: '/register',
+            component: Register,
+        },
+        {
+            //dynamic routing passing location value into TreeDetails component.
+            path: '/tree-details/:location',
+            component: TreeDetails,
+        },
+        {
+            path: '/myaccount',
+            component: MyAccount,
+        },
+        {
+            path: '/treemanagement',
+            component: TreeManagement,
+        },
+    ]
 })

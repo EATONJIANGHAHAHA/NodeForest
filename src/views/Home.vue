@@ -2,7 +2,7 @@
     <div>
         <Header/>
         <!--when iterating through components, make sure :key"id" is used to optimize performance.-->
-        <TreeInfo id="tree-info-list" v-for="treeInfo in treeInfoList" v-bind="treeInfo" :key="treeInfo.headerTitle"></TreeInfo>
+        <TreeInfo id="tree-info-list" v-for="treeInfo in treeInfoList" v-bind="treeInfo" :key="treeInfo.location"></TreeInfo>
     </div>
 </template>
 

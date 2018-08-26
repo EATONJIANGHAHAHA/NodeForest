@@ -3,15 +3,15 @@
         <mu-container>
             <mu-card style="width: 100%; max-width: 375px; margin: 0 auto;">
                 <!--to bind a data to a component's property, use v-bind syntax instead of {{}}-->
-                <mu-card-header v-bind:title="headerTitle" v-bind:sub-title="headerSubTitle">
+                <mu-card-header v-bind:title="location" >
                     <mu-avatar slot="avatar">
-                        <img v-bind:src="headerImageSrc">
+                        <img v-bind:src="locationImageSrc">
                     </mu-avatar>
                 </mu-card-header>
-                <mu-card-media v-bind:title="mediaTitle" v-bind:sub-title="mediaSubTitle" >
-                    <img v-bind:src="mediaImageSrc">
+                <mu-card-media v-bind:title="species" >
+                    <img v-bind:src="speciesImageSrc">
                 </mu-card-media>
-                <mu-card-title v-bind:title="contentTitle" v-bind:sub-title="contentSubTitle"></mu-card-title>
+                <mu-card-title v-bind:title="treeNumber" ></mu-card-title>
                 <mu-card-text>
                     {{contentText}}
                 </mu-card-text>
@@ -31,13 +31,13 @@
          * props are used for components value passing.
          */
         props: [
-            'headerTitle',
+            'location',
             'headerSubTitle',
-            'headerImageSrc',
-            'mediaTitle',
+            'locationImageSrc',
+            'species',
             'mediaSubTitle',
-            'mediaImageSrc',
-            'contentTitle',
+            'speciesImageSrc',
+            'treeNumber',
             'contentSubTitle',
             'contentText'
         ],
@@ -47,7 +47,7 @@
             }
         },
         mounted() {
-            this.routePath = this.routePath + "tree-details/" + this.headerTitle;
+            this.routePath = this.routePath + "tree-details/" + this.location;
         }
     }
 </script>
