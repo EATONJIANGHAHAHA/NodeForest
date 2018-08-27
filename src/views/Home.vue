@@ -14,10 +14,13 @@
     export default {
         name: "Home",
         created() {
+            //before mounted, we need to get what trees does this user has and store them in vuex.
+            //todo: call server tree api
             this.$store.dispatch('setTrees',this.trees);
         },
         data() {
             return {
+                //right now we are getting trees generated for testing.
                 trees: treeInfoList
             }
         },

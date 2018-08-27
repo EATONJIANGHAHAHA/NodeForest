@@ -30,7 +30,7 @@ export default new Vuex.Store({
             return state.trees;
         },
         getTreebyId:(state) => (treeId) => {
-            return state.trees.find(trees => trees.treeId === treeId);
+            return state.trees.find(tree => tree.treeId === Number(treeId));
         }
     },
     //async tasks.

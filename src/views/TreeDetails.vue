@@ -1,13 +1,13 @@
 <template>
     <div>
         <Header/>
-        <h1>Tree No. {{treeNumber}}</h1>
+        <h1>Tree No. {{tree.treeId}}</h1>
         <mu-flex class="flex-wrapper" justify-content="center" fill>
             <mu-flex justify-content="end" fill>
                 <img src="../img/tree1.jpg" height="200px" width="200px"/>
             </mu-flex>
 
-            <mu-list nested-indent="true">
+            <mu-list >
                 <mu-list-item v-for="item in infos" v-bind="item.id">
                     <mu-list-item-title>{{item.label}}</mu-list-item-title>
                     <mu-list-item-content>{{item.value}}</mu-list-item-content>
@@ -28,34 +28,31 @@
 
         data() {
             return {
+                tree: Tree,
                 treeNumber: 123456,
                 date: 32,
                 month: 'Jun',
                 year: 2020,
                 infos: [
-                    {id: 1, label: 'Height: ', value: '100cm'},
-                    {id: 2, label: 'Health: ', value: 'Good'},
-                    {id: 3, label: 'Location: ', value: 'Africa'},
-                    {id: 4, label: 'Updated: ', value: new Date()},
+                    //here we have to leave the declaration of this array contains objects, we will modify
+                    //this array later after we have passed the data locally during mounting.
+                    {}
                 ],
-                //this syntax will define a object from a class.
-                tree: Tree,
             }
         },
         components: {
             Header
         },
-        mounted() {
-            //console.log(this.$route.params.treeId);
-            //use $store.getter to get a tree
-            let tree = new Tree();
-            tree = this.$store.getters.getTreebyId(this.$route.params.treeId)
-            console.log(tree);
-            /*for (let i = 0; i < treeInfos.length; i++) {
-                if(treeInfos[i].location === this.$route.params.location) {
-                    this.treeInfo = treeInfos[i];
-                }
-            }*/
+        created() {
+            this.tree = this.$store.getters.getTreebyId(this.$route.params.treeId);
+            //here we reinitialize this array as a new empty array.
+            this.infos = [];
+            this.infos.push({id:1, label:'Height', value: this.tree.height});
+            this.infos.push({id:2, label:'Health', value: this.tree.health});
+            this.infos.push({id:3, label:'Location', value: this.tree.location});
+            this.infos.push({id:4, label:'updated', value: new Date()});
+            this.infos.
+            console.log(this.tree.treeId);
         }
     }
 </script>

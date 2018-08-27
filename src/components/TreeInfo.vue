@@ -11,7 +11,7 @@
                 <mu-card-media v-bind:title="species" >
                     <img src='../img/tree1.jpg'>
                 </mu-card-media>
-                <mu-card-title v-bind:title="treeId" ></mu-card-title>
+                <mu-card-title v-bind:title="species" ></mu-card-title>
                 <mu-card-text>
                     {{contentText}}
                 </mu-card-text>
