@@ -9,9 +9,9 @@
                     </mu-avatar>
                 </mu-card-header>
                 <mu-card-media v-bind:title="species" >
-                    <img v-bind:src="speciesImageSrc">
+                    <img src='../img/tree1.jpg'>
                 </mu-card-media>
-                <mu-card-title v-bind:title="treeNumber" ></mu-card-title>
+                <mu-card-title v-bind:title="treeId" ></mu-card-title>
                 <mu-card-text>
                     {{contentText}}
                 </mu-card-text>
@@ -31,14 +31,12 @@
          * props are used for components value passing.
          */
         props: [
+            'treeId',
+            'height',
             'location',
-            'headerSubTitle',
             'locationImageSrc',
             'species',
-            'mediaSubTitle',
             'speciesImageSrc',
-            'treeNumber',
-            'contentSubTitle',
             'contentText'
         ],
         data() {
@@ -47,7 +45,8 @@
             }
         },
         mounted() {
-            this.routePath = this.routePath + "tree-details/" + this.location;
+            /*console.log(this.props.locationImageSrc);*/
+            this.routePath = this.routePath + "tree-details/" + this.treeId;
         }
     }
 </script>

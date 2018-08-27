@@ -35,7 +35,7 @@ export default new Router({
         },
         {
             //dynamic routing passing location value into TreeDetails component.
-            path: '/tree-details/:location',
+            path: '/tree-details/:treeId',
             component: TreeDetails,
         },
         {

@@ -7,7 +7,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     //defines application-wise variable.
     state: {
-        user: new User
+        user: new User,
+        trees: [],
     },
     /*
     this function are used for changing states. All states must changed using commit only
@@ -16,11 +17,20 @@ export default new Vuex.Store({
     mutations: {
         setUser(state, user) {
             state.user = user;
+        },
+        setTrees(state, trees) {
+            state.trees = trees;
         }
     },
     getters: {
         getUser(state) {
             return state.user;
+        },
+        getTrees(state) {
+            return state.trees;
+        },
+        getTreebyId:(state) => (treeId) => {
+            return state.trees.find(trees => trees.treeId === treeId);
         }
     },
     //async tasks.
@@ -37,6 +47,9 @@ export default new Vuex.Store({
             let user = state.getUser();
             user.password = password;
             context.commit('setUser', user)
+        },
+        setTrees(context, trees) {
+            context.commit('setTrees', trees)
         }
     }
 })

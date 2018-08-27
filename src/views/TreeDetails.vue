@@ -21,7 +21,7 @@
 
 <script>
     import Header from "../components/Header"
-    import treeInfos from "../components/SudoTreeInfos"
+    import Tree from "../model/Tree";
 
     export default {
         name: "TreeDetails",
@@ -38,20 +38,24 @@
                     {id: 3, label: 'Location: ', value: 'Africa'},
                     {id: 4, label: 'Updated: ', value: new Date()},
                 ],
-                //this syntax will define a object.
-                treeInfo: {},
+                //this syntax will define a object from a class.
+                tree: Tree,
             }
         },
         components: {
             Header
         },
         mounted() {
-            console.log(this.$route.params.location);
-            for (let i = 0; i < treeInfos.length; i++) {
+            //console.log(this.$route.params.treeId);
+            //use $store.getter to get a tree
+            let tree = new Tree();
+            tree = this.$store.getters.getTreebyId(this.$route.params.treeId)
+            console.log(tree);
+            /*for (let i = 0; i < treeInfos.length; i++) {
                 if(treeInfos[i].location === this.$route.params.location) {
                     this.treeInfo = treeInfos[i];
                 }
-            }
+            }*/
         }
     }
 </script>

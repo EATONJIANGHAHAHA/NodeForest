@@ -2,7 +2,7 @@
     <div>
         <Header/>
         <!--when iterating through components, make sure :key"id" is used to optimize performance.-->
-        <TreeInfo id="tree-info-list" v-for="treeInfo in treeInfoList" v-bind="treeInfo" :key="treeInfo.location"></TreeInfo>
+        <TreeInfo id="tree-info-list" v-for="tree in trees" v-bind="tree" :key="tree.treeId"></TreeInfo>
     </div>
 </template>
 
@@ -13,12 +13,12 @@
 
     export default {
         name: "Home",
-        created: {
-
+        created() {
+            this.$store.dispatch('setTrees',this.trees);
         },
         data() {
             return {
-                treeInfoList
+                trees: treeInfoList
             }
         },
         components: {
