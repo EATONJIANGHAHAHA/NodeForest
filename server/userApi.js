@@ -37,7 +37,7 @@ router.use('/add', function(req, res){
 /**
  * Check whether there is user in the database that has the user name and password.
  */
-router.use('/login', (req, res) => {
+router.post('/login', (req, res) => {
     var sql = userSQL.checkUser;
     var params = req.body;
     console.log(params);
