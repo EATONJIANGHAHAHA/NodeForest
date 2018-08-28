@@ -5,10 +5,10 @@
             <h1>Welcome</H1>
             <p>descriptions</p>
             <mu-form :model="form" class="mu-login-form" :label-position="labelPosition" label-width="100">
-                <mu-form-item prop="input" label="Username" >
+                <mu-form-item prop="input" label="Username">
                     <mu-text-field v-model="form.user.username"></mu-text-field>
                 </mu-form-item>
-                <mu-form-item prop="input" label="Password" >
+                <mu-form-item prop="input" label="Password">
                     <mu-text-field type="password" v-model="form.user.password"></mu-text-field>
                 </mu-form-item>
                 <mu-form-item prop="select" label="Login as: ">
@@ -33,12 +33,15 @@
         data() {
             return {
                 usernameRules: [
-                    { validate: (val) => !!val, message: 'User name is required'},
-                    { validate: (val) => val.length >= 3, message: 'User name has to be longer than 3 characters'}
+                    {validate: (val) => !!val, message: 'User name is required'},
+                    {validate: (val) => val.length >= 3, message: 'User name has to be longer than 3 characters'}
                 ],
                 passwordRules: [
-                    { validate: (val) => !!val, message: 'Password is required'},
-                    { validate: (val) => val.length >= 3 && val.length <= 10, message: 'Password name has to be longer than 3 characters'}
+                    {validate: (val) => !!val, message: 'Password is required'},
+                    {
+                        validate: (val) => val.length >= 3 && val.length <= 10,
+                        message: 'Password name has to be longer than 3 characters'
+                    }
                 ],
                 options: [
                     'User', 'Staff'
@@ -55,23 +58,24 @@
         methods: {
             check() {
                 //TODO: express api called here.
-                // if (this.form.user.password === this.form.username) {
-                    if (this.form.select === 'User') {
-                        this.$http.post('http://127.0.0.1:3000/api/user/login',
-                            {username:this.form.user.username, password:this.form.user.password}, {emulateJSON: true}).then(response => {
-                            //success callback
-                            console.log(response.data);
-                        }, response => {
-                            //error callback
-                            console.log('error');
-                        });
-                        this.$store.dispatch("setUser", this.form.user);
-                        Router.push('home')
-                    }
-                    else {
-                        //TODO: jump to staff main page.
-                    }
-                // }
+                if (this.form.select === 'User') {
+                    this.$http.post('http://127.0.0.1:3000/api/user/login',
+                        {
+                            username: this.form.user.username,
+                            password: this.form.user.password
+                        }).then(response => {
+                        console.log(response.data);
+                        this.$store.dispatch("setUser", response.data);
+                    }, response => {
+                        //error callback
+                        console.log('error');
+                    });
+
+                    Router.push('home')
+                }
+                else {
+                    //TODO: jump to staff main page.
+                }
             },
 
             clear() {
