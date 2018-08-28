@@ -76,7 +76,7 @@ router.get('/searchByUsername', (req, res) => {
     pool.query(sql, [params.username], function(error, results, fields) {
         if (error) throw error;
         if (results) {
-            console.log(results)
+            console.log(results);
             jsonWrite(res, results);
         }
     })

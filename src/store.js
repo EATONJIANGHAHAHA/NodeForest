@@ -4,8 +4,6 @@ import User from "./model/User";
 
 Vue.use(Vuex);
 
-var api = '127.0.0.1:3000/api/';
-
 export default new Vuex.Store({
     //defines application-wise variable.
     state: {
@@ -38,10 +36,7 @@ export default new Vuex.Store({
     //async tasks.
     actions: {
         setUser(context, user) {
-            console.log(user.username, user.password);
-            let url = api + '/login';
-            this.$http.post(url);
-            /*context.commit('setUser', user);*/
+            context.commit('setUser', user);
         },
         setUsername(context, username) {
             let user = state.getUser();
