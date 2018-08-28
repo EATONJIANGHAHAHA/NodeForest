@@ -28,7 +28,7 @@ router.use('/add', function(req, res){
     pool.query(sql, [params.username, params.password, params.email, params.address, params.phone], function(error, results, fields) {
         if (error) throw error;
         if (results) {
-            console.log(results)
+            console.log(results);
             jsonWrite(res, results);
         }
     })
@@ -44,7 +44,7 @@ router.use('/login', (req, res) => {
     pool.query(sql, [params.username, params.password], function(error, results, fields) {
         if (error) throw error;
         if (results) {
-            console.log(results)
+            console.log(results);
             jsonWrite(res, results);
         }
     })

@@ -57,11 +57,6 @@
                 //TODO: express api called here.
                 if (this.form.passWord === this.form.userName) {
                     if (this.form.select === 'User') {
-                        this.form.user.id = 1;
-                        this.form.user.address = 'some where on earth';
-                        this.form.user.email = 'eatonjiangtonlei@gmail.com';
-                        this.form.user.balance = 100;
-                        this.form.user.phone = 415030592;
                         this.$store.dispatch("setUser", this.form.user);
                         Router.push('home')
                     }
