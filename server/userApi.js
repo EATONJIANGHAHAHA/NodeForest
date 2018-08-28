@@ -81,4 +81,17 @@ router.get('/searchByUsername', (req, res) => {
         }
     })
 });
+
+router.get('/getTrees', (req, res) => {
+    var sql = userSQL.getTrees;
+    var params = req.query||req.params;
+    console.log(params);
+    pool.query(sql, [params.userId], function(error, results, fields) {
+        if (error) throw error;
+        if (results) {
+            console.log(results)
+            jsonWrite(res, results);
+        }
+    })
+});
 module.exports = router;
