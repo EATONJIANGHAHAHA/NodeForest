@@ -63,9 +63,9 @@
                             this.form.passWord,
                         ];
                         console.log(url);
-                        this.$http.post('127.0.0.1:3000/api/user/login',
+                        this.$http.post('http://127.0.0.1:3000/api/user/login',
                             {username:this.form.userName, password:this.form.password},
-                            {emulateJSON: true, emulateHTTP: true}).then(response => {
+                            {emulateJSON: true}).then(response => {
                             //success callback
                             console.log(response.data);
                         }, response => {
