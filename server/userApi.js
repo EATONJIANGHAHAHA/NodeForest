@@ -82,6 +82,9 @@ router.get('/searchByUsername', (req, res) => {
     })
 });
 
+/**
+ * Get all trees for a specific user.
+ */
 router.get('/getTrees', (req, res) => {
     var sql = userSQL.getTrees;
     var params = req.query||req.params;

@@ -55,16 +55,16 @@
         methods: {
             check() {
                 //TODO: express api called here.
-                if (this.form.passWord === this.form.userName) {
+                // if (this.form.user.password === this.form.username) {
                     if (this.form.select === 'User') {
                         let url = '127.0.0.1:3000/api/user/login';
                         let body = [
-                            this.form.userName,
-                            this.form.passWord,
+                            this.form.user.username,
+                            this.form.user.password,
                         ];
                         console.log(url);
                         this.$http.post('http://127.0.0.1:3000/api/user/login',
-                            {username:this.form.userName, password:this.form.password},
+                            {username:this.form.user.username, password:this.form.user.password},
                             {emulateJSON: true}).then(response => {
                             //success callback
                             console.log(response.data);
@@ -78,12 +78,12 @@
                     else {
                         //TODO: jump to staff main page.
                     }
-                }
+                // }
             },
 
             clear() {
-                this.form.userName = '';
-                this.form.passWord = '';
+                this.form.username = '';
+                this.form.password = '';
             },
         }
     }

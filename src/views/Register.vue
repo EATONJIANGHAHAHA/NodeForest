@@ -5,10 +5,10 @@
             <h1>Register</H1>
             <mu-form :model="form" class="mu-login-form" :label-position="labelPosition" label-width="100">
                 <mu-form-item prop="input" label="Username">
-                    <mu-text-field v-model="form.userName"></mu-text-field>
+                    <mu-text-field v-model="form.username"></mu-text-field>
                 </mu-form-item>
                 <mu-form-item prop="input" label="Password">
-                    <mu-text-field v-model="form.passWord"></mu-text-field>
+                    <mu-text-field v-model="form.password"></mu-text-field>
                 </mu-form-item>
                 <mu-form-item prop="input" label="Email">
                     <mu-text-field v-model="form.email"></mu-text-field>
@@ -29,8 +29,8 @@
         data() {
             return {
                 form: {
-                    userName: '',
-                    passWord: '',
+                    username: '',
+                    password: '',
                     email: ''
                 }
             }
@@ -40,7 +40,7 @@
         },
         methods: {
           validate(){
-              if(this.form.userName != '') {
+              if(this.form.username != '') {
                   Router.push('home')
                   store.commit("SET_USER", userName)
               }

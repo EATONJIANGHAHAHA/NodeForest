@@ -21,7 +21,7 @@
         components: {},
         data() {
             return {
-                /*userName: ''*/
+                /*username: ''*/
             }
         },
         mounted() {
