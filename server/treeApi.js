@@ -54,6 +54,9 @@ router.get('/getById', (req, res) => {
     })
 });
 
+/**
+ * Get historical photos of a tree.
+ */
 router.get('/getPhotos', (req, res) => {
     var sql = treeSQL.getPhotos;
     var params = req.query||req.params;
