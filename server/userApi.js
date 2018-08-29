@@ -67,7 +67,7 @@ router.use('/searchByEmail', (req, res) => {
 });
 
 /**
- * Search for a user has the username.
+ * Search for a user has the username.tree
  */
 router.get('/searchByUsername', (req, res) => {
     var sql = userSQL.checkUsername;

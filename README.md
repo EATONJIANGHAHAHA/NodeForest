@@ -40,10 +40,10 @@ npm run lint
 
 ##Project key programming principles
 
-1. Files occur more than one contribute to the same functionality should 
-placed under the same directory. 
-2. Directory name should indicate their purpose clearly within 1-3 words. 
-3. Common shorthand are allowed for naming directories.
+1. Files occur more than one time which contribute to the same functionality should
+be placed under the same directory.
+2. Directory name should indicate their purpose clearly within 1-3 words.
+3. Common shorthand are allowed for naming directories and variables.
 4. Naming directory should follow underline nomenclature.
 5. Vue plugins should have their own files apart from the main.js to adapt 
 modular programming principles.
@@ -67,5 +67,19 @@ components' props.
 defined within methods object for Vue components, use no arrow function to prevent vue from using the 
 fields defined from its ancestor).
 19. Add semicolon wherever it's needed. 
-20. Complicate control flows and API calls should be fairly commented. 
+20. Complicate control flows and API calls should be fairly commented.
+21. When importing from vue, use "import" keyword. When importing from express, use "require" keyword.
+22. Middle-ware for express should be defined within the index file because server side coding is relatively simple.
+23. Database file should be synchronized using other tools.
+24. No Eslint configuration should be enabled.
+25. Comment for commit should explain all the work a contributor done during development, not only the most important part.
+26. A class should have one and only one reason to change, meaning that one class should only have one job.
+27. We should be able to add new features or components to the existing application without breaking the existing code.
+28. In other words, as simple as that, a subclass should override the parent class methods in a way that does not break
+functionality from a client’s point of view.
+29. A client should never be forced to implement an interface that it doesn’t use or
+clients shouldn’t be forced to depend on methods they do not use.
+30. Entities must depend on abstractions not on concretions. It states that the high level module must not depend on the
+ low level module, but they should depend on abstractions.
+
  
