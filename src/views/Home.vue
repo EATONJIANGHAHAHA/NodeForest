@@ -2,7 +2,7 @@
     <div>
         <Header/>
         <!--when iterating through components, make sure :key"id" is used to optimize performance.-->
-        <TreeInfo id="tree-info-list" v-for="tree in trees" v-bind="tree" :key="tree.treeId"></TreeInfo>
+        <TreeInfo id="tree-info-list" v-for="tree in trees" v-bind="tree" :key="id"></TreeInfo>
     </div>
 </template>
 
@@ -14,14 +14,28 @@
     export default {
         name: "Home",
         created() {
-            //before mounted, we need to get what trees does this user has and store them in vuex.
+            console.log(this.$store.state.user);
+            console.log('user id is: ')
+            console.log(this.$store.state.user[0].id);
+            this.$http.get('http://127.0.0.1:3000/api/user/getTrees',
+                {
+                    params:{
+                        userId:this.$store.state.user[0].id
+                    }
+                }
+                    ).then((response) => {
+                this.$store.dispatch('setTrees',response.data);
+                console.log(response.data);
+            }, (response) => {
+                console.log('error')
+            });
             //todo: call server tree api
-            this.$store.dispatch('setTrees',this.trees);
+
         },
         data() {
             return {
                 //right now we are getting trees generated for testing.
-                trees: treeInfoList
+                trees: this.$store.state.trees
             }
         },
         components: {

@@ -5,7 +5,7 @@ var UserSQL = {
     checkUser: 'SELECT * FROM user WHERE username = ? and password = ? ',
     checkUsername: 'SELECT * FROM user WHERE username = ? ',
     checkEmail:'SELECT * FROM user WHERE email = ? ',
-    getTrees: 'SELECT * FROM tree WHERE user_id = ?',
+    getTrees: 'SELECT max(p.upload_date) AS upload_date, t.id, t.name, t.sayings, t.species, t.location, t.location_image, t.health, t.last_edit, p.path AS photo_src from photo p join tree t on t.id = p.tree_id WHERE t.owner_id = ? group by p.tree_id ',
     getAddress:'SELECT * FROM user WHERE id = ? ',
     updatePassword:'UPDATE user SET password = ? WHERE id = ? ',
     updateAccount:'UPDATE user SET email = ? , address = ? , phone = ? WHERE id = ? '
