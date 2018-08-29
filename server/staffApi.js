@@ -126,3 +126,4 @@ router.post('/new_password', (req, res) => {
         }
     })
 });
+module.exports = router;
