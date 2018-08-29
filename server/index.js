@@ -16,7 +16,9 @@ app.use('/api/tree', treeApi);
 //enable pre-flight
 app.options('*', cors());
 
-
+/**
+ * middleware that accepts cross origin resource sharing.
+ */
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     next();
