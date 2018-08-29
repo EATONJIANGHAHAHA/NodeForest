@@ -3,3 +3,4 @@ var PostcardSQL = {
     updateStatus:'UPDATE postcard_app SET status = ? WHERE id = ? ',
     updateReceiveDate:'UPDATE postcard_app SET receive_date = ? WHERE id = ? ',
 }
+module.exports = PostcardSQL;
