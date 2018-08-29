@@ -62,10 +62,10 @@ components' props.
 14. Server APIs should go under:"/server" directories. 
 15. APIs regarding different entities should be separated as individual files. 
 16. Script naming conventions should follow hump ​​nomenclature.
-17. For templates that refers to the script variables, use underline nomenclature instead. 
+17. For templates that refer to script variables, use underline nomenclature instead. 
 18. We should always maximise the use of arrow functions to increase simplicity (in places like functions 
-defined within methods object for vue components, use no arrow function to prevent vue from using the 
-fields defined from its ancestor.).
+defined within methods object for Vue components, use no arrow function to prevent vue from using the 
+fields defined from its ancestor).
 19. Add semicolon wherever it's needed. 
 20. Complicate control flows and API calls should be fairly commented. 
  
