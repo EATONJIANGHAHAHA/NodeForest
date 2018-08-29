@@ -1,5 +1,6 @@
 const userApi = require('./userApi');
 const treeApi = require('./treeApi');
+const staffApi = require('./staffApi');
 const fs = require('fs');
 const path = require('path');
 const bodyParser = require('body-parser');
@@ -13,6 +14,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // 后端api路由
 app.use('/api/user', userApi);
 app.use('/api/tree', treeApi);
+app.use('/api/staff', staffApi);
 //enable pre-flight
 app.options('*', cors());
 

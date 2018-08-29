@@ -6,7 +6,7 @@ var userSQL = require('../db/usersql');
 
 var pool = mysql.createPool( dbConfig.mysql );
 
-var jsonWrite = function(res, ret) {
+var jsonWrite = (res, ret) => {
     if (typeof ret === 'undefined') {
         res.json({
             code: '1',
@@ -21,11 +21,11 @@ var jsonWrite = function(res, ret) {
  * Add user to the database.
  * Order of params are: username, password, email, address, phone.
  */
-router.use('/add', function(req, res){
+router.use('/add', (req, res) => {
     var sql = userSQL.insert;
     var params = req.body;
     console.log(params);
-    pool.query(sql, [params.username, params.password, params.email, params.address, params.phone], function(error, results, fields) {
+    pool.query(sql, [params.username, params.password, params.email, params.address, params.phone], (error, results, fields) => {
         if (error) throw error;
         if (results) {
             console.log(results);
@@ -41,7 +41,7 @@ router.post('/login', (req, res) => {
     var sql = userSQL.checkUser;
     var params = req.body;
     console.log(params);
-    pool.query(sql, [params.username, params.password], function(error, results, fields) {
+    pool.query(sql, [params.username, params.password], (error, results, fields) => {
         if (error) throw error;
         if (results) {
             console.log(results);
@@ -57,10 +57,10 @@ router.use('/searchByEmail', (req, res) => {
     var sql = userSQL.checkEmail;
     var params = req.query||req.params;
     console.log(params);
-    pool.query(sql, [params.email], function(error, results, fields) {
+    pool.query(sql, [params.email], (error, results, fields) => {
         if (error) throw error;
         if (results) {
-            console.log(results)
+            console.log(results);
             jsonWrite(res, results);
         }
     })
@@ -73,7 +73,7 @@ router.get('/searchByUsername', (req, res) => {
     var sql = userSQL.checkUsername;
     var params = req.query||req.params;
     console.log(params);
-    pool.query(sql, [params.username], function(error, results, fields) {
+    pool.query(sql, [params.username], (error, results, fields) => {
         if (error) throw error;
         if (results) {
             console.log(results);
@@ -85,14 +85,14 @@ router.get('/searchByUsername', (req, res) => {
 /**
  * Get all trees for a specific user.
  */
-router.get('/getTrees', (req, res) => {
+router.get('/Trees', (req, res) => {
     var sql = userSQL.getTrees;
     var params = req.query||req.params;
     console.log(params);
-    pool.query(sql, [params.userId], function(error, results, fields) {
+    pool.query(sql, [params.userId], (error, results, fields) => {
         if (error) throw error;
         if (results) {
-            console.log(results)
+            console.log(results);
             jsonWrite(res, results);
         }
     })
