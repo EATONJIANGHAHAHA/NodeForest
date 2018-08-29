@@ -17,6 +17,7 @@ export default new Vuex.Store({
     mutations: {
         setUser(state, user) {
             state.user = user;
+            console.log(state.user);
         },
         setTrees(state, trees) {
             state.trees = trees;

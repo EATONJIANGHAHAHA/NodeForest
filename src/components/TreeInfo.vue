@@ -5,15 +5,15 @@
                 <!--to bind a data to a component's property, use v-bind syntax instead of {{}}-->
                 <mu-card-header v-bind:title="location" >
                     <mu-avatar slot="avatar">
-                        <img v-bind:src="locationImageSrc">
+                        <img v-bind:src="location_image">
                     </mu-avatar>
                 </mu-card-header>
                 <mu-card-media v-bind:title="species" >
-                    <img src='../img/tree1.jpg'>
+                    <img v-bind:src="photo_src">
                 </mu-card-media>
                 <mu-card-title v-bind:title="species" ></mu-card-title>
                 <mu-card-text>
-                    {{contentText}}
+                    {{sayings}}
                 </mu-card-text>
                 <mu-card-actions>
                     <mu-button flat v-bind:to="routePath">View</mu-button>
@@ -31,13 +31,14 @@
          * props are used for components value passing.
          */
         props: [
-            'treeId',
+            'id',
             'height',
             'location',
-            'locationImageSrc',
+            'health',
+            'location_image',
             'species',
-            'speciesImageSrc',
-            'contentText'
+            'photo_src',
+            'sayings'
         ],
         data() {
             return {

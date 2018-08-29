@@ -65,13 +65,15 @@
                             password: this.form.user.password
                         }).then(response => {
                         console.log(response.data);
+                        if(response.data.length !== 0){
                         this.$store.dispatch("setUser", response.data);
+                        Router.push('home')}
                     }, response => {
                         //error callback
                         console.log('error');
                     });
 
-                    Router.push('home')
+
                 }
                 else {
                     //TODO: jump to staff main page.
