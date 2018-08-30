@@ -39,6 +39,7 @@
             Header,
         },
         methods: {
+            //TODO: validation of the user input.
             validate() {
                 if (this.form.username != '') {
                     Router.push('home')

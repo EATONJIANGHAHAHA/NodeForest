@@ -32,6 +32,7 @@
         name: "Login",
         data() {
             return {
+                //TODO: validation of the inputs.
                 usernameRules: [
                     {validate: (val) => !!val, message: 'User name is required'},
                     {validate: (val) => val.length >= 3, message: 'User name has to be longer than 3 characters'}
