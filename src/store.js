@@ -17,6 +17,7 @@ export default new Vuex.Store({
     mutations: {
         setUser(state, user) {
             state.user = user;
+            console.log('user in the store');
             console.log(state.user);
         },
         setTrees(state, trees) {
@@ -31,6 +32,8 @@ export default new Vuex.Store({
             return state.trees;
         },
         getTreebyId:(state) => (treeId) => {
+            console.log("treeId: ")
+            console.log(treeId);
             return state.trees.find(tree => tree.treeId === Number(treeId));
         }
     },
@@ -50,7 +53,9 @@ export default new Vuex.Store({
             context.commit('setUser', user)
         },
         setTrees(context, trees) {
-            context.commit('setTrees', trees)
+            context.commit('setTrees', trees);
+            console.log('trees in the store: ');
+            console.log(context.state.trees);
         }
     }
 })

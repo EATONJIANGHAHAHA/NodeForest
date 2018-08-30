@@ -10,19 +10,24 @@
             <mu-button flat slot="right" to="/about">About</mu-button>
             <mu-button v-if="!isLoggedIn" flat slot="right" to="/login">Login</mu-button>
             <mu-button v-if="isLoggedIn" flat slot="right" to="/home">Home</mu-button>
-            <mu-button v-if="isLoggedIn" flat slot="right" @click="logout()">Logout</mu-button>
+            <mu-button v-if="isLoggedIn" flat slot="right" @click="logout">Logout</mu-button>
+            <mu-dialog title="Dialog" width="360" :open.sync="openDialog">
+                You are Logged Out.
+                <mu-button slot="actions" flat color="primary" @click="closeDialog">Close</mu-button>
+            </mu-dialog>
         </mu-appbar>
     </div>
 </template>
 
 <script>
+    import User from "../model/User";
 
     export default {
         name: "Header",
         components: {},
         data() {
             return {
-
+                openSimple: false
             }
         },
         mounted() {
@@ -40,6 +45,12 @@
         methods: {
             logout() {
                 //todo: add logout functions
+                this.$store.dispatch('setUser', new User());
+                this.openDialog = true;
+            },
+            closeDialog() {
+                this.openDialog = false;
+                this.$router.push('/');
             }
         }
     }
