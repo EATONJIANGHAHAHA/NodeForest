@@ -1,3 +1,6 @@
+/**
+ * Class that represents the user object.
+ */
 export default class User  {
     constructor (
         id,

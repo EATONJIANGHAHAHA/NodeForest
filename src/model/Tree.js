@@ -1,3 +1,6 @@
+/**
+ * Class that represents the tree object.
+ */
 export default class {
     constructor(
         treeId, //treenumber

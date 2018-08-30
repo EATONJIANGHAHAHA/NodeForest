@@ -1,3 +1,4 @@
+<!--Register user page.-->
 <template>
     <div>
         <Header/>
@@ -40,6 +41,9 @@
         },
         methods: {
             //TODO: validation of the user input.
+            /*
+                Validate the user input.
+            */
             validate() {
                 if (this.form.username != '') {
                     Router.push('home')
@@ -47,15 +51,20 @@
                 }
             },
 
+            /*
+                Submit the user register information use post request.
+            */
             submit() {
                 this.$http.post('http://127.0.0.1:3000/api/user/register',
                     {
                         username: this.form.username,
                         password: this.form.password,
                         email: this.form.email
-                    }).then(response => {
-                    console.log(response.data)
-                    Router.push('home')
+                    }
+                ).then(response => {
+                    console.log(response.data);
+                    Router.push('home');
+                    //Store the user information in the session.
                     this.$store.dispatch("setUser", new User(
                         response.data,//user id.
                         this.form.username,
@@ -63,7 +72,8 @@
                         this.form.email,
                         null,
                         null,
-                        0.0)
+                        0.0
+                        )
                     )
                 }, response => {
                     //error callback

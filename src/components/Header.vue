@@ -1,3 +1,4 @@
+<!--Used as header for the whole application.-->
 <template>
     <div id="header">
         <mu-appbar style="width: 100%;" color="primary">
@@ -21,13 +22,16 @@
         components: {},
         data() {
             return {
-                /*username: ''*/
+
             }
         },
         mounted() {
 
         },
         computed: {
+            /*
+                Check whether there is user logged in this web app.
+             */
             isLoggedIn() {
                 //use this syntax to get state from the store for observable.
                 return this.$store.state.user.username;

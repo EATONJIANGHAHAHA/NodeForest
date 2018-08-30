@@ -1,3 +1,5 @@
+<!--Detail page of the tree-->
+<!--Can be used both by the user and staff-->
 <template>
     <div>
         <Header/>
@@ -39,6 +41,9 @@
         components: {
             Header
         },
+        /*
+           Initialize the tree information.
+        */
         created() {
             this.tree = this.$store.getters.getTreebyId(this.$route.params.treeId);
             //here we reinitialize this array as a new empty array.

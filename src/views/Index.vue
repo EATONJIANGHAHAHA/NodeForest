@@ -1,3 +1,4 @@
+<!--The welcome page of this project-->
 <template>
     <div>
         <Header/>

@@ -1,3 +1,4 @@
+<!--A component that mainly used for displaying information of the tree.-->
 <template>
     <div>
         <mu-container>
@@ -27,7 +28,7 @@
 <script>
     export default {
         name: "TreeInfo",
-        /**
+        /*
          * props are used for components value passing.
          */
         props: [

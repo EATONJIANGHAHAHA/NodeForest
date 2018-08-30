@@ -1,3 +1,4 @@
+<!--The log in page for all users.-->
 <template>
     <div>
         <Header/>
@@ -13,8 +14,7 @@
                 </mu-form-item>
                 <mu-form-item prop="select" label="Login as: ">
                     <mu-select v-model="form.select">
-                        <mu-option v-for="option, index in options" :key="option" :label="option"
-                                   :value="option"></mu-option>
+                        <mu-option v-for="option, index in options" :key="option" :label="option" :value="option"></mu-option>
                     </mu-select>
                 </mu-form-item>
             </mu-form>
@@ -34,18 +34,28 @@
             return {
                 //TODO: validation of the inputs.
                 usernameRules: [
-                    {validate: (val) => !!val, message: 'User name is required'},
-                    {validate: (val) => val.length >= 3, message: 'User name has to be longer than 3 characters'}
+                    {
+                        validate: (val) => !!val,
+                        message: 'User name is required'
+                    },
+                    {
+                        validate: (val) => val.length >= 3,
+                        message: 'User name has to be longer than 3 characters'
+                    }
                 ],
                 passwordRules: [
-                    {validate: (val) => !!val, message: 'Password is required'},
+                    {
+                        validate: (val) => !!val,
+                        message: 'Password is required'
+                    },
                     {
                         validate: (val) => val.length >= 3 && val.length <= 10,
                         message: 'Password name has to be longer than 3 characters'
                     }
                 ],
                 options: [
-                    'User', 'Staff'
+                    'User',
+                    'Staff'
                 ],
                 labelPosition: 'top',
                 form: {
@@ -57,9 +67,12 @@
             Header
         },
         methods: {
+            /*
+                Use post method to call the user api or staff api for login
+                action from the server.
+            */
             check() {
-                //TODO: express api called here.
-                if (this.form.select === 'User') {
+                if ( this.form.select === 'User' ) {
                     this.$http.post('http://127.0.0.1:3000/api/user/login',
                         {
                             username: this.form.user.username,
@@ -77,10 +90,14 @@
 
                 }
                 else {
-                    //TODO: jump to staff main page.
+                    //TODO: Staff log in operation.
                 }
             },
 
+            /*
+               Called when the log in operation fails.
+               Clear the error inputs.
+            */
             clear() {
                 this.form.username = '';
                 this.form.password = '';
