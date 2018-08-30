@@ -7,7 +7,9 @@ export default class {
         species,
         speciesImaSrc,
         contentText,
-        health,//the word you give to your tree.
+        health,
+        upload_date,
+        sayings,//the word you give to your tree.
     ) {
         this.treeId = treeId;
         this.height = height;
@@ -17,5 +19,7 @@ export default class {
         this.speciesImaSrc = speciesImaSrc;
         this.contentText = contentText;
         this.health = health;
+        this.upload_date = upload_date;
+        this.sayings = sayings;
     }
 }

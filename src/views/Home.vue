@@ -2,38 +2,36 @@
     <div>
         <Header/>
         <!--when iterating through components, make sure :key"id" is used to optimize performance.-->
-        <TreeInfo id="tree-info-list" v-for="tree in trees" v-bind="tree" :key="id"></TreeInfo>
+        <TreeInfo id="tree-info-list" v-for="tree in trees" v-bind="tree" :key="tree.treeId"></TreeInfo>
     </div>
 </template>
 
 <script>
-    import Header from "../components/Header"
-    import TreeInfo from "../components/TreeInfo"
-    import treeInfoList from "../components/SudoTreeInfos"
+    import Header from '../components/Header'
+    import TreeInfo from '../components/TreeInfo'
 
     export default {
-        name: "Home",
+        name: 'Home',
         created() {
             // console.log(this.$store.state.user);
             // console.log('user id is: ')
-            // console.log(this.$store.state.user[0].id);
+            // console.log(this.$store.state    .user[0].id);
             this.$http.get('http://127.0.0.1:3000/api/user/getTrees',
                 {
-                    params:{
-                        userId:this.$store.state.user.id
+                    params: {
+                        userId: this.$store.state.user.id
                     }
                 }
-                    ).then((response) => {
-                this.$store.dispatch('setTrees',response.data);
-
-                for(let i=0; i<this.$store.state.trees.length; i++){
-                    this.trees.push(this.$store.state.trees[i]);
+            ).then((response) => {
+                /*console.log("response:");
+                console.log(response.data[1]);*/
+                this.$store.dispatch('setTrees', response.data)//todo: trees' id have problem.
+                for (let i = 0; i < this.$store.state.trees.length; i++) {
+                    this.trees.push(this.$store.state.trees[i])
                 }
-                // trees = this.$store.state.trees;
-                console.log(this.$store.state.trees);
             }, (response) => {
                 console.log('error')
-            });
+            })
             //todo: call server tree api
 
         },
@@ -47,9 +45,7 @@
             Header,
             TreeInfo
         },
-        methods: {
-
-        }
+        methods: {}
     }
 </script>
 

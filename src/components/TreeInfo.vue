@@ -31,7 +31,7 @@
          * props are used for components value passing.
          */
         props: [
-            'id',
+            'treeId',
             'height',
             'location',
             'health',
@@ -46,7 +46,7 @@
             }
         },
         mounted() {
-            /*console.log(this.props.locationImageSrc);*/
+            console.log(this.treeId);
             this.routePath = this.routePath + "tree-details/" + this.treeId;
         }
     }

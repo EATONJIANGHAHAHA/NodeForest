@@ -29,10 +29,6 @@
         data() {
             return {
                 tree: Tree,
-                treeNumber: 123456,
-                date: 32,
-                month: 'Jun',
-                year: 2020,
                 infos: [
                     //here we have to leave the declaration of this array contains objects, we will modify
                     //this array later after we have passed the data locally during mounting.
@@ -46,12 +42,14 @@
         created() {
             this.tree = this.$store.getters.getTreebyId(this.$route.params.treeId);
             //here we reinitialize this array as a new empty array.
+            console.log(this.tree);
             this.infos = [];
-            this.infos.push({id:1, label:'Height', value: this.tree.height});
-            this.infos.push({id:2, label:'Health', value: this.tree.health});
-            this.infos.push({id:3, label:'Location', value: this.tree.location});
-            this.infos.push({id:4, label:'updated', value: new Date()});
-            this.infos.
+            this.infos.push({id:1, label:'Name:', value: this.tree.name});
+            this.infos.push({id:2, label:'Health:', value: this.tree.health});
+            this.infos.push({id:3, label:'Location:', value: this.tree.location});
+            this.infos.push({id:4, label:'Updated at:', value: this.tree.upload_date});
+            this.infos.push({id:5, label:'Sayings:', value: this.tree.sayings})
+            this.infos.push({id:6, label:'Species:', value:this.tree.species});
             console.log(this.tree.treeId);
         }
     }
