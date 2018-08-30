@@ -6,6 +6,11 @@ var staffSQL = require('../db/staffsql');
 
 var pool = mysql.createPool( dbConfig.mysql );
 
+/**
+ * Sending response as json format.
+ * @param res
+ * @param ret
+ */
 var jsonWrite = (res, ret) => {
     if (typeof ret === 'undefined') {
         res.json({
@@ -18,21 +23,13 @@ var jsonWrite = (res, ret) => {
 };
 
 /**
- * add staff member
+ * login if the given username and password pair exist within the database,
+ * if exists, returns the entire staff record.
+ * @params needed in the request body:
+ * 1. name
+ * 2. password
+ * @returns entire record of staff.
  */
-router.post('/add', (req, res) => {
-    var sql = staffSQL.insert;
-    var params = req.body;
-    console.log(params);
-    pool.query(sql, [params.name, params.password, params.email, params.address, params.phone], (error, results, fields) => {
-        if (error) throw error;
-        if (results) {
-            console.log(results);
-            jsonWrite(res, results);
-        }
-    })
-});
-
 router.post('/login', (req, res) => {
     var sql = staffSQL.checkStaff;
     var params = req.body;
@@ -48,6 +45,12 @@ router.post('/login', (req, res) => {
 
 /**
  * update staff's information
+ * @params needed in the request body:
+ * 1. email
+ * 2. address,
+ * 3. phone,
+ * 4. staffId
+ * @returns boolean of process status.
  */
 router.post('/update', (req, res) => {
     var sql = staffSQL.updateAccount;
@@ -62,6 +65,10 @@ router.post('/update', (req, res) => {
     })
 });
 
+/**
+ * get all staff record
+ * @returns all the staff records
+ */
 router.post('/allStaff', (req, res) => {
     var sql = staffSQL.queryAll;
     var params = req.body;
@@ -75,6 +82,12 @@ router.post('/allStaff', (req, res) => {
     })
 });
 
+/**
+ * Get all the trees a staff is managed
+ * @params needed in the request body:
+ * 1. staffId
+ * @returns array | list of trees.
+ */
 router.get('/trees', (req, res) => {
     var sql = staffSQL.getTrees;
     var params = req.query||req.params;
@@ -88,6 +101,12 @@ router.get('/trees', (req, res) => {
     })
 });
 
+/**
+ * get all the tree application a staff is assigned and managed.
+ * @params needed in the request body:
+ * 1. staffId
+ * @returns array | list of tree applications.
+ */
 router.get('/tree_app', (req, res) => {
     var sql = staffSQL.getTreeApplications;
     var params = req.query||req.params;
@@ -101,6 +120,12 @@ router.get('/tree_app', (req, res) => {
     })
 });
 
+/**
+ * get all the postcard application a staff is assigned and managed.
+ * @params needed in the request body:
+ * 1. staffId
+ * @returns array | list of postcard applications.
+ */
 router.get('/postcard_app', (req, res) => {
     var sql = staffSQL.getPostcardApplications;
     var params = req.query||req.params;
@@ -114,6 +139,13 @@ router.get('/postcard_app', (req, res) => {
     })
 });
 
+/**
+ * reset a staff's password.
+ * @params needed in the request body:
+ * 1. newPassword
+ * 2. staffId
+ * @returns boolean of process status.
+ */
 router.post('/new_password', (req, res) => {
     var sql = staffSQL.updatePassword;
     var params = req.body;

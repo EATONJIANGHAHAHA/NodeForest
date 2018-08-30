@@ -6,6 +6,11 @@ var userSQL = require('../db/usersql');
 
 var pool = mysql.createPool( dbConfig.mysql );
 
+/**
+ * Sending response as json format.
+ * @param res
+ * @param ret
+ */
 var jsonWrite = function(res, ret) {
     if (typeof ret === 'undefined') {
         res.json({
@@ -19,7 +24,13 @@ var jsonWrite = function(res, ret) {
 
 /**
  * Add user to the database.
- * Order of params are: username, password, email, address, phone.
+ * @params needed in the request body:
+ * 1. username
+ * 2. password
+ * 3. email
+ * 4. address
+ * 5. phone
+ * @returns: boolean of process status.
  */
 router.use('/register', function(req, res){
     var sql = userSQL.insert;
@@ -39,6 +50,10 @@ router.use('/register', function(req, res){
 
 /**
  * Check whether there is user in the database that has the user name and password.
+ * @params needed in the request body:
+ * 1. username
+ * 2. password
+ * @returns the entire record of this user
  */
 router.post('/login', (req, res) => {
     var sql = userSQL.checkUser;
@@ -55,6 +70,9 @@ router.post('/login', (req, res) => {
 
 /**
  * Search for a user has the email.
+ * @params needed in the request body:
+ * 1. email
+ * @returns user
  */
 router.use('/searchByEmail', (req, res) => {
     var sql = userSQL.checkEmail;
@@ -71,6 +89,9 @@ router.use('/searchByEmail', (req, res) => {
 
 /**
  * Search for a user has the username.tree
+ * @params needed in the request body:
+ * 1. username
+ * @returns user
  */
 router.get('/searchByUsername', (req, res) => {
     var sql = userSQL.checkUsername;
@@ -87,6 +108,9 @@ router.get('/searchByUsername', (req, res) => {
 
 /**
  * Get all trees for a specific user.
+ * @params needed in the request body:
+ * 1. userId
+ * @returns array | list of trees a user has.
  */
 router.get('/getTrees', (req, res) => {
     var sql = userSQL.getTrees;

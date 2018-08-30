@@ -6,6 +6,11 @@ var treeSQL = require('../db/treesql')
 
 var pool = mysql.createPool(dbConfig.mysql)
 
+/**
+ * Sending response as json format.
+ * @param res
+ * @param ret
+ */
 var jsonWrite = function (res, ret) {
     if (typeof ret === 'undefined') {
         res.json({
@@ -19,7 +24,13 @@ var jsonWrite = function (res, ret) {
 
 /**
  * Add user to the database.
- * Order of params are: username, password, email, address, phone.
+ * @params needed in the request body:
+ * 1. username
+ * 2. password
+ * 3. email
+ * 4. address
+ * 5. phone.
+ * @returns boolean of the process status.
  */
 router.post('/add', function (req, res) {
     var sql = treeSQL.insert
@@ -35,12 +46,13 @@ router.post('/add', function (req, res) {
     })
 })
 
-
-
 router.route('/:treeId')
 /**
  * Get information for a tree.
  * The link is like localhost:3000/api/tree/1.
+ * @params needed in the request body:
+ * 1. treeId
+ * @returns boolean of process status
  */
     .get(function (req, res) {
         var sql = treeSQL.getById
@@ -71,6 +83,9 @@ router.route('/:treeId')
 
 /**
  * Get historical photos of a tree.
+ * @params needed in the request body:
+ * 1. treeId
+ * @returns boolean of process status
  */
 router.get('/getPhotos', (req, res) => {
     var sql = treeSQL.getPhotos
