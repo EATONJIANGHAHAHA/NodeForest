@@ -21,15 +21,18 @@ var jsonWrite = function(res, ret) {
  * Add user to the database.
  * Order of params are: username, password, email, address, phone.
  */
-router.use('/add', function(req, res){
+router.use('/register', function(req, res){
     var sql = userSQL.insert;
     var params = req.body;
     console.log(params);
     pool.query(sql, [params.username, params.password, params.email, params.address, params.phone], function(error, results, fields) {
-        if (error) throw error;
+        if (error) {
+            throw error;
+        }
         if (results) {
-            console.log(results);
-            jsonWrite(res, results);
+            console.log(results.insertId);
+
+            jsonWrite(res, results.insertId);
         }
     })
 });
