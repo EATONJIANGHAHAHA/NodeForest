@@ -1,3 +1,18 @@
+/**
+ * SQL statements of the user related operations that should be stored in the database,
+ * or retrieved from the database.
+ * @type {{
+ * insert: string,
+ * queryAll: string,
+ * getUserById: string,
+ * checkUser: string,
+ * checkUsername: string,
+ * checkEmail: string,
+ * getTrees: string,
+ * getAddress: string,
+ * updatePassword: string,
+ * updateAccount: string}}
+ */
 var UserSQL = {
     insert:'INSERT INTO user(username, password, email, address, phone) VALUES(?,?,?,?,?)',
     queryAll:'SELECT * FROM user',

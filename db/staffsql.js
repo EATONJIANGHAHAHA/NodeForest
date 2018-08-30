@@ -1,3 +1,16 @@
+/**
+ * SQL statement for operations of the staff that should be stored in the database
+ * or retrieved from the database.
+ * @type {{
+ * insert: string,
+ * queryAll: string,
+ * getStaffById: string,
+ * checkStaff: string,
+ * getTrees: string,
+ * getTreeApplications: string,
+ * getPostcardApplications: string,
+ * updatePassword: string, updateAccount: string}}
+ */
 var StaffSQL = {
     insert:'INSERT INTO staff(name, password, email, address, phone) VALUES(?,?,?,?,?) ',
     queryAll:'SELECT * FROM staff',
