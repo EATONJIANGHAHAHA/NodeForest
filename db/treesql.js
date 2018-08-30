@@ -1,3 +1,8 @@
+/**
+ * SQL statements of the tree related operations that should be stored in the database,
+ * or retrieved from the database.
+ * @type {{insert: string, getById: string, getPhotos: string, update: string}}
+ */
 var TreeSQL = {
     insert:'INSERT INTO tree(height, location, location_image, species, sayings, name, owner_id, staff_id, health, last_edit) ' +
         'VALUES(?,?,?,?,?,?,?,?,?,?)',
