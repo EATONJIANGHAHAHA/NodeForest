@@ -20,7 +20,7 @@
             this.$http.get('http://127.0.0.1:3000/api/user/getTrees',
                 {
                     params:{
-                        userId:this.$store.state.user[0].id
+                        userId:this.$store.state.user.id
                     }
                 }
                     ).then((response) => {

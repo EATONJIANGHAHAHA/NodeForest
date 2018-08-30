@@ -47,8 +47,8 @@ router.post('/login', (req, res) => {
     pool.query(sql, [params.username, params.password], function(error, results, fields) {
         if (error) throw error;
         if (results) {
-            console.log(results);
-            jsonWrite(res, results);
+            console.log(results[0]);
+            jsonWrite(res, results[0]);
         }
     })
 });
@@ -63,8 +63,8 @@ router.use('/searchByEmail', (req, res) => {
     pool.query(sql, [params.email], function(error, results, fields) {
         if (error) throw error;
         if (results) {
-            console.log(results)
-            jsonWrite(res, results);
+            console.log(results[0])
+            jsonWrite(res, results[0]);
         }
     })
 });
@@ -79,8 +79,8 @@ router.get('/searchByUsername', (req, res) => {
     pool.query(sql, [params.username], function(error, results, fields) {
         if (error) throw error;
         if (results) {
-            console.log(results);
-            jsonWrite(res, results);
+            console.log(results[0]);
+            jsonWrite(res, results[0]);
         }
     })
 });
