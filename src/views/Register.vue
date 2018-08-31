@@ -10,7 +10,7 @@
                 <mu-form-item prop="user.password" label="Password" :rules="passwordRules">
                     <mu-text-field type="password" v-model="form.user.password"></mu-text-field>
                 </mu-form-item>
-                <mu-form-item prop="input" label="Email">
+                <mu-form-item prop="user.email" label="Email" :rules="emailRules">
                     <mu-text-field v-model="form.user.email"></mu-text-field>
                 </mu-form-item>
             </mu-form>
@@ -27,6 +27,7 @@
         name: "Register",
         data() {
             return {
+                reg: /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
                 usernameRules: [
                     {
                         validate: (val) => !!val,
@@ -45,6 +46,12 @@
                     {
                         validate: (val) => val.length >= 3 && val.length <= 10,
                         message: 'Password name has to be longer than 3 characters'
+                    }
+                ],
+                emailRules: [
+                    {
+                        validate: (val) => this.reg.test(val),
+                        message: 'Please check your email format.'
                     }
                 ],
                 form: {

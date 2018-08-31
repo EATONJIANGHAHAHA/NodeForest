@@ -3,7 +3,6 @@
     <div>
         <mu-container class="main">
             <h1>Welcome</H1>
-            <p>descriptions</p>
             <mu-form :model="form" class="mu-login-form" :label-position="labelPosition" label-width="100">
                 <mu-form-item label="Username" :rules="usernameRules" prop="user.username">
                     <mu-text-field v-model="form.user.username"></mu-text-field>
@@ -11,16 +10,14 @@
                 <mu-form-item label="Password" :rules="passwordRules" prop="user.password">
                     <mu-text-field type="password" v-model="form.user.password"></mu-text-field>
                 </mu-form-item>
-                <mu-form-item prop="select" label="Login as: ">
-                    <mu-select v-model="form.select">
-                        <mu-option v-for="option, index in options" :key="option" :label="option"
-                                   :value="option"></mu-option>
-                    </mu-select>
-                </mu-form-item>
+                <mu-flex class="select-control-row" :key="type" v-for="type in types">
+                    <mu-radio :value="type" v-model="radio.loginType" :label="type"></mu-radio>
+                </mu-flex>
             </mu-form>
             <mu-button round @click="check" color="primary">Login</mu-button>
+
             <mu-dialog title="Warning!" width="360" :open.sync="openDialog">
-                Your password or username is incorrect. Please try again.
+                {{dialogText}}
                 <mu-button slot="actions" flat color="primary" @click="closeDialog">Close</mu-button>
             </mu-dialog>
         </mu-container>
@@ -34,7 +31,13 @@
         name: "Login",
         data() {
             return {
-                //TODO: validation of the inputs.
+                types: [
+                    'User',
+                    'Staff'
+                ],
+                radio: {
+                    loginType: [],
+                },
                 usernameRules: [
                     {
                         validate: (val) => !!val,
@@ -64,17 +67,26 @@
                     user: new User,
                 },
                 openDialog: false,
+                dialogText: 'Your password or username is incorrect. Please try again.',
             }
         },
-        components: {
-        },
+        components: {},
         methods: {
             /*
                 Use post method to call the user api or staff api for login
                 action from the server.
             */
             check() {
-                if (this.form.select === 'User') {
+                console.log(this.radio.loginType.length === 0);
+                if (this.radio.loginType.length === 0) {
+
+                    this.dialogText = 'Please select a login type.';
+                    this.openDialog = true;
+                }
+                else {
+                    this.dialogText = 'Your password or username is incorrect. Please try again.';
+                }
+                if (this.radio.loginType === 'User') {
                     this.$http.post('http://127.0.0.1:3000/api/user/login',
                         {
                             username: this.form.user.username,
@@ -118,5 +130,9 @@
     .mu-login-form {
         width: 100%;
         max-width: 460px;
+    }
+
+    .select-control-row {
+        padding: 8px 0;
     }
 </style>
