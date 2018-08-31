@@ -2,20 +2,13 @@
 <!--Automatically opened when successfully logging in as user.-->
 <template>
     <div>
-        <Header/>
         <!--when iterating through components, make sure :key"id" is used to optimize performance.-->
         <!--display the trees owned by the user briefly.-->
         <TreeInfo id="tree-info-list" v-for="tree in trees" v-bind="tree" :key="tree.treeId"></TreeInfo>
-        <mu-container id="alert">
-            <mu-alert color="success" @delete="alert1 = false" delete v-if="alert1" transition="mu-scale-transition">
-                <mu-icon left value="check_circle"></mu-icon> You have Logged in.
-            </mu-alert>
-        </mu-container>
     </div>
 </template>
 
 <script>
-    import Header from '../components/Header'
     import TreeInfo from '../components/TreeInfo'
 
     export default {
@@ -25,6 +18,7 @@
         * Preparing for displaying the tree information.
         */
         created() {
+            this.$store.dispatch('setDrawerOpen');
             this.$http.get('http://127.0.0.1:3000/api/user/getTrees',
                 {
                     params: {
@@ -43,21 +37,15 @@
                 //TODO: Display error message when there is error loading the trees.
                 console.log('error')
             });
-            setInterval(() => this.alert1 = false, 3000);
         },
-
         data() {
             return {
-                alert1: true,
                 trees: []// trees of the user.
             }
         },
-
         components: {
-            Header,
             TreeInfo
         },
-
         methods: {}
     }
 </script>
@@ -67,8 +55,5 @@
         margin: 10px;
         float: left;
         list-style: none;
-    }
-    #alert {
-        margin-top: 20px;
     }
 </style>

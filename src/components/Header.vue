@@ -2,7 +2,7 @@
 <template>
     <div id="header">
         <mu-appbar style="width: 100%;" color="primary">
-            <mu-button icon slot="left">
+            <mu-button icon slot="left" @click="openDrawer">
                 <img src="../../public/logo.png" height="30px" width="30px">
             </mu-button>
             NodeForest
@@ -11,10 +11,6 @@
             <mu-button v-if="!isLoggedIn" flat slot="right" to="/login">Login</mu-button>
             <mu-button v-if="isLoggedIn" flat slot="right" to="/home">Home</mu-button>
             <mu-button v-if="isLoggedIn" flat slot="right" @click="logout">Logout</mu-button>
-            <mu-dialog title="Dialog" width="360" :open.sync="openDialog">
-                You are Logged Out.
-                <mu-button slot="actions" flat color="primary" @click="closeDialog">Close</mu-button>
-            </mu-dialog>
         </mu-appbar>
     </div>
 </template>
@@ -46,11 +42,12 @@
             logout() {
                 //todo: add logout functions
                 this.$store.dispatch('setUser', new User());
-                this.openDialog = true;
-            },
-            closeDialog() {
-                this.openDialog = false;
                 this.$router.push('/');
+            },
+            openDrawer() {
+                if (this.$store.state.user.id) {
+                    this.$store.dispatch('setDrawerOpen');
+                }
             }
         }
     }

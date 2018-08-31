@@ -1,7 +1,6 @@
 <!--The log in page for all users.-->
 <template>
     <div>
-        <Header/>
         <mu-container class="main">
             <h1>Welcome</H1>
             <p>descriptions</p>
@@ -29,7 +28,6 @@
 </template>
 
 <script>
-    import Header from '../components/Header';
     import User from "../model/User";
 
     export default {
@@ -69,7 +67,6 @@
             }
         },
         components: {
-            Header
         },
         methods: {
             /*

@@ -9,6 +9,7 @@ export default new Vuex.Store({
     state: {
         user: new User,
         trees: [],
+        openDrawer: false,
     },
     /*
     this function are used for changing states. All states must changed using commit only
@@ -22,6 +23,12 @@ export default new Vuex.Store({
         },
         setTrees(state, trees) {
             state.trees = trees;
+        },
+        setDrawerOpen(state) {
+            state.openDrawer = true;
+        },
+        setDrawerClose(state) {
+            state.openDrawer = false;
         }
     },
     getters: {
@@ -56,6 +63,12 @@ export default new Vuex.Store({
             context.commit('setTrees', trees);
             console.log('trees in the store: ');
             console.log(context.state.trees);
+        },
+        setDrawerOpen(context) {
+            context.commit('setDrawerOpen');
+        },
+        setDrawerClose(context) {
+            context.commit('setDrawerClose');
         }
     }
 })

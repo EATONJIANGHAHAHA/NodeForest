@@ -2,7 +2,6 @@
 <!--Can be used both by the user and staff-->
 <template>
     <div>
-        <Header/>
         <h1>Tree No. {{tree.treeId}}</h1>
         <mu-flex class="flex-wrapper" justify-content="center" fill>
             <mu-flex justify-content="end" fill>
@@ -22,7 +21,6 @@
 </template>
 
 <script>
-    import Header from "../components/Header"
     import Tree from "../model/Tree";
 
     export default {
@@ -39,7 +37,6 @@
             }
         },
         components: {
-            Header
         },
         /*
            Initialize the tree information.

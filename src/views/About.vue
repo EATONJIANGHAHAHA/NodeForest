@@ -1,6 +1,5 @@
 <template>
     <div>
-        <Header/>
         <mu-container>
             <mu-flex justify-content="center">
                 <p>There will be more information available soon.</p>
@@ -10,12 +9,10 @@
 </template>
 
 <script>
-    import Header from '../components/Header'
 
     export default {
         name: "About",
         components: {
-            Header,
         }
     }
 </script>

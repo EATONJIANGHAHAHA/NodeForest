@@ -1,7 +1,6 @@
 <!--The welcome page of this project-->
 <template>
     <div>
-        <Header/>
         <mu-container>
             <mu-flex justify-content="center">
                 <h1>A project that protects our planet.</h1>
@@ -11,12 +10,10 @@
 </template>
 
 <script>
-    import Header from '../components/Header'
 
     export default {
         name: "Index",
         components: {
-            Header
         }
     }
 </script>
