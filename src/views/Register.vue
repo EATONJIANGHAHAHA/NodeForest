@@ -22,6 +22,7 @@
 <script>
     import Router from '../router'
     import User from "../model/User";
+    import md5 from "js-md5";
 
     export default {
         name: "Register",
@@ -76,6 +77,7 @@
                 Submit the user register information use post request.
             */
             submit() {
+                this.form.user.password = md5(md5(this.form.user.password) + this.form.user.username);
                 this.$http.post('http://127.0.0.1:3000/api/user/register',
                     {
                         username: this.form.user.username,

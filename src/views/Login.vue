@@ -26,6 +26,7 @@
 
 <script>
     import User from "../model/User";
+    import md5 from "js-md5";
 
     export default {
         name: "Login",
@@ -87,6 +88,9 @@
                     this.dialogText = 'Your password or username is incorrect. Please try again.';
                 }
                 if (this.radio.loginType === 'User') {
+
+                    this.form.user.password = md5(md5(this.form.user.password) + this.form.user.username);
+
                     this.$http.post('http://127.0.0.1:3000/api/user/login',
                         {
                             username: this.form.user.username,
