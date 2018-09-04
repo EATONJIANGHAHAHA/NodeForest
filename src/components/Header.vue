@@ -17,6 +17,8 @@
 
 <script>
     import User from "../model/User";
+    import Admin from "../model/Admin";
+    import Staff from "../model/Staff";
 
     export default {
         name: "Header",
@@ -35,13 +37,17 @@
              */
             isLoggedIn() {
                 //use this syntax to get state from the store for observable.
-                return this.$store.state.user.username;
+                return this.$store.state.user.username ||
+                    this.$store.state.admin.username ||
+                    this.$store.state.staff.username;
             }
         },
         methods: {
             logout() {
                 //todo: add logout functions
                 this.$store.dispatch('setUser', new User());
+                this.$store.dispatch('setAdmin', new Admin());
+                this.$store.dispatch('setStaff', new Staff());
                 this.$router.push('/');
             },
             openDrawer() {

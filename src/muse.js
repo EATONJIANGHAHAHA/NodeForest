@@ -4,7 +4,10 @@ import 'muse-ui/dist/muse-ui.css'
 import Vue from "vue";
 
 Theme.add('project', {
-    primary: '#a5d6a7'
+    primary: '#579C87',
+    secondary: '#A1C181',
+    success: '#233D4D',
+    warning: '#FCCA46'
 }, 'light');
 
 Theme.use('project');

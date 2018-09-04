@@ -28,13 +28,26 @@ var jsonWrite = (res, ret) => {
  * @params needed in the request body:
  * 1. name
  * 2. password
- * @returns entire record of admin.
+ * @returns entire record of admin.email
  */
 router.post('/login', (req, res) => {
     var sql = adminSQL.checkAdmin;
     var params = req.body;
     console.log(params);
     pool.query(sql, [params.username, params.password], (error, results, fields) => {
+        if (error) throw error;
+        if (results) {
+            console.log(results[0]);
+            jsonWrite(res,results[0]);
+        }
+    })
+});
+
+router.get('/get_all_staffs', (req, res) => {
+    var sql = adminSQL.getAllStaffs;
+    var params = req.body;
+    console.log(params);
+    pool.query(sql, (error, results, fields) => {
         if (error) throw error;
         if (results) {
             console.log(results);

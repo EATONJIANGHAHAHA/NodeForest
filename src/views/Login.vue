@@ -87,10 +87,9 @@
                         else {
                             this.dialogText = 'Your password or username is incorrect. Please try again.';
                         }
+                        this.form.user.password = md5(md5(this.form.user.password) + this.form.user.username);
                         if (this.radio.loginType === 'User') {
-                            this.form.user.password = md5(md5(this.form.user.password) + this.form.user.username);
-                            this.$http.post('http://127.0.0.1:3000/api/user/login',
-                                {
+                            this.$http.post('http://127.0.0.1:3000/api/user/login', {
                                     username: this.form.user.username,
                                     password: this.form.user.password
                                 }).then(response => {
@@ -104,10 +103,38 @@
                                 //error callback
                                 this.openDialog = true;
                             });
-                        }
-                        else {
+                        } else if (this.radio.loginType === 'Staff'){
                             //TODO: Staff log in operation.
-
+                            this.$http.post('http://127.0.0.1:3000/api/staff/login', {
+                                username: this.form.user.username,
+                                password: this.form.user.password
+                            }).then(response => {
+                                if (response.data.code === "1") {
+                                    this.openDialog = true;
+                                } else {
+                                    this.$store.dispatch("setStaff", response.data);
+                                    this.$router.push('staff_home');
+                                }
+                            }, response => {
+                                //error callback
+                                this.openDialog = true;
+                            })
+                        } else {
+                            //TODO: Admin log in operation.
+                            this.$http.post('http://127.0.0.1:3000/api/admin/login', {
+                                username: this.form.user.username,
+                                password: this.form.user.password
+                            }).then(response => {
+                                if (response.data.code === "1") {
+                                    this.openDialog = true;
+                                } else {
+                                    this.$store.dispatch("setStaff", response.data);
+                                    this.$router.push('admin_home')
+                                }
+                            }, response => {
+                                //error callback
+                                this.openDialog = true;
+                            })
                         }
                     }
                     else {

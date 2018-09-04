@@ -21,7 +21,7 @@ app.use('/api/tree', treeApi);
 app.use('/api/staff', staffApi);
 app.use('/api/postcard_app', postcardAppApi);
 app.use('/api/tree_app', treeAppApi);
-app.use('/api/tree_app', adminApi);
+app.use('/api/admin', adminApi);
 //enable pre-flight
 app.options('*', cors());
 

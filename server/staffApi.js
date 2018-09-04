@@ -37,8 +37,8 @@ router.post('/login', (req, res) => {
     pool.query(sql, [params.username, params.password], (error, results, fields) => {
         if (error) throw error;
         if (results) {
-            console.log(results);
-            jsonWrite(res,results);
+            console.log(results[0]);
+            jsonWrite(res,results[0]);
         }
     })
 });
@@ -60,7 +60,7 @@ router.post('/update', (req, res) => {
         if (error) throw error;
         if (results) {
             console.log(results);
-            jsonWrite(res, result);
+            jsonWrite(res, results);
         }
     })
 });

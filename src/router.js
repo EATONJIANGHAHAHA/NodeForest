@@ -8,6 +8,8 @@ import MyAccount from './views/MyAccount'
 import Register from './views/Register'
 import TreeManagement from './views/TreeManagement'
 import TreeDetails from './views/TreeDetails'
+import AdminHome from './views/AdminHome'
+import StaffHome from './views/StaffHome'
 
 Vue.use(Router);
 
@@ -32,6 +34,14 @@ export default new Router({
         {
             path: '/register',
             component: Register,
+        },
+        {
+            path: '/admin_home',
+            component: AdminHome,
+        },
+        {
+            path: '/staff_home',
+            component: StaffHome,
         },
         {
             //dynamic routing passing location value into TreeDetails component.

@@ -42,7 +42,6 @@ router.use('/register', function(req, res){
         }
         if (results) {
             console.log(results.insertId);
-
             jsonWrite(res, results.insertId);
         }
     })
