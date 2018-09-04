@@ -6,11 +6,11 @@
                 <!--to bind a data to a component's property, use v-bind syntax instead of {{}}-->
                 <mu-card-header v-bind:title="location" >
                     <mu-avatar slot="avatar">
-                        <img v-bind:src="location_image">
+                        <img src="../img/tree1.jpg">
                     </mu-avatar>
                 </mu-card-header>
                 <mu-card-media v-bind:title="species" >
-                    <img v-bind:src="photo_src">
+                    <img src="../img/tree3.jpg">
                 </mu-card-media>
                 <mu-card-title v-bind:title="species" ></mu-card-title>
                 <mu-card-text>

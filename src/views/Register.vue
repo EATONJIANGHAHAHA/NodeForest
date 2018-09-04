@@ -14,7 +14,7 @@
                     <mu-text-field v-model="form.user.email"></mu-text-field>
                 </mu-form-item>
             </mu-form>
-            <mu-button @click="submit">Register</mu-button>
+            <mu-button @click="submit" round color="secondary">Register</mu-button>
             <mu-dialog title="Warning!" width="360" :open.sync="isDialogOpen">
                 {{dialogText}}
                 <mu-button slot="actions" flat color="primary" @click="closeDialog">Close</mu-button>

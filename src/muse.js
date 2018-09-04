@@ -7,7 +7,12 @@ Theme.add('project', {
     primary: '#579C87',
     secondary: '#A1C181',
     success: '#233D4D',
-    warning: '#FCCA46'
+    warning: '#FCCA46',
+    text: {
+        primary: '#233D4D',
+        secondary: '22556E',
+        alternate: '#233D4D'
+    }
 }, 'light');
 
 Theme.use('project');
