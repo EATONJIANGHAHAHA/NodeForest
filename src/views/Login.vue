@@ -3,7 +3,7 @@
     <div>
         <mu-container class="main">
             <h1>Welcome</H1>
-            <mu-form :model="form" class="mu-login-form" :label-position="labelPosition" label-width="100">
+            <mu-form ref="form" :model="form" class="mu-login-form" :label-position="labelPosition" label-width="100">
                 <mu-form-item label="Username" :rules="usernameRules" prop="user.username">
                     <mu-text-field v-model="form.user.username"></mu-text-field>
                 </mu-form-item>
@@ -15,7 +15,6 @@
                 </mu-flex>
             </mu-form>
             <mu-button round @click="check" color="primary">Login</mu-button>
-
             <mu-dialog title="Warning!" width="360" :open.sync="openDialog">
                 {{dialogText}}
                 <mu-button slot="actions" flat color="primary" @click="closeDialog">Close</mu-button>
@@ -34,7 +33,8 @@
             return {
                 types: [
                     'User',
-                    'Staff'
+                    'Staff',
+                    'Admin'
                 ],
                 radio: {
                     loginType: [],
@@ -55,7 +55,7 @@
                         message: 'Password is required'
                     },
                     {
-                        validate: (val) => val.length >= 3 && val.length <= 10,
+                        validate: (val) => val.length >= 3,
                         message: 'Password name has to be longer than 3 characters'
                     }
                 ],
@@ -78,43 +78,47 @@
                 action from the server.
             */
             check() {
-                console.log(this.radio.loginType.length === 0);
-                if (this.radio.loginType.length === 0) {
-
-                    this.dialogText = 'Please select a login type.';
-                    this.openDialog = true;
-                }
-                else {
-                    this.dialogText = 'Your password or username is incorrect. Please try again.';
-                }
-                if (this.radio.loginType === 'User') {
-
-                    this.form.user.password = md5(md5(this.form.user.password) + this.form.user.username);
-
-                    this.$http.post('http://127.0.0.1:3000/api/user/login',
-                        {
-                            username: this.form.user.username,
-                            password: this.form.user.password
-                        }).then(response => {
-                        //response.data.length !== 0 ||
-                        if (response.data.code === "1") {
+                this.$refs.form.validate().then((result) => {
+                    if(result) {
+                        if (this.radio.loginType.length === 0) {
+                            this.dialogText = 'Please select a login type.';
                             this.openDialog = true;
-                        } else {
-                            this.$store.dispatch("setUser", response.data);
-                            this.$router.push('home');
                         }
-                    }, response => {
-                        //error callback
+                        else {
+                            this.dialogText = 'Your password or username is incorrect. Please try again.';
+                        }
+                        if (this.radio.loginType === 'User') {
+                            this.form.user.password = md5(md5(this.form.user.password) + this.form.user.username);
+                            this.$http.post('http://127.0.0.1:3000/api/user/login',
+                                {
+                                    username: this.form.user.username,
+                                    password: this.form.user.password
+                                }).then(response => {
+                                if (response.data.code === "1") {
+                                    this.openDialog = true;
+                                } else {
+                                    this.$store.dispatch("setUser", response.data);
+                                    this.$router.push('home');
+                                }
+                            }, response => {
+                                //error callback
+                                this.openDialog = true;
+                            });
+                        }
+                        else {
+                            //TODO: Staff log in operation.
+
+                        }
+                    }
+                    else {
+                        this.dialogText = 'Please correct your input.';
                         this.openDialog = true;
-                    });
-                }
-                else {
-                    //TODO: Staff log in operation.
-                    this.openDialog = true;
-                }
+                    }
+                });
             },
 
             closeDialog() {
+                this.clear();
                 this.openDialog = false;
             },
 

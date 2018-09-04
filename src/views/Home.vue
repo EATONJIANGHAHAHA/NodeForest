@@ -18,7 +18,6 @@
         * Preparing for displaying the tree information.
         */
         created() {
-            this.$store.dispatch('setDrawerOpen');
             this.$http.get('http://127.0.0.1:3000/api/user/getTrees',
                 {
                     params: {

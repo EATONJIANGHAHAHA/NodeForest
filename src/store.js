@@ -39,7 +39,7 @@ export default new Vuex.Store({
             return state.trees;
         },
         getTreebyId:(state) => (treeId) => {
-            console.log("treeId: ")
+            console.log("treeId: ");
             console.log(treeId);
             return state.trees.find(tree => tree.treeId === Number(treeId));
         }

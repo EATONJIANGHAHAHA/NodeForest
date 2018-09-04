@@ -1,5 +1,5 @@
 <template>
-    <mu-drawer :open.sync="this.$store.state.openDrawer" :docked="docked" :right="position === 'right'" z-depth="1">
+    <mu-drawer :open.sync="$store.state.openDrawer" :docked="docked" :right="position === 'right'" :z-depth="1">
         <mu-list>
             <mu-list-item button>
                 <mu-list-item-title>Menu Item 1</mu-list-item-title>

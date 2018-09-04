@@ -9,7 +9,7 @@
             </mu-flex>
 
             <mu-list >
-                <mu-list-item v-for="item in infos" v-bind="item.id">
+                <mu-list-item v-for="item in infos" v-bind="item">
                     <mu-list-item-title>{{item.label}}</mu-list-item-title>
                     <mu-list-item-content>{{item.value}}</mu-list-item-content>
                 </mu-list-item>
@@ -50,7 +50,7 @@
             this.infos.push({id:2, label:'Health:', value: this.tree.health});
             this.infos.push({id:3, label:'Location:', value: this.tree.location});
             this.infos.push({id:4, label:'Updated at:', value: this.tree.upload_date});
-            this.infos.push({id:5, label:'Sayings:', value: this.tree.sayings})
+            this.infos.push({id:5, label:'Sayings:', value: this.tree.sayings});
             this.infos.push({id:6, label:'Species:', value:this.tree.species});
             console.log(this.tree.treeId);
         }
