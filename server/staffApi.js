@@ -26,7 +26,7 @@ var jsonWrite = (res, ret) => {
  * login if the given username and password pair exist within the database,
  * if exists, returns the entire staff record.
  * @params needed in the request body:
- * 1. name
+ * 1. username
  * 2. password
  * @returns entire record of staff.
  */
@@ -34,7 +34,7 @@ router.post('/login', (req, res) => {
     var sql = staffSQL.checkStaff;
     var params = req.body;
     console.log(params);
-    pool.query(sql, [params.name, params.password], (error, results, fields) => {
+    pool.query(sql, [params.username, params.password], (error, results, fields) => {
         if (error) throw error;
         if (results) {
             console.log(results);

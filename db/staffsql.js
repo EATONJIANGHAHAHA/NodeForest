@@ -12,10 +12,10 @@
  * updatePassword: string, updateAccount: string}}
  */
 var StaffSQL = {
-    insert:'INSERT INTO staff(name, password, email, address, phone) VALUES(?,?,?,?,?) ',
+    insert:'INSERT INTO staff(username, password, email, address, phone) VALUES(?,?,?,?,?) ',
     queryAll:'SELECT * FROM staff',
     getStaffById:'SELECT * FROM staff WHERE id = ? ',
-    checkStaff:'SELECT * FROM staff WHERE name = ? and password = ? ',
+    checkStaff:'SELECT * FROM staff WHERE username = ? and password = ? ',
     getTrees:'SELECT * FROM tree WHERE staff_id = ? ',
     getTreeApplications:'SELECT * FROM tree_app WHERE staff_id = ? ',
     getPostcardApplications:'SELECT p.id, p.address, p.post_code, p.status, p.apply_date, p.receive_date, tree_id FROM postcard_app p JOIN tree t on p.tree_id = t.id where staff_id = ? ',

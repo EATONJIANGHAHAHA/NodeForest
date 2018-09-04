@@ -3,6 +3,7 @@ const treeApi = require('./treeApi');
 const staffApi = require('./staffApi');
 const postcardAppApi = require('./postcardAppApi');
 const treeAppApi = require('./treeAppApi');
+const adminApi = require('./adminApi')
 const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
@@ -20,6 +21,7 @@ app.use('/api/tree', treeApi);
 app.use('/api/staff', staffApi);
 app.use('/api/postcard_app', postcardAppApi);
 app.use('/api/tree_app', treeAppApi);
+app.use('/api/tree_app', adminApi);
 //enable pre-flight
 app.options('*', cors());
 
