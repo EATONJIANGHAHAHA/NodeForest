@@ -24,8 +24,9 @@
             }
         },
         created() {
+            console.log(this.$store.state.staff.staffId);
             this.$http.post('http://127.0.0.1:3000/api/staff/trees', {
-                staffId: this.$store.state.staffId
+                staffId: this.$store.state.staff.staffId
             }).then(response => {
                 console.log(response.data);
                 if (response.data.length !== 0) {
