@@ -3,6 +3,7 @@ import Theme from 'muse-ui/lib/theme'
 import 'muse-ui/dist/muse-ui.css'
 import Vue from "vue";
 
+//add a custom theme
 Theme.add('project', {
     primary: '#579C87',
     secondary: '#A1C181',
@@ -15,6 +16,7 @@ Theme.add('project', {
     }
 }, 'light');
 
+//use the custom theme
 Theme.use('project');
 Vue.use(MuseUI);
 

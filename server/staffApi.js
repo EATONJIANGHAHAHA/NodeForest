@@ -77,7 +77,7 @@ router.post('/allStaff', (req, res) => {
         if (error) throw error;
         if (results) {
             console.log(results);
-            jsonWrite(res, result);
+            jsonWrite(res, results);
         }
     })
 });
@@ -107,7 +107,7 @@ router.get('/trees', (req, res) => {
  * 1. staffId
  * @returns array | list of tree applications.
  */
-router.get('/tree_app', (req, res) => {
+router.get('/tree_apps', (req, res) => {
     var sql = staffSQL.getTreeApplications;
     var params = req.query||req.params;
     console.log(params);
@@ -126,7 +126,7 @@ router.get('/tree_app', (req, res) => {
  * 1. staffId
  * @returns array | list of postcard applications.
  */
-router.get('/postcard_app', (req, res) => {
+router.get('/postcard_apps', (req, res) => {
     var sql = staffSQL.getPostcardApplications;
     var params = req.query||req.params;
     console.log(params);
