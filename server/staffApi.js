@@ -88,9 +88,9 @@ router.post('/allStaff', (req, res) => {
  * 1. staffId
  * @returns array | list of trees.
  */
-router.get('/trees', (req, res) => {
+router.post('/trees', (req, res) => {
     var sql = staffSQL.getTrees;
-    var params = req.query||req.params;
+    var params = req.body;
     console.log(params);
     pool.query(sql, [params.staffId], (error, results, fields) => {
         if (error) throw error;

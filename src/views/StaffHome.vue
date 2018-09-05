@@ -24,7 +24,21 @@
             }
         },
         created() {
-
+            this.$http.post('http://127.0.0.1:3000/api/staff/trees', {
+                staffId: this.$store.state.staffId
+            }).then(response => {
+                console.log(response.data);
+                if (response.data.length !== 0) {
+                    for (let i = 0; i < response.data.length; i++)
+                        this.trees.push(response.data[i]);
+                } else {
+                    //TODO: do something if there is no match.
+                }
+            }, response => {
+                // error callback
+                console.log('error');
+                console.log(response);
+            })
         },
         components: {
             TreeInfo,
