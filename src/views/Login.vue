@@ -89,6 +89,7 @@
                         }
                         this.form.user.password = md5(md5(this.form.user.password) + this.form.user.username);
                         if (this.radio.loginType === 'User') {
+                            console.log(window.location.host);
                             this.$http.post('http://127.0.0.1:3000/api/user/login', {
                                     username: this.form.user.username,
                                     password: this.form.user.password
