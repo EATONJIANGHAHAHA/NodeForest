@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
-var dbConfig = require('../db/DBConfig');
-var userSQL = require('../db/usersql');
+var dbConfig = require('./db/DBConfig');
+var userSQL = require('./db/usersql');
 
 var pool = mysql.createPool( dbConfig.mysql );
 
