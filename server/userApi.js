@@ -62,6 +62,7 @@ router.post('/login', (req, res) => {
         if (error) throw error;
         if (results) {
             console.log(results[0]);
+            req.session.user = results[0];
             jsonWrite(res, results[0]);
         }
     })
@@ -80,7 +81,7 @@ router.use('/searchByEmail', (req, res) => {
     pool.query(sql, [params.email], function(error, results, fields) {
         if (error) throw error;
         if (results) {
-            console.log(results[0])
+            console.log(results[0]);
             jsonWrite(res, results[0]);
         }
     })
