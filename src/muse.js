@@ -5,6 +5,11 @@ import Vue from "vue";
 
 //add a custom theme
 Theme.add('project', {
+    /*background: {
+        paper: '#ff0',
+        chip: '#ff0',
+        default: '#ff0'
+    },*/
     primary: '#579C87',
     secondary: '#A1C181',
     success: '#233D4D',
