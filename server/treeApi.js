@@ -1,10 +1,24 @@
-var express = require('express')
-var router = express.Router()
-var mysql = require('mysql')
-var dbConfig = require('./db/DBConfig')
-var treeSQL = require('./db/treesql')
+var express = require('express');
+var router = express.Router();
+var mysql = require('mysql');
+var dbConfig = require('./db/DBConfig');
+var treeSQL = require('./db/treesql');
+var multer = require('multer');
 
-var pool = mysql.createPool(dbConfig.mysql)
+var storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, './server/uploads/')
+    },
+    filename:function (req, file, cb) {
+        cb(null, new Date().toISOString() + file.originalname);
+    }
+});
+
+var upload = multer({
+    storage: storage
+});
+
+var pool = mysql.createPool(dbConfig.mysql);
 
 /**
  * Sending response as json format.
@@ -99,4 +113,20 @@ router.get('/getPhotos', (req, res) => {
         }
     })
 })
-module.exports = router
+
+router.post('/uploadPhoto', upload.single('treeImage'), (req, res) => {
+    var file = req.file;
+    var sql = treeSQL.insertPhoto;
+    var params = req.body;
+    console.log
+    pool.query(sql, [new Date().toISOString().replace('T', ' '), file.path, params.treeId], function (error, results, fields) {
+        if (error) throw error;
+        if (results) {
+            console.log(results);
+            if (results.insertId !== 0) {
+                jsonWrite(res, file.path);
+            }
+        }
+    });
+});
+module.exports = router;

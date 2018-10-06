@@ -38,6 +38,7 @@ router.post('/login', (req, res) => {
         if (error) throw error;
         if (results) {
             console.log(results[0]);
+            req.session.admin = results[0];
             jsonWrite(res,results[0]);
         }
     })

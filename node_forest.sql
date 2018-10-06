@@ -49,13 +49,13 @@ DROP TABLE IF EXISTS `photo`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `photo` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
-  `upload_date` date DEFAULT NULL,
+  `upload_date` datetime DEFAULT NULL,
   `path` varchar(200) DEFAULT NULL,
   `tree_id` int(10) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `photo_tree__fk` (`tree_id`),
   CONSTRAINT `photo_tree__fk` FOREIGN KEY (`tree_id`) REFERENCES `tree` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -64,7 +64,7 @@ CREATE TABLE `photo` (
 
 LOCK TABLES `photo` WRITE;
 /*!40000 ALTER TABLE `photo` DISABLE KEYS */;
-INSERT INTO `photo` VALUES (1,'2018-08-23','../img/tree1.jpg',1),(2,'2018-08-03','../img/tree2.jpg',2),(3,'2018-08-27','../img/tree1.jpg',3),(4,'2018-08-18','../img/tree3.jpg',4),(5,'2018-08-16','../img/tree3.jpg',1);
+INSERT INTO `photo` VALUES (1,'2018-08-23 00:00:00','../img/tree1.jpg',1),(2,'2018-08-03 00:00:00','../img/tree2.jpg',2),(3,'2018-08-27 00:00:00','../img/tree1.jpg',3),(4,'2018-08-18 00:00:00','../img/tree3.jpg',4),(5,'2018-08-16 00:00:00','../img/tree3.jpg',1),(6,'2018-10-06 00:00:00','server/uploads/2018-10-06T08:54:55.159Z46495182.jpg',1),(7,'2018-10-06 00:00:00','server/uploads/2018-10-06T08:57:14.054Z46495182.jpg',1),(8,'2018-10-06 00:00:00','server/uploads/2018-10-06T09:00:22.323Z46495182.jpg',1),(9,'2018-10-06 00:00:00','server/uploads/2018-10-06T09:01:54.913Z46495182.jpg',1);
 /*!40000 ALTER TABLE `photo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -240,4 +240,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-09-05 10:29:31
+-- Dump completed on 2018-10-06 19:11:44

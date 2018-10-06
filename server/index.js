@@ -4,6 +4,7 @@ const staffApi = require('./staffApi');
 const postcardAppApi = require('./postcardAppApi');
 const treeAppApi = require('./treeAppApi');
 const adminApi = require('./adminApi');
+const rootApi = require('./rootApi');
 const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
@@ -28,7 +29,10 @@ app.use(cors());
 app.use(bodyParser.json());
 //using simple algorithm to parsing when dealing with nested objects.
 app.use(bodyParser.urlencoded({ extended: false }));
+//make the uploads folder globally available,ignoring /server/uploads
+app.use('/server/uploads',express.static('server/uploads'));
 //API routing
+app.use('/api/root', rootApi);
 app.use('/api/user', userApi);
 app.use('/api/tree', treeApi);
 app.use('/api/staff', staffApi);

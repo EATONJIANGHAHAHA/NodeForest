@@ -28,7 +28,7 @@
                 openSimple: false
             }
         },
-        mounted() {
+        created() {
 
         },
         computed: {
