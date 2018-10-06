@@ -6,7 +6,7 @@
                 <img src="../../public/logo.png" height="30px" width="30px">
             </mu-button>
             NodeForest
-            <mu-button flat slot="right" to="/register">Register</mu-button>
+            <mu-button v-if="!isLoggedIn" flat slot="right" to="/register">Register</mu-button>
             <mu-button flat slot="right" to="/about">About</mu-button>
             <mu-button v-if="!isLoggedIn" flat slot="right" to="/login">Login</mu-button>
             <mu-button v-if="isLoggedIn" flat slot="right" to="/home">Home</mu-button>
@@ -51,7 +51,7 @@
                 this.$router.push('/');
             },
             openDrawer() {
-                if (this.$store.state.user.id) {
+                if (this.$store.state.user.id || this.$store.state.admin.id || this.$store.state.staff.staffId) {
                     this.$store.dispatch('setDrawerOpen');
                 }
             }

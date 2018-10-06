@@ -1,10 +1,10 @@
 export default class {
     constructor (
-        adminId,
+        id,
         username,
         password,
     ) {
-        this.adminId = adminId;
+        this.id = id;
         this.username = username;
         this.password = password;
     }

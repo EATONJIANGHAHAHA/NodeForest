@@ -10,6 +10,9 @@ import TreeManagement from './views/TreeManagement'
 import TreeDetails from './views/TreeDetails'
 import AdminHome from './views/AdminHome'
 import StaffHome from './views/StaffHome'
+import AdminAccount from './views/AdminAccount'
+import StaffManagement from './views/StaffManagement'
+import Admin from "./model/Admin"
 
 Vue.use(Router);
 
@@ -36,7 +39,7 @@ export default new Router({
             component: Register,
         },
         {
-            path: '/admin_home',
+            path: '/admin/home',
             component: AdminHome,
         },
         {
@@ -56,5 +59,13 @@ export default new Router({
             path: '/treemanagement',
             component: TreeManagement,
         },
+        {
+            path: '/admin/account',
+            component: AdminAccount
+        },
+        {
+            path: 'admin/manageStaff',
+            component: StaffManagement
+        }
     ]
 })

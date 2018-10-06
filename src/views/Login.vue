@@ -123,7 +123,6 @@
                                 this.openDialog = true;
                             })
                         } else {
-                            //TODO: Admin log in operation.
                             this.$http.post( path + ':3000/api/admin/login', {
                                 username: this.form.user.username,
                                 password: this.form.user.password
@@ -131,8 +130,8 @@
                                 if (response.data.code === "1") {
                                     this.openDialog = true;
                                 } else {
-                                    this.$store.dispatch("setStaff", response.data);
-                                    this.$router.push('admin_home')
+                                    this.$store.dispatch("setAdmin", response.data);
+                                    this.$router.push('admin/home')
                                 }
                             }, response => {
                                 //error callback
