@@ -140,11 +140,11 @@ router.get('/getPhotos', (req, res) => {
 });
 
 router.post('/uploadPhoto', upload.single('treeImage'), (req, res) => {
-
-    console.log(getDate());
     var file = req.file;
+    console.log(file);
     var sql = treeSQL.insertPhoto;
     var params = req.body;
+    console.log(params);
     pool.query(sql, [getDate(), file.path, params.treeId], function (error, results, fields) {
         if (error) throw error;
         if (results) {
