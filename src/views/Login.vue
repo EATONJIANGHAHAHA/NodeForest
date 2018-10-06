@@ -26,6 +26,7 @@
 <script>
     import User from "../model/User";
     import md5 from "js-md5";
+    var path = require("../common.js");
 
     export default {
         name: "Login",
@@ -91,7 +92,7 @@
                         if (this.radio.loginType === 'User') {
                             console.log(window.location.host);
 
-                            this.$http.post('http://35.189.47.28:3000/api/user/login', {
+                            this.$http.post(path + ':3000/api/user/login', {
                                     username: this.form.user.username,
                                     password: this.form.user.password
                                 }).then(response => {
@@ -107,7 +108,7 @@
                             });
                         } else if (this.radio.loginType === 'Staff'){
                             //TODO: Staff log in operation.
-                            this.$http.post('http://35.189.47.28:3000/api/staff/login', {
+                            this.$http.post( path + ':3000/api/staff/login', {
                                 username: this.form.user.username,
                                 password: this.form.user.password
                             }).then(response => {
@@ -123,7 +124,7 @@
                             })
                         } else {
                             //TODO: Admin log in operation.
-                            this.$http.post('http://35.189.47.28:3000/api/admin/login', {
+                            this.$http.post( path + ':3000/api/admin/login', {
                                 username: this.form.user.username,
                                 password: this.form.user.password
                             }).then(response => {
