@@ -14,12 +14,14 @@
 var StaffSQL = {
     insert:'INSERT INTO staff(username, password, email, address, phone) VALUES(?,?,?,?,?) ',
     queryAll:'SELECT * FROM staff',
-    getStaffById:'SELECT * FROM staff WHERE id = ? ',
     checkStaff:'SELECT id AS staffId, username, password, email, phone, address FROM staff WHERE username = ? and password = ? ',
     getTrees:'SELECT * FROM tree WHERE staff_id = ? ',
     getTreeApplications:'SELECT * FROM tree_app WHERE staff_id = ? ',
     getPostcardApplications:'SELECT p.id, p.address, p.post_code, p.status, p.apply_date, p.receive_date, tree_id FROM postcard_app p JOIN tree t on p.tree_id = t.id where staff_id = ? ',
     updatePassword:'UPDATE staff SET password = ? WHERE id = ? ',
-    updateAccount:'UPDATE staff SET email = ?, address = ?, phone = ? WHERE id = ? ',
+    updateAccount:'UPDATE staff SET password = ?, email = ?, address = ?, phone = ? WHERE id = ? ',
+    getAllStaffs: 'SELECT * FROM staff',
+    addStaff:'INSERT INTO staff (username, password, email, phone, address) VALUES (?, ?, ?, ?, ?)',
+    getStaffById:'SELECT * FROM staff WHERE id = ? ',
 };
 module.exports = StaffSQL;

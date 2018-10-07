@@ -3,6 +3,7 @@ var router = express.Router();
 var mysql = require('mysql');
 var dbConfig = require('./db/DBConfig');
 var adminSQL = require('./db/adminsql');
+let staffSQL = require('./db/staffsql')
 
 var pool = mysql.createPool( dbConfig.mysql );
 
@@ -45,10 +46,23 @@ router.post('/login', (req, res) => {
 });
 
 router.get('/staffs', (req, res) => {
-    var sql = adminSQL.getAllStaffs;
+    var sql = staffSQL.getAllStaffs;
     var params = req.body;
     console.log(params);
     pool.query(sql,  (error, results, fields) => {
+        if (error) throw error;
+        if (results) {
+            console.log(results);
+            jsonWrite(res,results);
+        }
+    })
+});
+
+router.get('/staffs/getById', (req, res) => {
+    let sql = staffSQL.getStaffById;
+    let params = req.query;
+    console.log(params);
+    pool.query(sql, [params.staffId],  (error, results, fields) => {
         if (error) throw error;
         if (results) {
             console.log(results);
@@ -77,10 +91,26 @@ router.post('/update', (req, res) =>{
  * Add new staff
  */
 router.post('/staffs/add', (req, res) =>{
-    var sql = adminSQL.addStaff;
+    var sql = staffSQL.addStaff;
     var params = req.body;
     console.log(params);
     pool.query(sql, [params.username, params.password, params.email, params.phone, params.address], (error, results, fields) => {
+        if(error) throw  error;
+        if(results){
+            console.log(results);
+            jsonWrite(res, results);
+        }
+    })
+})
+
+/**
+ * Update staff.
+ */
+router.post('/staffs/update', (req, res) =>{
+    var sql = staffSQL.updateAccount;
+    var params = req.body;
+    console.log(params);
+    pool.query(sql, [params.password, params.email, params.address, params.phone, params.staffId], (error, results, fields) => {
         if(error) throw  error;
         if(results){
             console.log(results);

@@ -59,7 +59,7 @@ router.route('/:treeAppId')
  * @returns array | list of tree applications
  */
     .get(function (req, res) {
-        var sql = treeAppSQL.getById
+        let sql = treeAppSQL.getById
         console.log(req.params)
         pool.query(sql, [req.params.treeAppId], function (error, results, fields) {
             if (error) throw error
@@ -80,7 +80,7 @@ router.route('/:treeAppId')
      * @returns boolean of process status.
      */
     .put(function (req, res) {
-        var sql = treeAppSQL.update
+        let sql = treeAppSQL.update
         console.log(req.params)
         pool.query(sql, [req.body.status, req.body.staffId, req.body.completeDate, req.params.treeAppId], function (error, results, fields) {
             if (error) throw error

@@ -13,6 +13,7 @@ import StaffHome from './views/StaffHome'
 import AdminAccount from './views/AdminAccount'
 import StaffManagement from './views/StaffManagement'
 import NewStaff from './views/NewStaff'
+import EditStaff from './views/EditStaff'
 
 Vue.use(Router);
 
@@ -70,6 +71,10 @@ export default new Router({
         {
           path: '/admin/staffs/add',
           component: NewStaff
+        },
+        {
+          path:'/admin/staffs/edit',
+          component: EditStaff
         }
     ]
 })
