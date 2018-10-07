@@ -12,6 +12,7 @@ import AdminHome from './views/AdminHome'
 import StaffHome from './views/StaffHome'
 import AdminAccount from './views/AdminAccount'
 import StaffManagement from './views/StaffManagement'
+import NewStaff from './views/NewStaff'
 
 Vue.use(Router);
 
@@ -63,8 +64,12 @@ export default new Router({
             component: AdminAccount
         },
         {
-            path: '/admin/manageStaff',
+            path: '/admin/staffs',
             component: StaffManagement
+        },
+        {
+          path: '/admin/staffs/add',
+          component: NewStaff
         }
     ]
 })

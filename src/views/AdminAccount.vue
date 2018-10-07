@@ -2,7 +2,7 @@
     <mu-container class="expension-panel">
         <h1>Edit Account: {{this.$store.state.admin.username}}</h1>
         <mu-form ref="form" :model="form" class="mu-login-form" :label-position="labelPosition" label-width="100">
-            <mu-form-item label="Password" :rules="passwordRules" prop="password">
+            <mu-form-item label="NewPassword" :rules="passwordRules" prop="password">
                 <mu-text-field type="password" v-model="form.password"></mu-text-field>
             </mu-form-item>
             <mu-form-item label="Repeat" :rules="repeatPasswordRules" prop="repeatPassword">

@@ -7,12 +7,13 @@
             <mu-button slot="action" flat color="secondary">Delete</mu-button>
         </mu-expansion-panel>
         <mu-flex justify-content="center">
-            <mu-button style="margin-top: 10px" color="secondary">Add Staff</mu-button>
+            <mu-button style="margin-top: 10px" color="secondary" to="/admin/staffs/add">Add Staff</mu-button>
         </mu-flex>
     </mu-container>
 </template>
 
 <script>
+    var path = require("../common.js");
     export default {
         name: "StaffManagement",
         data() {
@@ -22,7 +23,7 @@
         },
         created() {
             console.log("Admin: manageStaff");
-            this.$http.get('http://127.0.0.1:3000/api/admin/get_all_staffs', {
+            this.$http.get( path + ':3000/api/admin/staffs', {
             }).then(response => {
                 console.log(response.data);
                 for (let i = 0; i < response.data.length; i++)

@@ -4,7 +4,7 @@
             <mu-list-item button v-if="this.$store.state.admin.id" to="/admin/home" @click="closeDrawer">
                 <mu-list-item-title>Home</mu-list-item-title>
             </mu-list-item>
-            <mu-list-item button v-if="this.$store.state.admin.id" to="/admin/manageStaff" @click="closeDrawer">
+            <mu-list-item button v-if="this.$store.state.admin.id" to="/admin/staffs" @click="closeDrawer">
                 <mu-list-item-title>Manage Staff</mu-list-item-title>
             </mu-list-item>
             <mu-list-item button v-if="this.$store.state.admin.id" to="/admin/account" @click="closeDrawer">

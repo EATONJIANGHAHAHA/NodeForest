@@ -44,7 +44,7 @@ router.post('/login', (req, res) => {
     })
 });
 
-router.get('/get_all_staffs', (req, res) => {
+router.get('/staffs', (req, res) => {
     var sql = adminSQL.getAllStaffs;
     var params = req.body;
     console.log(params);
@@ -57,11 +57,30 @@ router.get('/get_all_staffs', (req, res) => {
     })
 });
 
+/**
+ * Update admin account by new email.
+ */
 router.post('/update', (req, res) =>{
     var sql = adminSQL.updatePassword;
     var params = req.body;
     console.log(params);
     pool.query(sql, [params.password, params.id], (error, results, fields) => {
+        if(error) throw  error;
+        if(results){
+            console.log(results);
+            jsonWrite(res, results);
+        }
+    })
+})
+
+/**
+ * Add new staff
+ */
+router.post('/staffs/add', (req, res) =>{
+    var sql = adminSQL.addStaff;
+    var params = req.body;
+    console.log(params);
+    pool.query(sql, [params.username, params.password, params.email, params.phone, params.address], (error, results, fields) => {
         if(error) throw  error;
         if(results){
             console.log(results);
