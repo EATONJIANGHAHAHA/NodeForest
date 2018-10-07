@@ -23,6 +23,11 @@ var jsonWrite = (res, ret) => {
     }
 };
 
+router.get('/', (req, res) => {
+    console.log(req.session);
+    jsonWrite(res, res.session);
+});
+
 /**
  * login if the given username and password pair exist within the database,
  * if exists, returns the entire admin record.
@@ -38,8 +43,8 @@ router.post('/login', (req, res) => {
     pool.query(sql, [params.username, params.password], (error, results, fields) => {
         if (error) throw error;
         if (results) {
-            console.log(results[0]);
             req.session.admin = results[0];
+            console.log(req.session);
             jsonWrite(res,results[0]);
         }
     })

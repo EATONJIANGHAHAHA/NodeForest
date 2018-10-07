@@ -5,9 +5,7 @@
         <div>
             <Drawer/>
             <Header/>
-            <transition name="fade">
-                <router-view/>
-            </transition>
+            <router-view/>
         </div>
     </div>
 </template>

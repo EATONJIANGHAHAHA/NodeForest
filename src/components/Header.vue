@@ -19,6 +19,7 @@
     import User from "../model/User";
     import Admin from "../model/Admin";
     import Staff from "../model/Staff";
+    const path = require("../common");
 
     export default {
         name: "Header",
@@ -29,7 +30,26 @@
             }
         },
         created() {
+            console.log("Header created");
+            this.$http.get(path + ":3000/api/admin/")
+                .then(function (response) {
+                    if (response.data.code === '1') {
 
+                    } else {
+                        if (response.data !== "empty session") {
+                            if (response.data.type === "user") {
+                                this.$store.dispatch("setUser");
+                            } else if (response.data.type === "staff") {
+                                this.$store.dispatch("setStaff");
+                            } else if (response.data.type === "admin") {
+                                this.$store.dispatch("setAdmin");
+                            }
+                        }
+                    }
+                })
+                .catch(function (error) {
+
+                })
         },
         computed: {
             /*

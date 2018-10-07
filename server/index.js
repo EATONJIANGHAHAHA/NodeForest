@@ -12,16 +12,14 @@ const cors = require('cors');
 const session = require('express-session');
 
 app.use(session({
-    //the name of the session id cookie to set in the response
-    name: 'secret-session-cookie-id',
     //used to sign the session id cookie, can be a string, or an array of multiple secrete
     secret: 'my express secret',
-    //session usable time limit
-    cookie: {maxAge: 80000},
-    //force a session that is uninitialized to be saved to teh store.
+    resave: true,
     saveUninitialized: true,
-    //forces the session to be saved back to the session store, even if the session was never modified during the request.
-    resave: true
+    cookie: {
+        secure: false,
+        httpOnly: false
+    }
 }));
 //enable cross origin resource sharing.
 app.use(cors());
