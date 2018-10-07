@@ -25,8 +25,6 @@
         name: "AdminAccount",
         data() {
             return {
-                // password:'',
-                // repeatPassword:'',
                 labelPosition: 'top',
                 passwordRules: [
                     {

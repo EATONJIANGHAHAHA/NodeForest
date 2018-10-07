@@ -23,6 +23,9 @@ var StaffSQL = {
     getAllStaffs: 'SELECT * FROM staff',
     addStaff:'INSERT INTO staff (username, password, email, phone, address) VALUES (?, ?, ?, ?, ?)',
     getStaffById:'SELECT * FROM staff WHERE id = ? ',
-    usernameExist:'SELECT COUNT(*) AS number FROM staff WHERE username = ?'
+    usernameExist:'SELECT COUNT(*) AS number FROM staff WHERE username = ?',
+    hasTrees: ' SELECT COUNT(*) AS number from tree WHERE staff_id = ?',
+    hasUnsolvedApplication:'SELECT COUNT(*) AS number from tree_app WHERE staff_id = ? AND complete_date IS NULL',
+    delete:'DELETE FROM staff WHERE id = ?'
 };
 module.exports = StaffSQL;

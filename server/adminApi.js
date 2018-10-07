@@ -134,4 +134,21 @@ router.post('/staffs/usernameExist', (req, res) =>{
         }
     })
 })
+
+/**
+ * Delete the staff by id.
+ */
+router.post('/staffs/delete', (req, res) =>{
+    let sql = staffSQL.delete;
+    let params = req.body;
+    console.log(params);
+    pool.query(sql, [params.staffId], (error, results, fields) => {
+        if(error) throw  error;
+        if(results){
+            console.log(results);
+            jsonWrite(res, results);
+        }
+    })
+})
+
 module.exports = router;

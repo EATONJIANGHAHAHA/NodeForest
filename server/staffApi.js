@@ -159,4 +159,30 @@ router.post('/new_password', (req, res) => {
         }
     })
 });
+
+router.get('/hasTrees', (req, res) => {
+    let sql = staffSQL.hasTrees;
+    let params = req.query||req.params;
+    console.log(params);
+    pool.query(sql, [params.staffId], (error, results, fields) => {
+        if (error) throw error;
+        if (results) {
+            console.log(results);
+            jsonWrite(res, results);
+        }
+    })
+});
+
+router.get('/hasUnsolvedApps', (req, res) => {
+    let sql = staffSQL.hasUnsolvedApplication;
+    let params = req.query||req.params;
+    console.log(params);
+    pool.query(sql, [params.staffId], (error, results, fields) => {
+        if (error) throw error;
+        if (results) {
+            console.log(results);
+            jsonWrite(res, results);
+        }
+    })
+});
 module.exports = router;
