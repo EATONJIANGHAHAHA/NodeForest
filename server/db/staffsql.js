@@ -23,5 +23,6 @@ var StaffSQL = {
     getAllStaffs: 'SELECT * FROM staff',
     addStaff:'INSERT INTO staff (username, password, email, phone, address) VALUES (?, ?, ?, ?, ?)',
     getStaffById:'SELECT * FROM staff WHERE id = ? ',
+    usernameExist:'SELECT COUNT(*) AS number FROM staff WHERE username = ?'
 };
 module.exports = StaffSQL;

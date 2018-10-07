@@ -118,4 +118,20 @@ router.post('/staffs/update', (req, res) =>{
         }
     })
 })
+
+/**
+ * Whether the staff that has the name exists.
+ */
+router.post('/staffs/usernameExist', (req, res) =>{
+    let sql = staffSQL.usernameExist;
+    let params = req.body;
+    console.log(params);
+    pool.query(sql, [params.username], (error, results, fields) => {
+        if(error) throw  error;
+        if(results){
+            console.log(results);
+            jsonWrite(res, results);
+        }
+    })
+})
 module.exports = router;

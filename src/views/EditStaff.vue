@@ -106,7 +106,6 @@
         },
         methods: {
             check() {
-
                 this.$refs.form.validate().then((result) => {
                     if (result) {
                         if( this.form.password !== this.form.originalPassword) this.form.password = md5(md5(this.form.password) + this.form.username);
