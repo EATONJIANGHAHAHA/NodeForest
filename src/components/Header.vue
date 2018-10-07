@@ -30,19 +30,21 @@
             }
         },
         created() {
-            console.log("Header created");
-            this.$http.get(path + ":3000/api/admin/")
+            this.$http.get(path + ":3000/api/root/")
                 .then(function (response) {
+                    console.log(response.data);
                     if (response.data.code === '1') {
 
                     } else {
                         if (response.data !== "empty session") {
                             if (response.data.type === "user") {
-                                this.$store.dispatch("setUser");
-                            } else if (response.data.type === "staff") {
-                                this.$store.dispatch("setStaff");
-                            } else if (response.data.type === "admin") {
-                                this.$store.dispatch("setAdmin");
+                                this.$store.dispatch("setUser", response.data);
+                            } if (response.data.type === "staff") {
+                                this.$store.dispatch("setStaff", response.data);
+                            } if (response.data.type === "admin") {
+                                let admin = new Admin(response.data.id, response.data.username, response.data.password);
+                                console.log("inside store: ");
+                                this.$store.dispatch('setAdmin', admin);
                             }
                         }
                     }

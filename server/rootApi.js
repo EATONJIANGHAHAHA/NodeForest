@@ -31,19 +31,21 @@ router.get('/', function(req, res){
         console.log(user);
         jsonWrite(res, user);
     }
-    if (typeof req.session.admin !== 'undefined') {
+    else if (typeof req.session.admin !== 'undefined') {
         let admin = req.session.admin;
         admin.type = "admin";
         console.log(admin);
         jsonWrite(res, admin);
     }
-    if (typeof req.session.staff !== 'undefined') {
+    else if (typeof req.session.staff !== 'undefined') {
         let staff = req.session.staff;
         staff.type = "staff";
         console.log(staff);
         jsonWrite(res, staff);
     }
-    else jsonWrite(res, "empty session");
+    else if (typeof req.session.staff === 'undefined' && typeof req.session.user === 'undefined' && typeof req.session.admin === 'undefined'){
+        jsonWrite(res, "empty session");
+    }
 });
 
 module.exports = router;

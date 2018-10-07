@@ -21,8 +21,17 @@ app.use(session({
         httpOnly: false
     }
 }));
+
+app.use('*', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "http://localhost:8080");
+    res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    res.header('Access-Control-Allow-Credentials', true);
+    next();
+});
 //enable cross origin resource sharing.
-app.use(cors());
+/*app.use(cors());*/
 //we want json object to be used.
 app.use(bodyParser.json());
 //using simple algorithm to parsing when dealing with nested objects.
