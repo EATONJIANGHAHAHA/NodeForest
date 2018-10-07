@@ -12,7 +12,6 @@ import AdminHome from './views/AdminHome'
 import StaffHome from './views/StaffHome'
 import AdminAccount from './views/AdminAccount'
 import StaffManagement from './views/StaffManagement'
-import Admin from "./model/Admin"
 
 Vue.use(Router);
 
@@ -64,7 +63,7 @@ export default new Router({
             component: AdminAccount
         },
         {
-            path: 'admin/manageStaff',
+            path: '/admin/manageStaff',
             component: StaffManagement
         }
     ]

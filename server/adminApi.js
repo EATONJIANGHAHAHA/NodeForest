@@ -48,7 +48,7 @@ router.get('/get_all_staffs', (req, res) => {
     var sql = adminSQL.getAllStaffs;
     var params = req.body;
     console.log(params);
-    pool.query(sql, (error, results, fields) => {
+    pool.query(sql,  (error, results, fields) => {
         if (error) throw error;
         if (results) {
             console.log(results);
@@ -56,4 +56,17 @@ router.get('/get_all_staffs', (req, res) => {
         }
     })
 });
+
+router.post('/update', (req, res) =>{
+    var sql = adminSQL.updatePassword;
+    var params = req.body;
+    console.log(params);
+    pool.query(sql, [params.password, params.id], (error, results, fields) => {
+        if(error) throw  error;
+        if(results){
+            console.log(results);
+            jsonWrite(res, results);
+        }
+    })
+})
 module.exports = router;
