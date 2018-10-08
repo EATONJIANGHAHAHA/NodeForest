@@ -16,42 +16,70 @@
 </template>
 
 <script>
-    import User from "../model/User";
-    import Admin from "../model/Admin";
-    import Staff from "../model/Staff";
-    const path = require("../common");
+    import User from '../model/User';
+    import Admin from '../model/Admin';
+    import Staff from '../model/Staff';
+    const path = require('../common');
 
     export default {
-        name: "Header",
+        name: 'Header',
         components: {},
         data() {
             return {
-                openSimple: false
+                openSimple: false,
+                user: new User,
+                admin: new Admin('','',''),
+                staff: new Staff,
             }
         },
         created() {
-            this.$http.get(path + ":3000/api/root/")
-                .then(function (response) {
+            const _this = this;
+            this.$http.get(path + ':3000/api/')
+                .then(response => {
                     console.log(response.data);
-                    if (response.data.code === '1') {
-
-                    } else {
-                        if (response.data !== "empty session") {
-                            if (response.data.type === "user") {
-                                this.$store.dispatch("setUser", response.data);
-                            } if (response.data.type === "staff") {
-                                this.$store.dispatch("setStaff", response.data);
-                            } if (response.data.type === "admin") {
-                                let admin = new Admin(response.data.id, response.data.username, response.data.password);
-                                console.log("inside store: ");
-                                this.$store.dispatch('setAdmin', admin);
+                    if (response.data.code !== '1') {
+                        if (response.data !== 'empty session') {
+                            console.log(response.data.type);
+                            if (response.data.type === 'user') {
+                                this.user.id = response.data.id;
+                                this.user.username = response.data.username;
+                                this.user.password = response.data.password;
+                                this.user.email = response.data.email;
+                                this.user.phone = response.data.phone;
+                                this.user.address = response.data.address;
+                                this.user.balance = response.data.balance;
+                            } else if (response.data.type === 'staff') {
+                                this.staff.staffId = response.data.staffId;
+                                this.staff.username = response.data.username;
+                                this.staff.password = response.data.password;
+                                this.staff.email = response.data.email;
+                                this.staff.phone = response.data.phone;
+                                this.staff.address = response.data.address;
+                            } else if (response.data.type === 'admin') {
+                                this.admin.id = response.data.id;
+                                this.admin.username = response.data.username;
+                                this.admin.password = response.data.password;
                             }
                         }
-                    }
-                })
-                .catch(function (error) {
+                    } else {
 
-                })
+                    }
+                }, response => {
+                    console.log('Error occurred during transaction');
+                });
+        },
+        mounted() {
+            console.log('Updated:');
+            console.log(this.admin);
+            console.log(this.usertype);
+            if (this.user.id !== '') {
+                this.$store.dispatch('setUser', this.user);
+            } if (this.staff.id !== 'staff') {
+                this.$store.dispatch('setStaff', this.staff);
+            } if (this.admin.id !== 'admin') {
+                console.log('inisde admin');
+                this.$store.dispatch('setAdmin', this.admin);
+            }
         },
         computed: {
             /*

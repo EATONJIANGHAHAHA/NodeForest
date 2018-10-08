@@ -39,7 +39,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //make the uploads folder globally available,ignoring /server/uploads
 app.use('/server/uploads',express.static('server/uploads'));
 //API routing
-app.use('/api/root', rootApi);
+app.use('/api', rootApi);
 app.use('/api/user', userApi);
 app.use('/api/tree', treeApi);
 app.use('/api/staff', staffApi);

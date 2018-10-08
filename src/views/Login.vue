@@ -130,6 +130,7 @@
                                 if (response.data.code === "1") {
                                     this.openDialog = true;
                                 } else {
+                                    console.log(response.data);
                                     this.$store.dispatch("setAdmin", response.data);
                                     this.$router.push('admin/home')
                                 }
