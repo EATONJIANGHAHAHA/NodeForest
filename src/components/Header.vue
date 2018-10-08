@@ -32,55 +32,6 @@
                 staff: new Staff,
             }
         },
-        created() {
-            const _this = this;
-            this.$http.get(path + ':3000/api/')
-                .then(response => {
-                    console.log(response.data);
-                    if (response.data.code !== '1') {
-                        if (response.data !== 'empty session') {
-                            console.log(response.data.type);
-                            if (response.data.type === 'user') {
-                                this.user.id = response.data.id;
-                                this.user.username = response.data.username;
-                                this.user.password = response.data.password;
-                                this.user.email = response.data.email;
-                                this.user.phone = response.data.phone;
-                                this.user.address = response.data.address;
-                                this.user.balance = response.data.balance;
-                            } else if (response.data.type === 'staff') {
-                                this.staff.staffId = response.data.staffId;
-                                this.staff.username = response.data.username;
-                                this.staff.password = response.data.password;
-                                this.staff.email = response.data.email;
-                                this.staff.phone = response.data.phone;
-                                this.staff.address = response.data.address;
-                            } else if (response.data.type === 'admin') {
-                                this.admin.id = response.data.id;
-                                this.admin.username = response.data.username;
-                                this.admin.password = response.data.password;
-                            }
-                        }
-                    } else {
-
-                    }
-                }, response => {
-                    console.log('Error occurred during transaction');
-                });
-        },
-        mounted() {
-            console.log('Updated:');
-            console.log(this.admin);
-            console.log(this.usertype);
-            if (this.user.id !== '') {
-                this.$store.dispatch('setUser', this.user);
-            } if (this.staff.id !== 'staff') {
-                this.$store.dispatch('setStaff', this.staff);
-            } if (this.admin.id !== 'admin') {
-                console.log('inisde admin');
-                this.$store.dispatch('setAdmin', this.admin);
-            }
-        },
         computed: {
             /*
                 Check whether there is user logged in this web app.

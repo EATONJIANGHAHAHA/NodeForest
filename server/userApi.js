@@ -108,6 +108,25 @@ router.get('/searchByUsername', (req, res) => {
 });
 
 /**
+ * Search for a user by id.
+ * @params needed in the request body:
+ * 1. userId
+ * @returns user
+ */
+router.get('/getById', (req, res) => {
+    let sql = userSQL.getUserById;
+    let params = req.query || req.params;
+    console.log(params);
+    pool.query(sql, [params.userId], function (error, results, fields) {
+        if (error) throw error;
+        if (results) {
+            console.log(results[0]);
+            jsonWrite(res, results[0]);
+        }
+    })
+});
+
+/**
  * Get all trees for a specific user.
  * @params needed in the request body:
  * 1. userId

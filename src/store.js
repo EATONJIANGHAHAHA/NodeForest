@@ -6,6 +6,9 @@ import Staff from "./model/Staff";
 
 Vue.use(Vuex);
 
+function storeLocalStore (state) {
+    window.localStorage.setItem("userMsg",JSON.stringify(state));
+}
 export default new Vuex.Store({
     //defines application-wise variable.
     state: {
@@ -22,21 +25,27 @@ export default new Vuex.Store({
     mutations: {
         setUser(state, user) {
             state.user = user;
+            storeLocalStore(state);
         },
         setTrees(state, trees) {
             state.trees = trees;
+            storeLocalStore(state);
         },
         setAdmin(state, admin) {
             state.admin = admin;
+            storeLocalStore(state);
         },
         setStaff(state, staff) {
             state.staff = staff;
+            storeLocalStore(state);
         },
         setDrawerOpen(state) {
             state.openDrawer = true;
+            storeLocalStore(state);
         },
         setDrawerClose(state) {
             state.openDrawer = false;
+            storeLocalStore(state);
         }
     },
     getters: {
