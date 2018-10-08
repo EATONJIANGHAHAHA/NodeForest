@@ -13,7 +13,7 @@
             <mu-list-item button v-if="this.$store.state.user.id">
                 <mu-list-item-title>Trees</mu-list-item-title>
             </mu-list-item>
-            <mu-list-item button v-if="this.$store.state.user.id">
+            <mu-list-item button v-if="this.$store.state.user.id" to="/account" @click="closeDrawer">
                 <mu-list-item-title>Profile</mu-list-item-title>
             </mu-list-item>
             <mu-list-item  @click="closeDrawer" button>

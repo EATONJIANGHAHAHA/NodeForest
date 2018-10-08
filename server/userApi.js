@@ -94,9 +94,9 @@ router.use('/searchByEmail', (req, res) => {
  * 1. username
  * @returns user
  */
-router.get('/searchByUsername', (req, res) => {
-    var sql = userSQL.checkUsername;
-    var params = req.query || req.params;
+router.get('/usernameExist', (req, res) => {
+    let sql = userSQL.usernameExist;
+    let params = req.query || req.params;
     console.log(params);
     pool.query(sql, [params.username], function (error, results, fields) {
         if (error) throw error;
@@ -137,6 +137,29 @@ router.get('/getTrees', (req, res) => {
     var params = req.query || req.params;
     console.log(params);
     pool.query(sql, [params.userId], function (error, results, fields) {
+        if (error) throw error;
+        if (results) {
+            console.log(results);
+            jsonWrite(res, results);
+        }
+    })
+});
+
+/**
+ * Update user account
+ * @params needed in the request body:
+ * 1. password
+ * 2. email
+ * 3. address
+ * 4. phone
+ * 5. id
+ * @returns boolean of process status.
+ */
+router.post('/update', (req, res) => {
+    let sql = userSQL.updateAccount;
+    let params = req.body;
+    console.log("Update user account: " + params);
+    pool.query(sql, [params.password, params.email, params.address, params.phone, params.id], (error, results, fields) => {
         if (error) throw error;
         if (results) {
             console.log(results);

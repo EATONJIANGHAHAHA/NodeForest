@@ -9,7 +9,7 @@
             <mu-button v-if="!isLoggedIn" flat slot="right" to="/register">Register</mu-button>
             <mu-button flat slot="right" to="/about">About</mu-button>
             <mu-button v-if="!isLoggedIn" flat slot="right" to="/login">Login</mu-button>
-            <mu-button v-if="isLoggedIn" flat slot="right" to="/home">Home</mu-button>
+            <!--<mu-button v-if="isLoggedIn" flat slot="right" to="/home">Home</mu-button>-->
             <mu-button v-if="isLoggedIn" flat slot="right" @click="logout">Logout</mu-button>
         </mu-appbar>
     </div>
@@ -24,14 +24,7 @@
     export default {
         name: 'Header',
         components: {},
-        data() {
-            return {
-                openSimple: false,
-                user: new User,
-                admin: new Admin('','',''),
-                staff: new Staff,
-            }
-        },
+
         computed: {
             /*
                 Check whether there is user logged in this web app.

@@ -41,6 +41,16 @@
                     {
                         validate: (val) => val.length >= 3,
                         message: 'User name has to be longer than 3 characters'
+                    },
+                    {
+                        validate:(val) => this.$http.get(path + ':3000/api/user/usernameExist', {
+                            username: val,
+                        }).then(response => {
+                            return response.data.number === 0;
+                        }, response => {
+                            return true;
+                        }),
+                        message: 'Username already exists.'
                     }
                 ],
                 passwordRules: [
