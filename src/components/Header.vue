@@ -72,7 +72,7 @@
             console.log('Updated:');
             console.log(this.admin);
             console.log(this.usertype);
-            if (this.user.id !== '') {
+            if (this.user.id !== 'user') {
                 this.$store.dispatch('setUser', this.user);
             } if (this.staff.id !== 'staff') {
                 this.$store.dispatch('setStaff', this.staff);
