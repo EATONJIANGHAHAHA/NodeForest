@@ -20,6 +20,7 @@ import Applications from './views/user/Applications'
 import StaffApplications from './views/staff/Applications'
 import PostcardApp from './views/user/PostcardApp'
 import Postcards from './views/user/Postcards'
+import StaffPostcards from './views/staff/Postcards'
 
 Vue.use(Router);
 
@@ -80,6 +81,10 @@ export default new Router({
         {
             path: '/staff/applications',
             component: StaffApplications
+        },
+        {
+            path: '/staff/postcards',
+            component: StaffPostcards
         },
         {
             //dynamic routing passing location value into TreeDetails component.

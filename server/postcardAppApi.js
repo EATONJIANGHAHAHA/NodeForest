@@ -76,7 +76,7 @@ router.get('/user/received', function (req, res) {
         if (results) {
             for(let i = 0; i<results.length; i++){
                 results[i].apply_date = getDate(results[i].apply_date);
-                results[i].received_date = getDate(results[i].received_date);
+                results[i].receive_date = getDate(results[i].receive_date);
             }
             console.log(results);
             jsonWrite(res,results);
@@ -91,7 +91,7 @@ router.get('/staff/unsent', function (req, res) {
     let sql = postcardSQL.unsentByStaffId;
     let params = req.query||req.params;
     console.log(params);
-    pool.query(sql,[params.staffId],  (error, results, fields) => {
+    pool.query(sql,[params.staffId, 'SUBMITTED'],  (error, results, fields) => {
         if (error) throw error;
         if (results) {
             for(let i = 0; i<results.length; i++){
@@ -110,12 +110,12 @@ router.get('/staff/sent', function (req, res) {
     let sql = postcardSQL.sentByStaffId;
     let params = req.query||req.params;
     console.log(params);
-    pool.query(sql,[params.staffId],  (error, results, fields) => {
+    pool.query(sql,[params.staffId, 'SUBMITTED'],  (error, results, fields) => {
         if (error) throw error;
         if (results) {
             for(let i = 0; i<results.length; i++){
                 results[i].apply_date = getDate(results[i].apply_date);
-                if(results[i].received_date) results[i].received_date = getDate(results[i].received_date);
+                if(results[i].receive_date) results[i].receive_date = getDate(results[i].receive_date);
             }
             console.log(results);
             jsonWrite(res,results);
@@ -131,11 +131,11 @@ router.get('/staff/sent', function (req, res) {
  * 2. postcardId
  * @returns boolean of process status.
  */
-router.put('/status', (req, res) => {
+router.put('/send', (req, res) => {
     var sql = postcardSQL.updateStatus;
     var params = req.body;
     console.log(params);
-    pool.query(sql, [params.status, params.postcardId], (error, results, fields) => {
+    pool.query(sql, ['SENT', params.id], (error, results, fields) => {
         if (error) throw error;
         if (results) {
             console.log(results);

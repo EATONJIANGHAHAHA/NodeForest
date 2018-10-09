@@ -8,8 +8,8 @@ var PostcardSQL = {
     updateReceive:'UPDATE postcard_app SET receive_date = ?, status = ? WHERE id = ? ',
     unreceivedByUserId:'select p.* from postcard_app p join tree t on p.tree_id = t.id where t.owner_id = ? AND receive_date IS NULL',
     receivedByUserId:'select p.* from postcard_app p join tree t on p.tree_id = t.id where t.owner_id = ? AND receive_date IS NOT NULL',
-    unsentByStaffId:'select p.* from postcard_app p join tree t on p.tree_id = t.id where t.staff_id = ? AND status = "SUBMITTED"',
-    sentByStaffId:'select p.* from postcard_app p join tree t on p.tree_id = t.id where t.staff_id = ? AND status = "SENT"',
+    unsentByStaffId:'select p.* from postcard_app p join tree t on p.tree_id = t.id where t.staff_id = ? AND status = ?',
+    sentByStaffId:'select p.* from postcard_app p join tree t on p.tree_id = t.id where t.staff_id = ? AND status <> ?',
 
 }
 module.exports = PostcardSQL;

@@ -25,7 +25,7 @@
                 <mu-icon value="person_outline"></mu-icon>
                 <mu-list-item-title>Profile</mu-list-item-title>
             </mu-list-item>
-            <mu-list-item button v-if="this.$store.state.user.id" to="/postcards" @click="closeDrawer">
+            <mu-list-item button v-if="this.$store.state.user.id || this.$store.state.staff.id" @click="postcards">
                 <mu-icon value="card_giftcard"></mu-icon>
                 <mu-list-item-title>Postcards</mu-list-item-title>
             </mu-list-item>
@@ -60,6 +60,11 @@
               if(this.$store.state.user.id) this.$router.push('/applications');
               if(this.$store.state.staff.id) this.$router.push('/staff/applications');
               this.closeDrawer()
+            },
+            postcards(){
+                if(this.$store.state.user.id) this.$router.push('/postcards');
+                if(this.$store.state.staff.id) this.$router.push('/staff/postcards');
+                this.closeDrawer()
             },
             closeDrawer() {
                 this.$store.dispatch('setDrawerClose');

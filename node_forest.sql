@@ -105,15 +105,15 @@ CREATE TABLE `postcard_app` (
   `address` varchar(100) DEFAULT NULL,
   `post_code` varchar(10) DEFAULT NULL,
   `status` varchar(10) DEFAULT NULL,
-  `apply_date` date DEFAULT NULL,
-  `receive_date` date DEFAULT NULL,
+  `apply_date` datetime DEFAULT NULL,
+  `receive_date` datetime DEFAULT NULL,
   `tree_id` int(10) NOT NULL,
   `message` varchar(200) DEFAULT NULL,
   `recipient` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `postcard_app_tree_id_fk` (`tree_id`),
   CONSTRAINT `postcard_app_tree_id_fk` FOREIGN KEY (`tree_id`) REFERENCES `tree` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -122,7 +122,7 @@ CREATE TABLE `postcard_app` (
 
 LOCK TABLES `postcard_app` WRITE;
 /*!40000 ALTER TABLE `postcard_app` DISABLE KEYS */;
-INSERT INTO `postcard_app` VALUES (1,'1341dasfafs','2342','SUBMITTED','2018-10-09',NULL,1,NULL,'we2'),(2,'difjapodjf','1231','SUBMITTED','2018-10-09',NULL,1,'I tried','recipent');
+INSERT INTO `postcard_app` VALUES (1,'1341dasfafs','2342','SENT','2018-10-09 00:00:00',NULL,1,NULL,'we2'),(2,'difjapodjf','1231','RECEIVED','2018-10-09 00:00:00','2018-10-09 00:00:00',2,'I tried','recipent'),(3,'24 Bristol Rd, Burwood, NSW','2220','SUBMITTED','2018-10-09 00:00:00',NULL,1,'Love you very mush','Puppy');
 /*!40000 ALTER TABLE `postcard_app` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -174,7 +174,7 @@ CREATE TABLE `staff` (
 
 LOCK TABLES `staff` WRITE;
 /*!40000 ALTER TABLE `staff` DISABLE KEYS */;
-INSERT INTO `staff` VALUES (1,'staff','f6b6aad4e094c7d2dedef4d5cf5822c1','staff@uts.edu.au','7688980','UTS Building 11'),(2,'Beilll','2222','beilling@gmail.com','908098089808','Town hall'),(3,'eric','6bea86ac5bec762a1e18327feed60396','email@email.com',NULL,NULL);
+INSERT INTO `staff` VALUES (1,'staff','f6b6aad4e094c7d2dedef4d5cf5822c1','staff@uts.edu.au','7688980','UTS Building 11'),(2,'Beilll','d2bac9e8a025eb1ff70b459104cff103','beilling@gmail.com','908098089808','Town hall'),(3,'eric','6bea86ac5bec762a1e18327feed60396','email@email.com',NULL,NULL);
 /*!40000 ALTER TABLE `staff` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -297,4 +297,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-09 22:58:18
+-- Dump completed on 2018-10-10  0:11:27
