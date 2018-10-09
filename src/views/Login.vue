@@ -105,6 +105,8 @@
                                     this.$store.dispatch("setUser", response.data);
                                     this.$store.dispatch("setStaff", new Staff());
                                     this.$store.dispatch("setAdmin", new Admin());
+                                    let expireDays = 1000 * 60 * 60 * 24 * 15;
+                                    this.setCookie('session', response.data.session, expireDays);
                                     this.$router.push('/home');
                                 }
                             }, response => {
@@ -122,6 +124,8 @@
                                     this.$store.dispatch("setStaff", response.data);
                                     this.$store.dispatch("setUser", new User());
                                     this.$store.dispatch("setAdmin", new Admin());
+                                    let expireDays = 1000 * 60 * 60 * 24 * 15;
+                                    this.setCookie('session', response.data.session, expireDays);
                                     this.$router.push('/staff/home');
                                 }
                             }, response => {
@@ -140,6 +144,8 @@
                                     this.$store.dispatch("setAdmin", response.data);
                                     this.$store.dispatch("setUser", new User());
                                     this.$store.dispatch("setStaff", new Staff());
+                                    let expireDays = 1000 * 60 * 60 * 24 * 15;
+                                    this.setCookie('session', response.data.session, expireDays);
                                     this.$router.push('/admin/home')
                                 }
                             }, response => {
