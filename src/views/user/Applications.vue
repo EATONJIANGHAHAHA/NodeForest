@@ -1,8 +1,8 @@
 <template>
     <mu-container style="margin:20px">
         <mu-tabs :value.sync="index" color="secondary" indicator-color="dark" full-width>
-            <mu-tab>Application</mu-tab>
-            <mu-tab>History</mu-tab>
+            <mu-tab><h3>Application</h3></mu-tab>
+            <mu-tab><h3>History</h3></mu-tab>
         </mu-tabs>
         <div class="demo-text" v-if="index === 0">
             <mu-expansion-panel v-for="incomplete in inCompletes" v-bind="incomplete">
@@ -22,6 +22,9 @@
                 <mu-sub-header>Status: {{complete.status}}</mu-sub-header>
             </mu-expansion-panel>
         </div>
+        <mu-button large fab color="red" to="/trees/application">
+           <mu-icon value="edit"></mu-icon>
+        </mu-button>
     </mu-container>
 </template>
 
@@ -73,7 +76,11 @@
 </script>
 
 <style scoped>
+
     .expension-panel {
         padding: 20px 0
+    }
+    .mu-button{
+        margin: 20px;
     }
 </style>

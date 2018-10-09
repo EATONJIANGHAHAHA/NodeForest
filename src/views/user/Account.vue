@@ -2,7 +2,7 @@
     <mu-container>
         <mu-paper :z-depth="1" class="demo-list-wrap" width="100%" style="margin: 20px">
             <mu-appbar color="secondary">
-                <h1>My Account</h1>
+                My Account
             </mu-appbar>
             <mu-list style="margin: 20px" textline="two-line" class="main" nested-indent="true"
                      toggle-nested-type="popover">
@@ -12,7 +12,7 @@
                         <mu-list-item-sub-title>{{item.value}}</mu-list-item-sub-title>
                     </mu-list-item-content>
                 </mu-list-item>
-                <mu-button full-width color="primary" to="/account/edit">Edit</mu-button>
+                <mu-button full-width color="primary" to="/account/edit"><mu-icon value="edit" left></mu-icon>Edit</mu-button>
             </mu-list>
         </mu-paper>
     </mu-container>

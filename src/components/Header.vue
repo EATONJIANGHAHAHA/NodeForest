@@ -9,7 +9,7 @@
             <mu-button v-if="!isLoggedIn" flat slot="right" to="/register">Register</mu-button>
             <mu-button flat slot="right" to="/about">About</mu-button>
             <mu-button v-if="!isLoggedIn" flat slot="right" to="/login">Login</mu-button>
-            <mu-button v-if="isLoggedIn" flat slot="right" @click="home">Home</mu-button>
+            <mu-button v-if="isLoggedIn" flat slot="right" @click="home"><mu-icon value="home"></mu-icon></mu-button>
             <mu-button v-if="isLoggedIn" flat slot="right" @click="logout">Logout</mu-button>
         </mu-appbar>
     </div>

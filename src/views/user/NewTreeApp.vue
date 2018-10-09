@@ -18,11 +18,17 @@
                 <mu-text-field multi-line :rows="4" type="text" v-model="form.tree.sayings" placeholder="Say something to the tree..."></mu-text-field>
             </mu-form-item>
         </mu-form>
-        <mu-button round @click="check" color="secondary">Apply</mu-button>
+
+
+
         <mu-dialog title="Notice" width="360" :open.sync="openDialog">
             {{dialogText}}
             <mu-button slot="actions" flat color="primary" @click="closeDialog">Close</mu-button>
         </mu-dialog>
+        <mu-container>
+            <mu-button round color="success" @click="()=>{this.$router.push('/trees/applications')}">Back</mu-button>
+            <mu-button round @click="check" color="secondary">Submit</mu-button>
+        </mu-container>
     </mu-container>
 </template>
 
@@ -130,5 +136,8 @@
 <style scoped>
     .expension-panel {
         padding: 20px 0
+    }
+    .mu-button{
+        margin: 10px;
     }
 </style>

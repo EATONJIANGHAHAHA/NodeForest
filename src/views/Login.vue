@@ -8,7 +8,7 @@
                     <mu-text-field v-model="form.user.username"></mu-text-field>
                 </mu-form-item>
                 <mu-form-item label="Password" :rules="passwordRules" prop="user.password">
-                    <mu-text-field type="password" v-model="form.user.password"></mu-text-field>
+                    <mu-text-field v-model="form.user.password" :action-click="() => (visibility = !visibility)" :type="visibility ? 'text' : 'password'" :action-icon="visibility ? 'visibility_off' : 'visibility'" ></mu-text-field>
                 </mu-form-item>
                 <mu-flex class="select-control-row" :key="type" v-for="type in types">
                     <mu-radio :value="type" v-model="radio.loginType" :label="type"></mu-radio>
@@ -70,6 +70,7 @@
                 },
                 openDialog: false,
                 dialogText: 'Your password or username is incorrect. Please try again.',
+                visibility: false
             }
         },
         components: {},
