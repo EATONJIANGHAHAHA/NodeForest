@@ -1,8 +1,6 @@
-
-
-var express = require('express')
-var router = express.Router()
-var mysql = require('mysql')
+var express = require('express');
+var router = express.Router();
+var mysql = require('mysql');
 var dbConfig = require('./db/DBConfig')
 var treeAppSQL = require('./db/treeappsql')
 let staffSQL = require('./db/staffsql')
@@ -119,6 +117,47 @@ router.get('/complete', function (req, res) {
         if (results) {
             for(var i = 0; i<results.length; i++){
                 results[i].apply_date = getDate(results[i].apply_date);
+                results[i].complete_date = getDate(results[i].complete_date);
+            }
+            console.log(results);
+            jsonWrite(res,results);
+        }
+    })
+})
+
+/**
+ * Get incomplete applications by staff id.
+ */
+router.get('/staff/incomplete', function (req, res) {
+    let sql = treeAppSQL.getIncompleteByStaffId;
+    let params = req.query||req.params;
+    console.log(params);
+    pool.query(sql,[params.staffId],  (error, results, fields) => {
+        if (error) throw error;
+        if (results) {
+            for(let i = 0; i<results.length; i++){
+                results[i].apply_date = getDate(results[i].apply_date);
+            }
+            console.log(results);
+            jsonWrite(res,results);
+        }
+    })
+})
+
+/**
+ * Get complete applications by staff id.
+ */
+router.get('/staff/complete', function (req, res) {
+    let sql = treeAppSQL.getCompleteByStaffId;
+    let params = req.query||req.params;
+    console.log(params);
+    pool.query(sql,[params.staffId],  (error, results, fields) => {
+        if (error) throw error;
+        if (results) {
+            for(var i = 0; i<results.length; i++){
+                results[i].apply_date = getDate(results[i].apply_date);
+                results[i].complete_date = getDate(results[i].complete_date);
+
             }
             console.log(results);
             jsonWrite(res,results);
@@ -128,7 +167,7 @@ router.get('/complete', function (req, res) {
 
 
 
-router.route('/:treeAppId')
+router.route('/')
 /**
  * Get information for a tree.
  * The link is like localhost:3000/api/tree/1.
@@ -152,14 +191,14 @@ router.route('/:treeAppId')
      * Complete a tree application
      * @params needed in the request body:
      * 1. status
-     * 2. completeDate
-     * 3. treeAppId
+     * 2. comment
+     * 3. id
      * @returns boolean of process status.
      */
     .put(function (req, res) {
-        let sql = treeAppSQL.update
-        console.log(req.params)
-        pool.query(sql, [req.body.status, req.body.completeDate, req.params.treeAppId], function (error, results, fields) {
+        let sql = treeAppSQL.update;
+        console.log(req.body)
+        pool.query(sql, [req.body.status, getNow(), req.body.reason, req.body.id], function (error, results, fields) {
             if (error) throw error
             if (results) {
                 console.log(results)
@@ -196,4 +235,4 @@ function getDate(d) {
         ":" + twoDigits(d.getSeconds());
 }
 
-module.exports = router
+module.exports = router;

@@ -108,6 +108,7 @@
                             } else {
                                 this.dialogText = 'Your application is successfully submitted.'
                                 this.openDialog = true;
+                                this.$router.push('/applications');
                             }
                         }, response => {
 

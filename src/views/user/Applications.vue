@@ -11,18 +11,24 @@
                 <mu-sub-header>Date: {{incomplete.apply_date}}</mu-sub-header>
                 <mu-sub-header>Location: {{incomplete.location}}</mu-sub-header>
                 <mu-sub-header>Status: {{incomplete.status}}</mu-sub-header>
+                <mu-sub-header>Amount: {{incomplete.amount}}</mu-sub-header>
+                <mu-sub-header>Sayings: {{incomplete.sayings}}</mu-sub-header>
             </mu-expansion-panel>
         </div>
         <div class="demo-text" v-if="index === 1">
             <mu-expansion-panel v-for="complete in completes" v-bind="complete">
                 <div slot="header"><h2>Application No.{{complete.id}} for {{complete.species}}</h2></div>
                 <mu-sub-header><h3>Tree Name: {{complete.name}}</h3></mu-sub-header>
-                <mu-sub-header>Date: {{complete.apply_date}}</mu-sub-header>
+                <mu-sub-header>Submit Date: {{complete.apply_date}}</mu-sub-header>
                 <mu-sub-header>Location: {{complete.location}}</mu-sub-header>
                 <mu-sub-header>Status: {{complete.status}}</mu-sub-header>
+                <mu-sub-header>Sayings: {{complete.sayings}}</mu-sub-header>
+                <mu-sub-header>Amount: {{complete.amount}}</mu-sub-header>
+                <mu-sub-header>Result Date: {{complete.complete_date}}</mu-sub-header>
+                <mu-sub-header>Reason: {{complete.reason}}</mu-sub-header>
             </mu-expansion-panel>
         </div>
-        <mu-button large fab color="red" to="/trees/application">
+        <mu-button large fab color="red" to="/applications/add">
            <mu-icon value="edit"></mu-icon>
         </mu-button>
     </mu-container>
@@ -34,7 +40,7 @@
         name: "Applications",
         data() {
             return {
-                index: 0,
+                tabIndex: 0,
                 inCompletes: [],
                 completes: []
             }

@@ -14,7 +14,7 @@
 var StaffSQL = {
     insert:'INSERT INTO staff(username, password, email, address, phone) VALUES(?,?,?,?,?) ',
     queryAll:'SELECT * FROM staff',
-    checkStaff:'SELECT id AS staffId, username, password, email, phone, address FROM staff WHERE username = ? and password = ? ',
+    checkStaff:'SELECT id, username, password, email, phone, address FROM staff WHERE username = ? and password = ? ',
     getTrees:'SELECT * FROM tree WHERE staff_id = ? ',
     getTreeApplications:'SELECT * FROM tree_app WHERE staff_id = ? ',
     getPostcardApplications:'SELECT p.id, p.address, p.post_code, p.status, p.apply_date, p.receive_date, tree_id FROM postcard_app p JOIN tree t on p.tree_id = t.id where staff_id = ? ',

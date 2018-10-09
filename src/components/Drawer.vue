@@ -17,7 +17,7 @@
                 <mu-icon value="filter_hdr" left></mu-icon>
                 <mu-list-item-title>Trees</mu-list-item-title>
             </mu-list-item>
-            <mu-list-item button v-if="this.$store.state.user.id" to="/trees/applications" @click="closeDrawer">
+            <mu-list-item button v-if="this.$store.state.user.id || this.$store.state.staff.id" @click="trees()">
                 <mu-icon value="file_copy"></mu-icon>
                 <mu-list-item-title>Applications</mu-list-item-title>
             </mu-list-item>
@@ -44,6 +44,11 @@
             }
         },
         methods: {
+            trees(){
+              if(this.$store.state.user.id) this.$router.push('/applications');
+              if(this.$store.state.staff.id) this.$router.push('/staff/applications');
+              this.closeDrawer()
+            },
             closeDrawer() {
                 this.$store.dispatch('setDrawerClose');
             }

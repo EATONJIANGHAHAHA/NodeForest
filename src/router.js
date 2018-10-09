@@ -17,6 +17,7 @@ import MyAccount from './views/user/Account'
 import EditAccount from './views/user/EditAccount'
 import NewTreeApp from './views/user/NewTreeApp'
 import Applications from './views/user/Applications'
+import StaffApplications from './views/staff/Applications'
 
 Vue.use(Router);
 
@@ -43,11 +44,11 @@ export default new Router({
             component: EditAccount
         },
         {
-            path: '/trees/application',
+            path: '/applications/add',
             component: NewTreeApp
         },
         {
-            path: '/trees/applications',
+            path: '/applications',
             component: Applications
         },
         {
@@ -67,6 +68,10 @@ export default new Router({
             component: StaffHome,
         },
         {
+            path: '/staff/applications',
+            component: StaffApplications
+        },
+        {
             //dynamic routing passing location value into TreeDetails component.
             path: '/tree-details/:treeId',
             component: TreeDetails,
@@ -84,12 +89,12 @@ export default new Router({
             component: StaffManagement
         },
         {
-          path: '/admin/staffs/add',
-          component: NewStaff
+            path: '/admin/staffs/add',
+            component: NewStaff
         },
         {
-          path:'/admin/staffs/edit',
-          component: EditStaff
+            path: '/admin/staffs/edit',
+            component: EditStaff
         }
     ]
 })

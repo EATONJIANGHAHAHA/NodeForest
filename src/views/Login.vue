@@ -108,7 +108,6 @@
                                 this.openDialog = true;
                             });
                         } else if (this.radio.loginType === 'Staff'){
-                            //TODO: Staff log in operation.
                             this.$http.post( path + ':3000/api/staff/login', {
                                 username: this.form.user.username,
                                 password: this.form.user.password
