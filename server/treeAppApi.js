@@ -36,10 +36,10 @@ var jsonWrite = function (res, ret) {
  * @returns boolean of process status
  */
 router.post('/add', function (req, res) {
-    var sql = treeAppSQL.insert
-    var params = req.body
+    let sql = treeAppSQL.insert;
+    let params = req.body
     console.log(params)
-    pool.query(sql, [params.applyDate, params.species, params.location, params.sayings, params.name, params.status, params.amount, params.userId], function (error, results, fields) {
+    pool.query(sql, [getDate(), params.species, params.location, params.sayings, params.name, params.status, params.amount, params.userId], function (error, results, fields) {
         if (error) throw error
         if (results) {
             console.log(results)
@@ -47,6 +47,35 @@ router.post('/add', function (req, res) {
         }
     })
 })
+
+/**
+ * Get tree species from the database.
+ */
+router.get('/species', function (req, res) {
+    let sql = treeAppSQL.getSpecies;
+    pool.query(sql,  (error, results, fields) => {
+        if (error) throw error;
+        if (results) {
+            console.log(results);
+            jsonWrite(res,results);
+        }
+    })
+})
+
+/**
+ * Get capable locations from the database.
+ */
+router.get('/locations', function (req, res) {
+    let sql = treeAppSQL.getLocations;
+    pool.query(sql,  (error, results, fields) => {
+        if (error) throw error;
+        if (results) {
+            console.log(results);
+            jsonWrite(res,results);
+        }
+    })
+})
+
 
 
 
@@ -90,5 +119,30 @@ router.route('/:treeAppId')
             }
         })
     })
+
+/**
+ * You first need to create a formatting function to pad numbers to two digits…
+ **/
+function twoDigits(d) {
+    if(0 <= d && d < 10) return "0" + d.toString();
+    if(-10 < d && d < 0) return "-0" + (-1*d).toString();
+    return d.toString();
+}
+
+/**
+ * …and then create the method to output the date string as desired.
+ * Some people hate using prototypes this way, but if you are going
+ * to apply this to more than one Date object, having it as a prototype
+ * makes sense.
+ **/
+function getDate() {
+    var date = new Date();
+    return date.getFullYear() +
+        "-" + twoDigits(1 + date.getMonth()) +
+        "-" + twoDigits(date.getDate()) +
+        " " + twoDigits(date.getHours()) +
+        ":" + twoDigits(date.getMinutes()) +
+        ":" + twoDigits(date.getSeconds());
+}
 
 module.exports = router

@@ -1,14 +1,15 @@
 <template>
-    <mu-drawer :open.sync="$store.state.openDrawer" :docked="docked" :right="position === 'right'" :z-depth="1">
+    <mu-drawer :open.sync="$store.state.openDrawer" :docked="docked" :right="position === 'right'" :z-depth="2">
+        <mu-appbar title="Menu" color="secondary"></mu-appbar>
         <mu-list>
-            <mu-list-item button v-if="this.$store.state.admin.id" to="/admin/home" @click="closeDrawer">
-                <mu-list-item-title>Home</mu-list-item-title>
-            </mu-list-item>
             <mu-list-item button v-if="this.$store.state.admin.id" to="/admin/staffs" @click="closeDrawer">
                 <mu-list-item-title>Manage Staff</mu-list-item-title>
             </mu-list-item>
             <mu-list-item button v-if="this.$store.state.admin.id" to="/admin/account" @click="closeDrawer">
                 <mu-list-item-title>Account</mu-list-item-title>
+            </mu-list-item>
+            <mu-list-item button v-if="this.$store.state.user.id" to="/trees/application" @click="closeDrawer">
+                <mu-list-item-title>New tree</mu-list-item-title>
             </mu-list-item>
             <mu-list-item button v-if="this.$store.state.user.id">
                 <mu-list-item-title>Trees</mu-list-item-title>

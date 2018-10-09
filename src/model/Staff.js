@@ -1,13 +1,13 @@
 export default class {
     constructor (
-        staffId,
+        id,
         username,
         password,
         email,
         phone,
         address
     ) {
-        this.staffId = staffId;
+        this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;

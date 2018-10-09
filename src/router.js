@@ -15,6 +15,7 @@ import NewStaff from './views/NewStaff'
 import EditStaff from './views/EditStaff'
 import MyAccount from './views/MyAccount'
 import EditAccount from './views/EditAccount'
+import NewTreeApp from './views/NewTreeApp'
 
 Vue.use(Router);
 
@@ -41,6 +42,10 @@ export default new Router({
             component: EditAccount
         },
         {
+            path: '/trees/application',
+            component: NewTreeApp
+        },
+        {
             path: '/login',
             component: Login,
         },
@@ -53,7 +58,7 @@ export default new Router({
             component: AdminHome,
         },
         {
-            path: '/staff_home',
+            path: '/staff/home',
             component: StaffHome,
         },
         {

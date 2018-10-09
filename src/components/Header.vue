@@ -9,7 +9,7 @@
             <mu-button v-if="!isLoggedIn" flat slot="right" to="/register">Register</mu-button>
             <mu-button flat slot="right" to="/about">About</mu-button>
             <mu-button v-if="!isLoggedIn" flat slot="right" to="/login">Login</mu-button>
-            <!--<mu-button v-if="isLoggedIn" flat slot="right" to="/home">Home</mu-button>-->
+            <mu-button v-if="isLoggedIn" flat slot="right" @click="home">Home</mu-button>
             <mu-button v-if="isLoggedIn" flat slot="right" @click="logout">Logout</mu-button>
         </mu-appbar>
     </div>
@@ -45,9 +45,14 @@
                 this.$router.push('/');
             },
             openDrawer() {
-                if (this.$store.state.user.id || this.$store.state.admin.id || this.$store.state.staff.staffId) {
+                if (this.$store.state.user.id || this.$store.state.admin.id || this.$store.state.staff.id) {
                     this.$store.dispatch('setDrawerOpen');
                 }
+            },
+            home(){
+                if (this.$store.state.user.id) this.$router.push('/home');
+                if (this.$store.state.admin.id) this.$router.push('/admin/home');
+                if (this.$store.state.staff.id) this.$router.push('/staff/home')
             }
         }
     }

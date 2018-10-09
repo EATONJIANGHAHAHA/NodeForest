@@ -100,7 +100,7 @@
                                     this.openDialog = true;
                                 } else {
                                     this.$store.dispatch("setUser", response.data);
-                                    this.$router.push('home');
+                                    this.$router.push('/home');
                                 }
                             }, response => {
                                 //error callback
@@ -116,7 +116,7 @@
                                     this.openDialog = true;
                                 } else {
                                     this.$store.dispatch("setStaff", response.data);
-                                    this.$router.push('staff_home');
+                                    this.$router.push('/staff/home');
                                 }
                             }, response => {
                                 //error callback
@@ -132,7 +132,7 @@
                                 } else {
                                     console.log(response.data);
                                     this.$store.dispatch("setAdmin", response.data);
-                                    this.$router.push('admin/home')
+                                    this.$router.push('/admin/home')
                                 }
                             }, response => {
                                 //error callback
