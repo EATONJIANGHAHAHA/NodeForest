@@ -16,6 +16,7 @@
     import User from "./model/User";
     import Admin from "./model/Admin";
     import Staff from "./model/Staff";
+    let path = require("./common")
 
     export default {
         name: 'app',
@@ -29,18 +30,8 @@
             window.addEventListener("beforeunload", () => {
                 localStorage.setItem("userMsg", JSON.stringify(this.$store.state))
             })
-
-            this.$http.get(path + ":3000/api/root/")
-                .then(function (response) {
-                    console.log(response.data);
-                    if (response.data.code !== '1' && response.data === "empty session") {
-
-                        this.$store.dispatch("setUser", new User());
-                        this.$store.dispatch("setStaff", new Staff());
-                        this.$store.dispatch("setAdmin", new Admin());
-
-                    }
-                })
+        }
+    }
 </script>
 <style>
 </style>

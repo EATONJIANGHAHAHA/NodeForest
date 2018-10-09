@@ -25,6 +25,22 @@
         name: 'Header',
         components: {},
 
+        created(){
+            this.$http.get(path + ":3000/api/")
+            .then(function (response) {
+                console.log(response.data);
+                if (response.data.code !== '1' && response.data === "empty session") {
+
+                    // this.$store.dispatch("setUser", new User());
+                    // this.$store.dispatch("setStaff", new Staff());
+                    // this.$store.dispatch("setAdmin", new Admin());
+
+                }
+            }, response => {
+                //error callback
+            });
+        },
+
         computed: {
             /*
                 Check whether there is user logged in this web app.
