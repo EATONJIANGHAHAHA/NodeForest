@@ -4,9 +4,9 @@
             <mu-flex justify-content="center">
                 <p>There will be more information available soon.</p>
                 <input style="display: none" type="file" @change="onFileChanged" ref="fileInput"/>
-                <mu-button @click="$refs.fileInput.click()">Select File:</mu-button>
+<!--                <mu-button @click="$refs.fileInput.click()">Select File:</mu-button>
                 <mu-text-field v-if="selectedFile" v-model="selectedFile.name"/>
-                <mu-button @click="onSubmitClicked" :disabled="shouldDisable">Upload</mu-button>
+                <mu-button @click="onSubmitClicked" :disabled="shouldDisable">Upload</mu-button>-->
             </mu-flex>
         </mu-container>
     </div>

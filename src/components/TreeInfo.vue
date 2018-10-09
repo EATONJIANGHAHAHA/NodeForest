@@ -48,7 +48,6 @@
             }
         },
         mounted() {
-            console.log("TreeInfo component information:");
             console.log(this.treeId);
             this.routePath = this.routePath + "trees/detail/" + this.treeId
         }

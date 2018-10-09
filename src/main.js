@@ -3,8 +3,10 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import muse from './muse'
-import axios from 'axios';
+import axios from 'axios'
+import Loading from 'muse-ui-loading';
 
+Vue.use(Loading);
 Vue.config.productionTip = true;
 Vue.prototype.$http = axios.create({
     withCredentials: true
