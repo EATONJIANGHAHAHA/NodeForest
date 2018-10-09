@@ -26,6 +26,8 @@
 <script>
     import User from "../model/User";
     import md5 from "js-md5";
+    import Admin from "../model/Admin";
+    import Staff from "../model/Staff";
     var path = require("../common.js");
 
     export default {
@@ -101,6 +103,8 @@
                                     this.openDialog = true;
                                 } else {
                                     this.$store.dispatch("setUser", response.data);
+                                    this.$store.dispatch("setStaff", new Staff());
+                                    this.$store.dispatch("setAdmin", new Admin());
                                     this.$router.push('/home');
                                 }
                             }, response => {
@@ -116,6 +120,8 @@
                                     this.openDialog = true;
                                 } else {
                                     this.$store.dispatch("setStaff", response.data);
+                                    this.$store.dispatch("setUser", new User());
+                                    this.$store.dispatch("setAdmin", new Admin());
                                     this.$router.push('/staff/home');
                                 }
                             }, response => {
@@ -132,6 +138,8 @@
                                 } else {
                                     console.log(response.data);
                                     this.$store.dispatch("setAdmin", response.data);
+                                    this.$store.dispatch("setUser", new User());
+                                    this.$store.dispatch("setStaff", new Staff());
                                     this.$router.push('/admin/home')
                                 }
                             }, response => {
