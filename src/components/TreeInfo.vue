@@ -1,16 +1,18 @@
 <!--A component that mainly used for displaying information of the tree.-->
 <template>
     <div>
+
         <mu-container>
             <mu-card style="width: 100%; max-width: 375px; margin: 0 auto;">
                 <!--to bind a data to a component's property, use v-bind syntax instead of {{}}-->
                 <mu-card-header v-bind:title="location" >
                     <mu-avatar slot="avatar">
-                        <img :src="require('../img/tree1.jpg')">
+                        <img v-lazy='this.location_img_src'>
+                        <!--<progressive-img src="https://unsplash.it/1920/1080?image=10" />-->
                     </mu-avatar>
                 </mu-card-header>
                 <mu-card-media v-bind:title="species" >
-                    <img :src="require('../img/tree1.jpg')">
+                    <img v-lazy='this.tree_img_src'>
                 </mu-card-media>
                 <mu-card-title v-bind:title="species" ></mu-card-title>
                 <mu-card-text>
@@ -26,6 +28,8 @@
 </template>
 
 <script>
+    const pass = require('../common');
+
     export default {
         name: "TreeInfo",
         /*
@@ -44,11 +48,14 @@
         data() {
             return {
                 // photo: require(this.photo_src),
-                routePath: '/'
+                routePath: '/',
+                location_img_src: '',
+                tree_img_src:'',
             }
         },
-        mounted() {
-            console.log(this.treeId);
+        created() {
+            this.location_img_src = pass + ':3000/' + this.location_image;
+            this.tree_img_src = pass + ':3000/' + this.photo_src;
             this.routePath = this.routePath + "trees/detail/" + this.treeId
         }
     }

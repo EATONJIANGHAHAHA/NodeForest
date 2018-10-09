@@ -27,7 +27,6 @@
             ).then((response) => {
                 //Store the trees information in the session.
                 this.$store.dispatch('setTrees', response.data);
-
                 //TODO: Display message when there is no tree owned by the user yet.
                 for (let i = 0; i < this.$store.state.trees.length; i++) {
                     this.trees.push(this.$store.state.trees[i])

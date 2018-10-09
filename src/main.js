@@ -4,13 +4,19 @@ import router from './router'
 import store from './store'
 import muse from './muse'
 import axios from 'axios'
-import Loading from 'muse-ui-loading';
+import Loading from 'muse-ui-loading'
+import VueLazyLoad from 'vue-lazyload'
 
 Vue.use(Loading);
+Vue.use(VueLazyLoad, {
+    error: 'img/failure_image.jpg',
+    loading: 'img/loading.gif',
+});
 Vue.config.productionTip = true;
 Vue.prototype.$http = axios.create({
     withCredentials: true
 });
+
 new Vue({
     el: '#app',
     router,

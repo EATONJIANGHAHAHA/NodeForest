@@ -5,7 +5,7 @@
         <h1>Tree No. {{tree.treeId}}</h1>
         <mu-flex class="flex-wrapper" justify-content="center" fill>
             <mu-flex justify-content="end" fill>
-                <img src="../img/tree1.jpg" height="200px" width="200px"/>
+                <img v-lazy="this.treeImageSrc" height="200px" width="200px"/>
             </mu-flex>
             <mu-list>
                 <mu-list-item v-for="item in infos" v-bind="item">
@@ -44,13 +44,13 @@
     const path = require("../common");
     export default {
         name: "TreeDetails",
-
         data() {
             return {
                 tree: Tree,
                 selectedFile: null,
                 shouldDisable: true,
                 routePath:'/postcards/add/',
+                treeImageSrc:'',
                 infos: [
                     //here we have to leave the declaration of this array contains objects, we will modify
                     //this array later after we have passed the data locally during mounting.
@@ -65,7 +65,6 @@
         created() {
             this.tree = this.$store.getters.getTreebyId(this.$route.params.treeId);
             //here we reinitialize this array as a new empty array.
-            console.log(this.tree);
             this.infos = [];
             this.infos.push({id: 1, label: 'Name:', value: this.tree.name});
             this.infos.push({id: 2, label: 'Health:', value: this.tree.health});
@@ -73,7 +72,8 @@
             this.infos.push({id: 4, label: 'Updated at:', value: this.tree.upload_date});
             this.infos.push({id: 5, label: 'Sayings:', value: this.tree.sayings});
             this.infos.push({id: 6, label: 'Species:', value: this.tree.species});
-            console.log(this.tree.treeId);
+            this.treeImageSrc = path + ':3000/' + this.tree.photo_src;
+
         },
         mounted() {
             this.routePath += this.tree.treeId;

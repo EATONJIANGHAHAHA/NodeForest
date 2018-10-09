@@ -8,7 +8,7 @@ export default class {
         location,
         locationImaSrc,
         species,
-        speciesImaSrc,
+        photo_src,
         contentText,
         health,
         upload_date,
@@ -20,7 +20,7 @@ export default class {
         this.location = location;
         this.locationImaSrc = locationImaSrc;
         this.species = species;
-        this.speciesImaSrc = speciesImaSrc;
+        this.photo_src = photo_src;
         this.contentText = contentText;
         this.health = health;
         this.upload_date = upload_date;
