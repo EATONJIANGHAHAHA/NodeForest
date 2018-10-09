@@ -1,103 +1,71 @@
 <template>
-    <mu-container class="expension-panel">
-        <h1>Staff List</h1>
-        <mu-expansion-panel v-for="staff in staffs" v-bind="staff">
-            <div slot="header">{{staff.username}}</div>
-            Email: {{staff.email}}, Phone: {{staff.phone}}, Address: {{staff.address}}
-            <mu-button slot="action" flat color="secondary" @click="modifyStaff(staff.id)">Modify</mu-button>
-            <mu-button slot="action" flat color="secondary" @click="deleteStaff(staff.id)">Delete</mu-button>
-        </mu-expansion-panel>
-        <mu-flex justify-content="center">
-            <mu-button style="margin-top: 10px" color="secondary" to="/admin/staffs/add">Add Staff</mu-button>
-        </mu-flex>
-        <mu-dialog title="Notice" width="360" :open.sync="openDialog">
-            {{dialogText}}
-            <mu-button slot="actions" flat color="primary" @click="closeDialog">Close</mu-button>
-        </mu-dialog>
+    <mu-container style="margin:20px">
+        <mu-tabs :value.sync="index" color="secondary" indicator-color="dark" full-width>
+            <mu-tab>Application</mu-tab>
+            <mu-tab>History</mu-tab>
+        </mu-tabs>
+        <div class="demo-text" v-if="index === 0">
+            <mu-expansion-panel v-for="incomplete in inCompletes" v-bind="incomplete">
+                <div slot="header"><h2>Application No.{{incomplete.id}} for {{incomplete.species}}</h2></div>
+                <mu-sub-header><h3>Tree Name: {{incomplete.name}}</h3></mu-sub-header>
+                <mu-sub-header>Date: {{incomplete.apply_date}}</mu-sub-header>
+                <mu-sub-header>Location: {{incomplete.location}}</mu-sub-header>
+                <mu-sub-header>Status: {{incomplete.status}}</mu-sub-header>
+            </mu-expansion-panel>
+        </div>
+        <div class="demo-text" v-if="index === 1">
+            <mu-expansion-panel v-for="complete in completes" v-bind="complete">
+                <div slot="header"><h2>Application No.{{complete.id}} for {{complete.species}}</h2></div>
+                <mu-sub-header><h3>Tree Name: {{complete.name}}</h3></mu-sub-header>
+                <mu-sub-header>Date: {{complete.apply_date}}</mu-sub-header>
+                <mu-sub-header>Location: {{complete.location}}</mu-sub-header>
+                <mu-sub-header>Status: {{complete.status}}</mu-sub-header>
+            </mu-expansion-panel>
+        </div>
     </mu-container>
 </template>
 
 <script>
     let path = require("../../common.js")
     export default {
-        name: "StaffManagement",
+        name: "Applications",
         data() {
             return {
-                staffs: [],
-                openDialog: false,
-                dialogText: 'Insert new staff failed.',
+                index: 0,
+                inCompletes: [],
+                completes: []
             }
         },
         created() {
-            this.getStaffs();
+            console.log("User: applications.");
+            this.getCompletes();
+            this.getIncompletes();
+
         },
 
         methods: {
 
-            getStaffs(){
-                console.log("Admin: manageStaff")
-                this.$http.get(path + ':3000/api/admin/staffs', {}).then(response => {
+            getCompletes() {
+
+                this.$http.get(path + ':3000/api/tree_app/complete?userId=' + this.$store.state.user.id, {}).then(response => {
                     console.log(response.data);
-                    this.staffs = [];
+                    this.completes = [];
                     for (let i = 0; i < response.data.length; i++)
-                        this.staffs.push(response.data[i])
+                        this.completes.push(response.data[i])
                 }, response => {
                     console.log('error')
                 })
             },
 
-            modifyStaff(staffId) {
-                this.$router.push({
-                    path: '/admin/staffs/edit',
-                    query: {
-                        staffId: staffId
-                    }
+            getIncompletes() {
+                this.$http.get(path + ':3000/api/tree_app/incomplete?userId=' + this.$store.state.user.id, {}).then(response => {
+                    console.log(response.data);
+                    this.inCompletes = [];
+                    for (let i = 0; i < response.data.length; i++)
+                        this.inCompletes.push(response.data[i])
+                }, response => {
+                    console.log('error')
                 })
-            },
-
-            deleteStaff(staffId) {
-                console.log(staffId);
-                this.$http.get(path + ':3000/api/staff/hasTrees?staffId=' + staffId)
-                    .then(response => {
-                        if (response.data[0].number !== 0) {
-                            this.dialogText = "Cannot delete: the staff has work to do!"
-                            this.openDialog = true;
-                        }
-                        else {
-                            this.$http.get(path + ':3000/api/staff/hasUnsolvedApps?staffId=' + staffId)
-                                .then(response => {
-                                    if (response.data[0].number !== 0) {
-                                        this.dialogText = "Cannot delete: the staff has work to do!"
-                                        this.openDialog = true;
-                                    }
-                                    else {
-
-                                        this.$http.post(path + ':3000/api/admin/staffs/delete', {
-                                            staffId: staffId
-                                        }).then(response => {
-                                            if (response.data.code === "1") {
-                                                this.dialogText = 'Deleting staff failed.'
-                                                this.openDialog = true
-                                            } else {
-                                                this.dialogText = 'Staff deleted'
-                                                this.openDialog = true
-                                                console.log("Admin: staff " + staffId + " deleted.")
-                                                this.$router.push('/admin/staffs');
-                                                this.getStaffs();
-                                            }
-                                        }, response => {
-                                            this.dialogText = 'Deleting staff failed: system error.'
-                                            this.openDialog = true
-                                        })
-
-                                    }
-                                });
-                        }
-                    });
-
-            },
-            closeDialog() {
-                this.openDialog = false;
             },
 
         }

@@ -1,8 +1,11 @@
+
+
 var express = require('express')
 var router = express.Router()
 var mysql = require('mysql')
 var dbConfig = require('./db/DBConfig')
 var treeAppSQL = require('./db/treeappsql')
+let staffSQL = require('./db/staffsql')
 
 var pool = mysql.createPool(dbConfig.mysql)
 
@@ -36,17 +39,26 @@ var jsonWrite = function (res, ret) {
  * @returns boolean of process status
  */
 router.post('/add', function (req, res) {
-    let sql = treeAppSQL.insert;
-    let params = req.body
-    console.log(params)
-    pool.query(sql, [getDate(), params.species, params.location, params.sayings, params.name, params.status, params.amount, params.userId], function (error, results, fields) {
+    let sql = staffSQL.getWorkloadOrder;
+    pool.query(sql, function (error, results, fields) {
         if (error) throw error
         if (results) {
-            console.log(results)
-            jsonWrite(res, results)
+            console.log("Staff id: " + results[0].id);
+            sql = treeAppSQL.insert;
+            let params = req.body;
+            console.log(params);
+            pool.query(sql, [getNow(), params.species, params.location, params.sayings, params.name, params.status, params.amount, params.userId, results[0].id], function (error, results, fields) {
+                if (error) throw error
+                if (results) {
+                    console.log(results)
+                    jsonWrite(res, results)
+                }
+            })
         }
     })
+
 })
+
 
 /**
  * Get tree species from the database.
@@ -76,6 +88,43 @@ router.get('/locations', function (req, res) {
     })
 })
 
+/**
+ * Get incomplete applications.
+ */
+router.get('/incomplete', function (req, res) {
+    let sql = treeAppSQL.getIncompleteByUserId;
+    let params = req.query||req.params;
+    console.log(params);
+    pool.query(sql,[params.userId],  (error, results, fields) => {
+        if (error) throw error;
+        if (results) {
+            for(var i = 0; i<results.length; i++){
+                results[i].apply_date = getDate(results[i].apply_date);
+            }
+            console.log(results);
+            jsonWrite(res,results);
+        }
+    })
+})
+
+/**
+ * Get complete applications.
+ */
+router.get('/complete', function (req, res) {
+    let sql = treeAppSQL.getCompleteByUserId;
+    let params = req.query||req.params;
+    console.log(params);
+    pool.query(sql,[params.userId],  (error, results, fields) => {
+        if (error) throw error;
+        if (results) {
+            for(var i = 0; i<results.length; i++){
+                results[i].apply_date = getDate(results[i].apply_date);
+            }
+            console.log(results);
+            jsonWrite(res,results);
+        }
+    })
+})
 
 
 
@@ -90,7 +139,7 @@ router.route('/:treeAppId')
     .get(function (req, res) {
         let sql = treeAppSQL.getById
         console.log(req.params)
-        pool.query(sql, [req.params.treeAppId], function (error, results, fields) {
+        pool.query(sql, [req.params.treeAppId], (error, results, fields) => {
             if (error) throw error
             if (results) {
                 console.log(results)
@@ -103,15 +152,14 @@ router.route('/:treeAppId')
      * Complete a tree application
      * @params needed in the request body:
      * 1. status
-     * 2. staffId
-     * 3. completeDate
-     * 4. treeAppId
+     * 2. completeDate
+     * 3. treeAppId
      * @returns boolean of process status.
      */
     .put(function (req, res) {
         let sql = treeAppSQL.update
         console.log(req.params)
-        pool.query(sql, [req.body.status, req.body.staffId, req.body.completeDate, req.params.treeAppId], function (error, results, fields) {
+        pool.query(sql, [req.body.status, req.body.completeDate, req.params.treeAppId], function (error, results, fields) {
             if (error) throw error
             if (results) {
                 console.log(results)
@@ -135,14 +183,17 @@ function twoDigits(d) {
  * to apply this to more than one Date object, having it as a prototype
  * makes sense.
  **/
-function getDate() {
-    var date = new Date();
-    return date.getFullYear() +
-        "-" + twoDigits(1 + date.getMonth()) +
-        "-" + twoDigits(date.getDate()) +
-        " " + twoDigits(date.getHours()) +
-        ":" + twoDigits(date.getMinutes()) +
-        ":" + twoDigits(date.getSeconds());
+function getNow() {
+    return getDate(new Date());
+}
+
+function getDate(d) {
+    return d.getFullYear() +
+        "-" + twoDigits(1 + d.getMonth()) +
+        "-" + twoDigits(d.getDate()) +
+        " " + twoDigits(d.getHours()) +
+        ":" + twoDigits(d.getMinutes()) +
+        ":" + twoDigits(d.getSeconds());
 }
 
 module.exports = router

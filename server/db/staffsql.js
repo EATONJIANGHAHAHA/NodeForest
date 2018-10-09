@@ -26,6 +26,7 @@ var StaffSQL = {
     usernameExist:'SELECT COUNT(*) AS number FROM staff WHERE username = ?',
     hasTrees: ' SELECT COUNT(*) AS number from tree WHERE staff_id = ?',
     hasUnsolvedApplication:'SELECT COUNT(*) AS number from tree_app WHERE staff_id = ? AND complete_date IS NULL',
-    delete:'DELETE FROM staff WHERE id = ?'
+    delete:'DELETE FROM staff WHERE id = ?',
+    getWorkloadOrder:'SELECT any_value(s.id) AS id, COUNT(t.staff_id) AS num FROM staff s LEFT JOIN tree t ON t.staff_id = s.id GROUP BY t.staff_id ORDER BY num'
 };
 module.exports = StaffSQL;
