@@ -107,7 +107,7 @@
                                     this.$store.dispatch("setAdmin", new Admin());
                                     let expireDays = 1000 * 60 * 60 * 24 * 15;
                                     this.setCookie('session', response.data.session, expireDays);
-                                    this.$router.push('/home');
+                                    this.$router.push('/user/home');
                                 }
                             }, response => {
                                 //error callback

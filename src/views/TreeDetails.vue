@@ -13,21 +13,21 @@
                     <mu-list-item-content>{{item.value}}</mu-list-item-content>
                 </mu-list-item>
                 <mu-flex>
-                    <mu-button>
+                    <mu-button v-if="this.$store.state.user.id">
                         <mu-icon value="photo_album"></mu-icon>
                         Historical Photos
                     </mu-button>
-                    <mu-button to="/postcard">
+                    <mu-button to="/postcard" v-if="this.$store.state.user.id">
                         <mu-icon value="card_giftcard"></mu-icon>
                         Postcard
                     </mu-button>
                     <input style="display: none" type="file" @change="onFileChanged" ref="fileInput"/>
-                    <mu-button @click="$refs.fileInput.click()">
+                    <mu-button v-if="this.$store.state.staff.id" @click="$refs.fileInput.click()">
                         <mu-icon value="folder"></mu-icon>
                         Select File
                     </mu-button>
                     <mu-text-field v-if="selectedFile" v-model="selectedFile.name" disabled=""/>
-                    <mu-button @click="onSubmitClicked" :disabled="shouldDisable">
+                    <mu-button v-if="this.$store.state.staff.id" @click="onSubmitClicked" :disabled="shouldDisable">
                         <mu-icon value="cloud_upload"></mu-icon>
                         Upload
                     </mu-button>
