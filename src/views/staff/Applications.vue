@@ -1,6 +1,6 @@
 <template>
     <mu-container style="margin:20px">
-        <mu-tabs :value.sync="tabIndex" color="secondary" indicator-color="dark" full-width>
+        <mu-tabs :value.sync="tabIndex" color="secondary" indicator-color="dark" full-width center>
             <mu-tab><h3>Application</h3></mu-tab>
             <mu-tab><h3>History</h3></mu-tab>
         </mu-tabs>
@@ -14,7 +14,8 @@
                 <mu-sub-header>Amount: {{incomplete.amount}}</mu-sub-header>
                 <mu-sub-header>Sayings: {{incomplete.sayings}}</mu-sub-header>
                 <h1>{{incomplete.reason}}</h1>
-                <mu-text-field placeholder="Reason..." v-model="inCompletes[index]['reason']" slot="action"></mu-text-field>
+                <mu-text-field placeholder="Reason..." v-model="inCompletes[index]['reason']"
+                               slot="action"></mu-text-field>
                 <mu-button slot="action" icon @click="complete(index, 'APPROVED')">
                     <mu-icon value="done_all"></mu-icon>
                 </mu-button>
@@ -80,7 +81,7 @@
                 this.$http.get(path + ':3000/api/tree_app/staff/incomplete?staffId=' + this.$store.state.staff.id, {}).then(response => {
                     console.log(response.data);
                     this.inCompletes = [];
-                    for (let i = 0; i < response.data.length; i++){
+                    for (let i = 0; i < response.data.length; i++) {
                         this.inCompletes.push(response.data[i]);
                         this.inCompletes[i].reason = '';
                     }
@@ -90,8 +91,8 @@
                 })
             },
 
-            complete(i, status){
-                if(status === 'DISAPPROVED' && this.inCompletes[i].reason === ''){
+            complete(i, status) {
+                if (status === 'DISAPPROVED' && this.inCompletes[i].reason === '') {
                     this.openDialog("Please fill in the reason of rejection.")
                 }
                 else {
@@ -108,7 +109,7 @@
                         locationId: this.inCompletes[i].location_id
                     }).then(response => {
                         console.log(response.data);
-                        if (response.data.code === 1){
+                        if (response.data.code === 1) {
                             this.openDialog("Failed!")
                         }
                         else {

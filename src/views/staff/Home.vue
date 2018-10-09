@@ -24,14 +24,14 @@
             }
         },
         created() {
-            console.log(this.$store.state.staff.id);
             this.$http.post('http://127.0.0.1:3000/api/staff/trees', {
                 staffId: this.$store.state.staff.id
             }).then(response => {
-                console.log(response.data);
                 if (response.data.length !== 0) {
                     for (let i = 0; i < response.data.length; i++)
                         this.trees.push(response.data[i]);
+                    console.log(this.trees);
+                    this.$store.dispatch('setTrees', this.trees);
                 } else {
                     //TODO: do something if there is no match.
                 }
