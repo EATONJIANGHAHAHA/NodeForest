@@ -4,7 +4,7 @@ var mysql = require('mysql');
 var dbConfig = require('./db/DBConfig')
 var treeAppSQL = require('./db/treeappsql')
 let staffSQL = require('./db/staffsql')
-
+let treeSQL = require('./db/treesql');
 var pool = mysql.createPool(dbConfig.mysql)
 
 /**
@@ -196,15 +196,41 @@ router.route('/')
      * @returns boolean of process status.
      */
     .put(function (req, res) {
-        let sql = treeAppSQL.update;
-        console.log(req.body)
-        pool.query(sql, [req.body.status, getNow(), req.body.reason, req.body.id], function (error, results, fields) {
-            if (error) throw error
-            if (results) {
-                console.log(results)
-                jsonWrite(res, results)
-            }
-        })
+        let sql;
+        let params = req.body;
+        if(params.status === 'APPROVED'){
+            sql = treeSQL.insert;
+            params = req.body;
+            console.log(params);
+            pool.query(sql, [0.5, params.location, null, params.species, params.sayings, params.name,
+                params.ownerId, params.staffId, 'GOOD', getNow()], function (error, results, fields) {
+                if (error) throw error;
+                if (results) {
+
+                    console.log(results);
+                    var treeId = results.insertId;
+                    sql = treeAppSQL.update;
+                    pool.query(sql, [params.status, getNow(), params.reason, treeId, params.id], function (error, results, fields) {
+                        if (error) throw error
+                        if (results) {
+                            console.log(results);
+                            jsonWrite(res, results);
+                        }
+                    })
+                }
+            })
+        }
+        else {
+            pool.query(sql, [params.status, getNow(), params.reason, null, params.id], function (error, results, fields) {
+                if (error) throw error
+                if (results) {
+                    console.log(results);
+                    jsonWrite(res, results);
+                }
+            })
+        }
+
+
     })
 
 /**

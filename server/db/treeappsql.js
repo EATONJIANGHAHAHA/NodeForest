@@ -6,7 +6,7 @@
 var TreeAppSQL = {
     insert:'INSERT INTO tree_app(apply_date, species, location, sayings, name, status, amount, user_id, staff_id) VALUES(?,?,?,?,?,?,?,?,?)',
     getById:'SELECT * FROM tree_app WHERE id = ? ',
-    update:'UPDATE tree_app SET status = ?, complete_date = ?, reason = ? WHERE id = ? ',
+    update:'UPDATE tree_app SET status = ?, complete_date = ?, reason = ?, tree_id = ? WHERE id = ? ',
     getSpecies:'SELECT species FROM species',
     getLocations:'SELECT location FROM location',
     getIncompleteByUserId:'SELECT * FROM tree_app WHERE complete_date IS NULL AND user_id = ?',

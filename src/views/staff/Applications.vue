@@ -98,7 +98,13 @@
                     this.$http.put(path + ':3000/api/tree_app/', {
                         status: status,
                         reason: this.inCompletes[i].reason,
-                        id: this.inCompletes[i].id
+                        id: this.inCompletes[i].id,
+                        name: this.inCompletes[i].name,
+                        location: this.inCompletes[i].location,
+                        species: this.inCompletes[i].species,
+                        sayings: this.inCompletes[i].sayings,
+                        ownerId: this.inCompletes[i].user_id,
+                        staffId: this.inCompletes[i].staff_id,
                     }).then(response => {
                         console.log(response.data);
                         if (response.data.code === 1){

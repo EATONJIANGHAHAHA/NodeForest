@@ -62,7 +62,7 @@ var jsonWrite = function (res, ret) {
 };
 
 /**
- * Add user to the database.
+ * Add tree to the database.
  * @params needed in the request body:
  * 1. username
  * 2. password
