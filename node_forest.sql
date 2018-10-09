@@ -41,6 +41,30 @@ INSERT INTO `admin` VALUES (1,'testing','f1e8e3f2df1a28cacc953cca3f0168f5');
 UNLOCK TABLES;
 
 --
+-- Table structure for table `location`
+--
+
+DROP TABLE IF EXISTS `location`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `location` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `location` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `location`
+--
+
+LOCK TABLES `location` WRITE;
+/*!40000 ALTER TABLE `location` DISABLE KEYS */;
+INSERT INTO `location` VALUES (1,'Sahara Desert'),(2,'North Canada'),(3,'Taklimakan'),(4,'Inner Mongolia grassland');
+/*!40000 ALTER TABLE `location` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `photo`
 --
 
@@ -55,7 +79,7 @@ CREATE TABLE `photo` (
   PRIMARY KEY (`id`),
   KEY `photo_tree__fk` (`tree_id`),
   CONSTRAINT `photo_tree__fk` FOREIGN KEY (`tree_id`) REFERENCES `tree` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -64,7 +88,7 @@ CREATE TABLE `photo` (
 
 LOCK TABLES `photo` WRITE;
 /*!40000 ALTER TABLE `photo` DISABLE KEYS */;
-INSERT INTO `photo` VALUES (1,'2018-08-23 00:00:00','../img/tree1.jpg',1),(2,'2018-08-03 00:00:00','../img/tree2.jpg',2),(3,'2018-08-27 00:00:00','../img/tree1.jpg',3),(4,'2018-08-18 00:00:00','../img/tree3.jpg',4),(5,'2018-08-16 00:00:00','../img/tree3.jpg',1),(6,'2018-10-06 00:00:00','server/uploads/2018-10-06T08:54:55.159Z46495182.jpg',1),(7,'2018-10-06 00:00:00','server/uploads/2018-10-06T08:57:14.054Z46495182.jpg',1),(8,'2018-10-06 00:00:00','server/uploads/2018-10-06T09:00:22.323Z46495182.jpg',1),(9,'2018-10-06 00:00:00','server/uploads/2018-10-06T09:01:54.913Z46495182.jpg',1);
+INSERT INTO `photo` VALUES (1,'2018-08-23 00:00:00','../img/tree1.jpg',1),(2,'2018-08-03 00:00:00','../img/tree2.jpg',2),(3,'2018-08-27 00:00:00','../img/tree1.jpg',3),(4,'2018-08-18 00:00:00','../img/tree3.jpg',4),(5,'2018-08-16 00:00:00','../img/tree3.jpg',1),(6,'2018-10-06 00:00:00','server/uploads/2018-10-06T08:54:55.159Z46495182.jpg',1),(7,'2018-10-06 00:00:00','server/uploads/2018-10-06T08:57:14.054Z46495182.jpg',1),(8,'2018-10-06 00:00:00','server/uploads/2018-10-06T09:00:22.323Z46495182.jpg',1),(9,'2018-10-06 00:00:00','server/uploads/2018-10-06T09:01:54.913Z46495182.jpg',1),(10,'2018-10-09 18:09:09','server/uploads/2018-10-09T07:09:09.858ZInner Mongolia grassland.jpg',1);
 /*!40000 ALTER TABLE `photo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -83,6 +107,7 @@ CREATE TABLE `postcard_app` (
   `apply_date` date DEFAULT NULL,
   `receive_date` date DEFAULT NULL,
   `tree_id` int(10) NOT NULL,
+  `comment` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `postcard_app_tree_id_fk` (`tree_id`),
   CONSTRAINT `postcard_app_tree_id_fk` FOREIGN KEY (`tree_id`) REFERENCES `tree` (`id`)
@@ -96,6 +121,30 @@ CREATE TABLE `postcard_app` (
 LOCK TABLES `postcard_app` WRITE;
 /*!40000 ALTER TABLE `postcard_app` DISABLE KEYS */;
 /*!40000 ALTER TABLE `postcard_app` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `species`
+--
+
+DROP TABLE IF EXISTS `species`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `species` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `species` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `species`
+--
+
+LOCK TABLES `species` WRITE;
+/*!40000 ALTER TABLE `species` DISABLE KEYS */;
+INSERT INTO `species` VALUES (1,'White birch'),(2,'Cherry tree'),(3,'Poplar'),(4,'Pine'),(5,'Ginkgo Tree');
+/*!40000 ALTER TABLE `species` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -144,13 +193,13 @@ CREATE TABLE `tree` (
   `owner_id` int(10) NOT NULL,
   `staff_id` int(10) DEFAULT NULL,
   `health` varchar(20) DEFAULT NULL,
-  `last_edit` date DEFAULT NULL,
+  `last_edit` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `tree_user__fk` (`owner_id`),
   KEY `tree_staff__fk` (`staff_id`),
   CONSTRAINT `tree_staff__fk` FOREIGN KEY (`staff_id`) REFERENCES `staff` (`id`),
   CONSTRAINT `tree_user__fk` FOREIGN KEY (`owner_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -159,7 +208,7 @@ CREATE TABLE `tree` (
 
 LOCK TABLES `tree` WRITE;
 /*!40000 ALTER TABLE `tree` DISABLE KEYS */;
-INSERT INTO `tree` VALUES (1,20.1,'Sahara Desert',NULL,'White birch','Protecting the environment is everyone’s responsibility','Ahihi',1,1,'Good','2018-08-27'),(2,15.66,'North Canada',NULL,'Cherry tree','I love Canada','Puppy',1,2,'Weak','2018-08-26'),(3,77.88,'Taklimakan',NULL,'White birch','For the tribe','Jinping Xi',2,2,'Good','2018-08-27'),(4,50.7,'Inner Mongolia grassland',NULL,'Poplar','Expecto Patronum','Patronus Charm',1,2,'Good','2018-08-28');
+INSERT INTO `tree` VALUES (1,20.1,'Sahara Desert',NULL,'White birch','Protecting the environment is everyone’s responsibility','Ahihi',1,1,'Good','2018-08-27 00:00:00'),(2,15.66,'North Canada',NULL,'Cherry tree','I love Canada','Puppy',1,2,'Weak','2018-08-26 00:00:00'),(3,77.88,'Taklimakan',NULL,'White birch','For the tribe','Jinping Xi',2,2,'Good','2018-08-27 00:00:00'),(4,50.7,'Inner Mongolia grassland',NULL,'Poplar','Expecto Patronum','Patronus Charm',1,2,'Good','2018-08-28 00:00:00'),(7,0.5,'Taklimakan',NULL,'Poplar','Tebieman','Given',1,3,'GOOD','2018-10-09 18:23:17');
 /*!40000 ALTER TABLE `tree` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -172,17 +221,18 @@ DROP TABLE IF EXISTS `tree_app`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `tree_app` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
-  `apply_date` date DEFAULT NULL,
+  `apply_date` datetime DEFAULT NULL,
   `species` varchar(20) DEFAULT NULL,
   `location` varchar(100) DEFAULT NULL,
   `sayings` varchar(200) DEFAULT NULL,
   `name` varchar(20) DEFAULT NULL,
-  `status` int(10) DEFAULT NULL,
+  `status` varchar(20) DEFAULT NULL,
   `tree_id` int(10) DEFAULT NULL,
   `user_id` int(10) DEFAULT NULL,
   `staff_id` int(10) DEFAULT NULL,
-  `complete_date` date DEFAULT NULL,
+  `complete_date` datetime DEFAULT NULL,
   `amount` double DEFAULT NULL,
+  `reason` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `tree_app_tree__fk` (`tree_id`),
   KEY `tree_app_user_id_fk` (`user_id`),
@@ -190,7 +240,7 @@ CREATE TABLE `tree_app` (
   CONSTRAINT `tree_app_staff_id_fk` FOREIGN KEY (`staff_id`) REFERENCES `staff` (`id`) ON UPDATE CASCADE,
   CONSTRAINT `tree_app_tree__fk` FOREIGN KEY (`tree_id`) REFERENCES `tree` (`id`),
   CONSTRAINT `tree_app_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -199,6 +249,7 @@ CREATE TABLE `tree_app` (
 
 LOCK TABLES `tree_app` WRITE;
 /*!40000 ALTER TABLE `tree_app` DISABLE KEYS */;
+INSERT INTO `tree_app` VALUES (1,'2018-10-09 11:32:50','White birch','Sahara Desert','Tried','Patty','APPROVED',1,1,1,'2018-10-09 01:12:43',20,'Very good'),(2,'2018-10-09 12:41:44','White birch','Sahara Desert','Ok','Test','SUBMITTED',NULL,1,2,NULL,20,NULL),(3,'2018-10-09 12:44:44','Poplar','Taklimakan','Tebieman','Given','APPROVED',7,1,3,'2018-10-09 18:23:17',20,'');
 /*!40000 ALTER TABLE `tree_app` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -240,4 +291,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-06 19:11:44
+-- Dump completed on 2018-10-09 18:25:44
