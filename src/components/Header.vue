@@ -42,6 +42,7 @@
                 this.$store.dispatch('setUser', new User());
                 this.$store.dispatch('setAdmin', new Admin());
                 this.$store.dispatch('setStaff', new Staff());
+                this.delCookie('session');
                 this.$router.push('/');
             },
             openDrawer() {

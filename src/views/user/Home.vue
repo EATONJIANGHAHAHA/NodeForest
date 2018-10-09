@@ -33,7 +33,6 @@
                     this.trees.push(this.$store.state.trees[i])
                 }
             }, (response) => {
-                //TODO: Display error message when there is error loading the trees.
                 console.log('error')
             });
         },

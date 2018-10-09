@@ -18,6 +18,7 @@ import EditAccount from './views/user/EditAccount'
 import NewTreeApp from './views/user/NewTreeApp'
 import Applications from './views/user/Applications'
 import StaffApplications from './views/staff/Applications'
+import PostcardApp from './views/user/PostcardApp'
 
 Vue.use(Router);
 
@@ -52,6 +53,10 @@ export default new Router({
             component: Applications
         },
         {
+            path: '/postcard/:treeId',
+            component: PostcardApp
+        },
+        {
             path: '/login',
             component: Login,
         },
@@ -73,7 +78,7 @@ export default new Router({
         },
         {
             //dynamic routing passing location value into TreeDetails component.
-            path: '/tree-details/:treeId',
+            path: '/trees/detail/:treeId',
             component: TreeDetails,
         },
         {

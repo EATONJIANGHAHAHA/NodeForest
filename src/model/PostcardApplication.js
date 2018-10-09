@@ -6,6 +6,7 @@ export default class {
         status,
         applyDate,
         receiveDate,
+        recipient,
         treeId,
     ) {
         this.postcardAppId = postcardAppId;
@@ -14,6 +15,7 @@ export default class {
         this.status = status;
         this.applyDate = applyDate;
         this.receiveDate = receiveDate;
+        this.recipient = recipient;
         this.treeId = treeId;
     }
 }

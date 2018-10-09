@@ -7,14 +7,19 @@
             <mu-flex justify-content="end" fill>
                 <img src="../img/tree1.jpg" height="200px" width="200px"/>
             </mu-flex>
-
             <mu-list >
                 <mu-list-item v-for="item in infos" v-bind="item">
                     <mu-list-item-title>{{item.label}}</mu-list-item-title>
                     <mu-list-item-content>{{item.value}}</mu-list-item-content>
                 </mu-list-item>
-                <mu-button>Historical Photos</mu-button>
-                <mu-button>Postcards</mu-button>
+                <mu-button>
+                    <mu-icon value="photo_album"></mu-icon>
+                    Historical Photos
+                </mu-button>
+                <mu-button to="/postcard">
+                    <mu-icon value="card_giftcard"></mu-icon>
+                    Postcard
+                </mu-button>
             </mu-list>
         </mu-flex>
     </div>

@@ -50,7 +50,7 @@
         mounted() {
             console.log("TreeInfo component information:");
             console.log(this.treeId);
-            this.routePath = this.routePath + "tree-details/" + this.treeId
+            this.routePath = this.routePath + "trees/detail/" + this.treeId
         }
     }
 </script>
