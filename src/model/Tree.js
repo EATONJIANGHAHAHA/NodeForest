@@ -13,6 +13,7 @@ export default class {
         health,
         upload_date,
         sayings,//the word you give to your tree.
+        location_id,
     ) {
         this.treeId = treeId;
         this.height = height;
@@ -24,5 +25,6 @@ export default class {
         this.health = health;
         this.upload_date = upload_date;
         this.sayings = sayings;
+        this.location_id = location_id;
     }
 }

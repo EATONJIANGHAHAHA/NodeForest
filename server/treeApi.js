@@ -61,29 +61,6 @@ var jsonWrite = function (res, ret) {
     }
 };
 
-/**
- * Add tree to the database.
- * @params needed in the request body:
- * 1. username
- * 2. password
- * 3. email
- * 4. address
- * 5. phone.
- * @returns boolean of the process status.
- */
-router.post('/add', function (req, res) {
-    var sql = treeSQL.insert;
-    var params = req.body;
-    console.log(params);
-    pool.query(sql, [params.height, params.location, params.locationImg, params.species, params.sayings, params.name,
-        params.ownerId, params.staffId, params.health, params.last_edit], function (error, results, fields) {
-        if (error) throw error;
-        if (results) {
-            console.log(results);
-            jsonWrite(res, results)
-        }
-    })
-});
 
 router.route('/:treeId')
 /**

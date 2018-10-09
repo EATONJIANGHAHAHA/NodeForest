@@ -45,7 +45,7 @@ router.post('/add', function (req, res) {
             sql = treeAppSQL.insert;
             let params = req.body;
             console.log(params);
-            pool.query(sql, [getNow(), params.species, params.location, params.sayings, params.name, params.status, params.amount, params.userId, results[0].id], function (error, results, fields) {
+            pool.query(sql, [getNow(), params.species, params.location_id, params.sayings, params.name, params.status, params.amount, params.userId, results[0].id], function (error, results, fields) {
                 if (error) throw error
                 if (results) {
                     console.log(results)
@@ -202,12 +202,11 @@ router.route('/')
             sql = treeSQL.insert;
             params = req.body;
             console.log(params);
-            pool.query(sql, [0.5, params.location, null, params.species, params.sayings, params.name,
+            pool.query(sql, [15, params.locationId, params.species, params.sayings, params.name,
                 params.ownerId, params.staffId, 'GOOD', getNow()], function (error, results, fields) {
                 if (error) throw error;
                 if (results) {
-
-                    console.log(results);
+                    console.log("Created: new tree " + results.insertId);
                     var treeId = results.insertId;
                     sql = treeAppSQL.update;
                     pool.query(sql, [params.status, getNow(), params.reason, treeId, params.id], function (error, results, fields) {

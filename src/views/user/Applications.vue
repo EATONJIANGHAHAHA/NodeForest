@@ -1,10 +1,10 @@
 <template>
     <mu-container style="margin:20px">
-        <mu-tabs :value.sync="index" color="secondary" indicator-color="dark" full-width>
+        <mu-tabs :value.sync="tabIndex" color="secondary" indicator-color="dark" full-width>
             <mu-tab><h3>Application</h3></mu-tab>
             <mu-tab><h3>History</h3></mu-tab>
         </mu-tabs>
-        <div class="demo-text" v-if="index === 0">
+        <div class="demo-text" v-if="tabIndex === 0">
             <mu-expansion-panel v-for="incomplete in inCompletes" v-bind="incomplete">
                 <div slot="header"><h2>Application No.{{incomplete.id}} for {{incomplete.species}}</h2></div>
                 <mu-sub-header><h3>Tree Name: {{incomplete.name}}</h3></mu-sub-header>
@@ -15,7 +15,7 @@
                 <mu-sub-header>Sayings: {{incomplete.sayings}}</mu-sub-header>
             </mu-expansion-panel>
         </div>
-        <div class="demo-text" v-if="index === 1">
+        <div class="demo-text" v-if="tabIndex === 1">
             <mu-expansion-panel v-for="complete in completes" v-bind="complete">
                 <div slot="header"><h2>Application No.{{complete.id}} for {{complete.species}}</h2></div>
                 <mu-sub-header><h3>Tree Name: {{complete.name}}</h3></mu-sub-header>

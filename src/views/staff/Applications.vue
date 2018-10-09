@@ -105,6 +105,7 @@
                         sayings: this.inCompletes[i].sayings,
                         ownerId: this.inCompletes[i].user_id,
                         staffId: this.inCompletes[i].staff_id,
+                        locationId: this.inCompletes[i].location_id
                     }).then(response => {
                         console.log(response.data);
                         if (response.data.code === 1){

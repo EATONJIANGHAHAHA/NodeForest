@@ -50,6 +50,7 @@ DROP TABLE IF EXISTS `location`;
 CREATE TABLE `location` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `location` varchar(50) DEFAULT NULL,
+  `path` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -60,7 +61,7 @@ CREATE TABLE `location` (
 
 LOCK TABLES `location` WRITE;
 /*!40000 ALTER TABLE `location` DISABLE KEYS */;
-INSERT INTO `location` VALUES (1,'Sahara Desert'),(2,'North Canada'),(3,'Taklimakan'),(4,'Inner Mongolia grassland');
+INSERT INTO `location` VALUES (1,'Sahara Desert',NULL),(2,'North Canada',NULL),(3,'Taklimakan',NULL),(4,'Inner Mongolia grassland',NULL);
 /*!40000 ALTER TABLE `location` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -185,8 +186,6 @@ DROP TABLE IF EXISTS `tree`;
 CREATE TABLE `tree` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `height` double DEFAULT NULL,
-  `location` varchar(100) DEFAULT NULL,
-  `location_image` varchar(100) DEFAULT NULL,
   `species` varchar(20) DEFAULT NULL,
   `sayings` varchar(200) DEFAULT NULL,
   `name` varchar(20) DEFAULT NULL,
@@ -194,12 +193,15 @@ CREATE TABLE `tree` (
   `staff_id` int(10) DEFAULT NULL,
   `health` varchar(20) DEFAULT NULL,
   `last_edit` datetime DEFAULT NULL,
+  `location_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `tree_user__fk` (`owner_id`),
   KEY `tree_staff__fk` (`staff_id`),
+  KEY `tree_location__fk` (`location_id`),
+  CONSTRAINT `tree_location__fk` FOREIGN KEY (`location_id`) REFERENCES `location` (`id`),
   CONSTRAINT `tree_staff__fk` FOREIGN KEY (`staff_id`) REFERENCES `staff` (`id`),
   CONSTRAINT `tree_user__fk` FOREIGN KEY (`owner_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -208,7 +210,7 @@ CREATE TABLE `tree` (
 
 LOCK TABLES `tree` WRITE;
 /*!40000 ALTER TABLE `tree` DISABLE KEYS */;
-INSERT INTO `tree` VALUES (1,20.1,'Sahara Desert',NULL,'White birch','Protecting the environment is everyone’s responsibility','Ahihi',1,1,'Good','2018-08-27 00:00:00'),(2,15.66,'North Canada',NULL,'Cherry tree','I love Canada','Puppy',1,2,'Weak','2018-08-26 00:00:00'),(3,77.88,'Taklimakan',NULL,'White birch','For the tribe','Jinping Xi',2,2,'Good','2018-08-27 00:00:00'),(4,50.7,'Inner Mongolia grassland',NULL,'Poplar','Expecto Patronum','Patronus Charm',1,2,'Good','2018-08-28 00:00:00'),(7,0.5,'Taklimakan',NULL,'Poplar','Tebieman','Given',1,3,'GOOD','2018-10-09 18:23:17');
+INSERT INTO `tree` VALUES (1,20.1,'White birch','Protecting the environment is everyone’s responsibility','Ahihi',1,2,'','2018-08-27 00:00:00',1),(2,15.66,'Cherry tree','I love Canada','Puppy',1,1,'Weak','2018-08-26 00:00:00',2),(3,77.88,'White birch','For the tribe','Jinping Xi',3,1,'Good','2018-08-27 00:00:00',3),(4,50.7,'Poplar','Expecto Patronum','Patronus Charm',2,1,'Good','2018-08-28 00:00:00',4),(7,0.5,'Poplar','Tebieman','Given',1,3,'GOOD','2018-10-09 18:23:17',1),(8,15,'White birch','Tried','Baby',1,1,'GOOD','2018-10-09 21:03:23',4),(9,15,'White birch','asdfa','dsfa',1,1,'GOOD','2018-10-09 21:10:31',1);
 /*!40000 ALTER TABLE `tree` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -223,7 +225,6 @@ CREATE TABLE `tree_app` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `apply_date` datetime DEFAULT NULL,
   `species` varchar(20) DEFAULT NULL,
-  `location` varchar(100) DEFAULT NULL,
   `sayings` varchar(200) DEFAULT NULL,
   `name` varchar(20) DEFAULT NULL,
   `status` varchar(20) DEFAULT NULL,
@@ -233,14 +234,17 @@ CREATE TABLE `tree_app` (
   `complete_date` datetime DEFAULT NULL,
   `amount` double DEFAULT NULL,
   `reason` varchar(200) DEFAULT NULL,
+  `location_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `tree_app_tree__fk` (`tree_id`),
   KEY `tree_app_user_id_fk` (`user_id`),
   KEY `tree_app_staff_id_fk` (`staff_id`),
+  KEY `tree_app_location__fk` (`location_id`),
+  CONSTRAINT `tree_app_location__fk` FOREIGN KEY (`location_id`) REFERENCES `location` (`id`),
   CONSTRAINT `tree_app_staff_id_fk` FOREIGN KEY (`staff_id`) REFERENCES `staff` (`id`) ON UPDATE CASCADE,
   CONSTRAINT `tree_app_tree__fk` FOREIGN KEY (`tree_id`) REFERENCES `tree` (`id`),
   CONSTRAINT `tree_app_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -249,7 +253,7 @@ CREATE TABLE `tree_app` (
 
 LOCK TABLES `tree_app` WRITE;
 /*!40000 ALTER TABLE `tree_app` DISABLE KEYS */;
-INSERT INTO `tree_app` VALUES (1,'2018-10-09 11:32:50','White birch','Sahara Desert','Tried','Patty','APPROVED',1,1,1,'2018-10-09 01:12:43',20,'Very good'),(2,'2018-10-09 12:41:44','White birch','Sahara Desert','Ok','Test','SUBMITTED',NULL,1,2,NULL,20,NULL),(3,'2018-10-09 12:44:44','Poplar','Taklimakan','Tebieman','Given','APPROVED',7,1,3,'2018-10-09 18:23:17',20,'');
+INSERT INTO `tree_app` VALUES (1,'2018-10-09 11:32:50','White birch','Tried','Patty','APPROVED',1,1,1,'2018-10-09 01:12:43',20,'Very good',1),(2,'2018-10-09 12:41:44','White birch','Ok','Test','SUBMITTED',NULL,1,2,NULL,20,NULL,2),(3,'2018-10-09 12:44:44','Poplar','Tebieman','Given','APPROVED',7,1,3,'2018-10-09 18:23:17',20,'',3),(4,'2018-10-09 20:18:18','White birch','Tried','Baby','APPROVED',8,1,1,'2018-10-09 21:03:23',20,'',2),(5,'2018-10-09 21:00:14','White birch','asdfa','dsfa','APPROVED',9,1,1,'2018-10-09 21:10:31',20,'',1),(6,'2018-10-09 21:01:32','White birch','Say something','Tried','SUBMITTED',NULL,1,1,NULL,20,NULL,3);
 /*!40000 ALTER TABLE `tree_app` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -291,4 +295,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-09 18:25:44
+-- Dump completed on 2018-10-09 21:11:55

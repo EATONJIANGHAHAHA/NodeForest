@@ -8,8 +8,8 @@
             <mu-select label="Species: " v-model="form.tree.species" :rules="optionRules">
                 <mu-option v-for="specy in species" :key="specy" :label="specy" :value="specy"></mu-option>
             </mu-select>
-            <mu-select label="Location: " v-model="form.tree.location" >
-                <mu-option v-for="location in locations" :key="location" :label="location" :value="location"></mu-option>
+            <mu-select label="Location: " v-model="form.tree.location_id" >
+                <mu-option v-for="location in locations" :key="location.id" :label="location.location" :value="location.id"></mu-option>
             </mu-select>
             <mu-form-item label="Amount($):" prop="address">
                 <mu-text-field disabled v-model="form.tree.amount"></mu-text-field>
@@ -80,9 +80,9 @@
             this.$http.get(path + ':3000/api/tree_app/locations', {}).then(response => {
                 console.log(response.data);
                 this.locations = [];
-                this.form.tree.location = response.data[0].location;
+                this.form.tree.location_id = response.data[0].id;
                 for (let i = 0; i < response.data.length; i++)
-                    this.locations.push(response.data[i].location)
+                    this.locations.push(response.data[i])
             }, response => {
                 console.log('Get locations: error')
             })
@@ -95,7 +95,7 @@
 
                         this.$http.post(path + ':3000/api/tree_app/add', {
                             species: this.form.tree.species,
-                            location: this.form.tree.location,
+                            location_id: this.form.tree.location_id,
                             sayings: this.form.tree.sayings,
                             name: this.form.tree.name,
                             status:'SUBMITTED',
