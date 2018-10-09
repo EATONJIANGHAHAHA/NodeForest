@@ -2,25 +2,19 @@
     <mu-container class="expension-panel">
         <h1>Apply for a postcard for tree {{tree.id}} {{tree.name}}</h1>
         <mu-form ref="form" :model="application" class="mu-login-form" :label-position="labelPosition" label-width="100">
-            <mu-form-item label="Tree Name:" :rules="nameRules" prop="tree.name" >
-                <mu-text-field type="text" v-model="form.tree.name" placeholder="Give a name of your tree..."></mu-text-field>
+            <mu-form-item label="Postcode:" :rules="postCodeRules" prop="postCode" >
+                <mu-text-field type="text" v-model="application.postCode" placeholder="Postcode..."></mu-text-field>
             </mu-form-item>
-            <mu-select label="Species: " v-model="form.tree.species" :rules="optionRules">
-                <mu-option v-for="specy in species" :key="specy" :label="specy" :value="specy"></mu-option>
-            </mu-select>
-            <mu-select label="Location: " v-model="form.tree.location_id" >
-                <mu-option v-for="location in locations" :key="location.id" :label="location.location" :value="location.id"></mu-option>
-            </mu-select>
-            <mu-form-item label="Amount($):" prop="address">
-                <mu-text-field disabled v-model="form.tree.amount"></mu-text-field>
+            <mu-form-item label="Address:" prop="address" :rules="addressRules">
+                <mu-text-field v-model="application.address"></mu-text-field>
             </mu-form-item>
-            <mu-form-item label="Sayings:" prop="sayings" >
-                <mu-text-field multi-line :rows="4" type="text" v-model="form.tree.sayings" placeholder="Say something to the tree..."></mu-text-field>
+            <mu-form-item label="Recipient:" prop="recipient" :rules="recipientRules">
+                <mu-text-field v-model="application.recipient"></mu-text-field>
+            </mu-form-item>
+            <mu-form-item label="Message:" prop="sayings" >
+                <mu-text-field multi-line :rows="4" type="text" v-model="application.message" placeholder="What you want to in the postcard, leave it blank if you want our staff to fill in for you..."></mu-text-field>
             </mu-form-item>
         </mu-form>
-
-
-
         <mu-dialog title="Notice" width="360" :open.sync="openDialog">
             {{dialogText}}
             <mu-button slot="actions" flat color="primary" @click="closeDialog">Close</mu-button>
@@ -44,10 +38,36 @@
             return {
                 tree: new Tree(),
                 application: new PostcardApplication(),
-                routePath: '/'
+                routePath: '/',
+                postCodeRules: [
+                    {
+                        validate: (val) => !!val,
+                        message: 'Postcode is required.'
+                    },
+                    {
+                        validate: (val) => /\d{4}/.test(val),
+                        message: 'Please enter a valid postcode.'
+                    }
+                ],
+                addressRules: [
+                    {
+                        validate: (val) => !!val,
+                        message: 'Address is required.'
+                    },
+                ],
+                recipientRules: [
+                    {
+                        validate: (val) => !!val,
+                        message: 'Recipient is required.'
+                    },
+                ],
+                openDialog: false,
+                dialogText: '',
+                labelPosition: 'top',
             }
         },
         created() {
+            console.log("postcard")
             this.tree = this.$store.getters.getTreebyId(this.$route.params.treeId);
         },
         mounted() {
@@ -57,15 +77,12 @@
             check() {
                 this.$refs.form.validate().then((result) => {
                     if (result) {
-
-                        this.$http.post(path + ':3000/api/tree_app/add', {
-                            species: this.form.tree.species,
-                            location_id: this.form.tree.location_id,
-                            sayings: this.form.tree.sayings,
-                            name: this.form.tree.name,
-                            status:'SUBMITTED',
-                            amount:this.form.tree.amount,
-                            userId:this.$store.state.user.id
+                        this.$http.post(path + ':3000/api/postcard_app/add', {
+                            address: this.application.address,
+                            treeId: this.tree.treeId,
+                            recipient: this.application.recipient,
+                            postCode: this.application.postCode,
+                            message: this.application.message
                         }).then(response => {
                             if (response.data.code === "1") {
                                 this.dialogText = 'Submission failed'
@@ -73,10 +90,11 @@
                             } else {
                                 this.dialogText = 'Your application is successfully submitted.'
                                 this.openDialog = true;
-                                this.$router.push('/applications');
+                                // this.$router.push('/applications');
                             }
                         }, response => {
-
+                            this.dialogText = 'Submission failed: system error.'
+                            this.openDialog = true
                         })
 
                     }
@@ -86,6 +104,7 @@
                     }
                 })
             },
+
 
             closeDialog() {
                 this.openDialog = false

@@ -32,11 +32,11 @@ var jsonWrite = (res, ret) => {
  * 5. receiveDate
  * @returns boolean of process status.
  */
-router.post('/new', (req, res) => {
+router.post('/add', (req, res) => {
     var sql = postcardSQL.insert;
     var params = req.body;
     console.log(params);
-    pool.query(sql, [params.address, params.postCode, params.status, params.applyDate, params.recieveDate], (error, results, fields) => {
+    pool.query(sql, [params.address, params.postCode,params.recipient, 'SUBMITTED', getNow(), params.treeId, params.message], (error, results, fields) => {
         if (error) throw error;
         if (results) {
             console.log(results);
@@ -85,4 +85,32 @@ router.put('/receive_date', (req, res) => {
         }
     })
 });
+
+/**
+ * You first need to create a formatting function to pad numbers to two digits…
+ **/
+function twoDigits(d) {
+    if(0 <= d && d < 10) return "0" + d.toString();
+    if(-10 < d && d < 0) return "-0" + (-1*d).toString();
+    return d.toString();
+}
+
+/**
+ * …and then create the method to output the date string as desired.
+ * Some people hate using prototypes this way, but if you are going
+ * to apply this to more than one Date object, having it as a prototype
+ * makes sense.
+ **/
+function getNow() {
+    return getDate(new Date());
+}
+
+function getDate(d) {
+    return d.getFullYear() +
+        "-" + twoDigits(1 + d.getMonth()) +
+        "-" + twoDigits(d.getDate()) +
+        " " + twoDigits(d.getHours()) +
+        ":" + twoDigits(d.getMinutes()) +
+        ":" + twoDigits(d.getSeconds());
+}
 module.exports = router;

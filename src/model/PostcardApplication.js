@@ -8,6 +8,7 @@ export default class {
         receiveDate,
         recipient,
         treeId,
+        message,
     ) {
         this.postcardAppId = postcardAppId;
         this.address = address;
@@ -17,5 +18,6 @@ export default class {
         this.receiveDate = receiveDate;
         this.recipient = recipient;
         this.treeId = treeId;
+        this.message = message;
     }
 }
