@@ -33,14 +33,17 @@ function twoDigits(d) {
  * to apply this to more than one Date object, having it as a prototype
  * makes sense.
  **/
-function getDate() {
-    var date = new Date();
-    return date.getFullYear() +
-        "-" + twoDigits(1 + date.getMonth()) +
-        "-" + twoDigits(date.getDate()) +
-        " " + twoDigits(date.getHours()) +
-        ":" + twoDigits(date.getMinutes()) +
-        ":" + twoDigits(date.getSeconds());
+function getNow() {
+    return getDate(new Date());
+}
+
+function getDate(d) {
+    return d.getFullYear() +
+        "-" + twoDigits(1 + d.getMonth()) +
+        "-" + twoDigits(d.getDate()) +
+        " " + twoDigits(d.getHours()) +
+        ":" + twoDigits(d.getMinutes()) +
+        ":" + twoDigits(d.getSeconds());
 }
 
 var pool = mysql.createPool(dbConfig.mysql);
@@ -76,6 +79,8 @@ router.route('/:treeId')
         pool.query(sql, [req.params.treeId], function (error, results, fields) {
             if (error) throw error;
             if (results) {
+                results[0].upload_date = getDate(results[0].upload_date);
+                results[0].last_edit = getDate(results[0].last_edit);
                 console.log(results);
                 jsonWrite(res, results)
             }
@@ -122,7 +127,7 @@ router.post('/uploadPhoto', upload.single('treeImage'), (req, res) => {
     var sql = treeSQL.insertPhoto;
     var params = req.body;
     console.log(params);
-    pool.query(sql, [getDate(), file.path, params.treeId], function (error, results, fields) {
+    pool.query(sql, [getNow(), file.path, params.treeId], function (error, results, fields) {
         if (error) throw error;
         if (results) {
             console.log(results);

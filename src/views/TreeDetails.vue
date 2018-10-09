@@ -17,7 +17,7 @@
                         <mu-icon value="photo_album"></mu-icon>
                         Historical Photos
                     </mu-button>
-                    <mu-button to="/postcard" v-if="this.$store.state.user.id">
+                    <mu-button :to= routePath v-if="this.$store.state.user.id">
                         <mu-icon value="card_giftcard"></mu-icon>
                         Postcard
                     </mu-button>
@@ -50,7 +50,7 @@
                 tree: Tree,
                 selectedFile: null,
                 shouldDisable: true,
-                treeId: 1,
+                routePath:'/postcard/',
                 infos: [
                     //here we have to leave the declaration of this array contains objects, we will modify
                     //this array later after we have passed the data locally during mounting.
@@ -74,6 +74,9 @@
             this.infos.push({id: 5, label: 'Sayings:', value: this.tree.sayings});
             this.infos.push({id: 6, label: 'Species:', value: this.tree.species});
             console.log(this.tree.treeId);
+        },
+        mounted() {
+            this.routePath += this.tree.treeId;
         },
         methods: {
             onFileChanged() {

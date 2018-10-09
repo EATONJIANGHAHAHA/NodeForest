@@ -96,6 +96,10 @@ router.post('/trees', (req, res) => {
     pool.query(sql, [params.staffId], (error, results, fields) => {
         if (error) throw error;
         if (results) {
+            for(let i = 0; i<results.length; i++){
+                results[i].upload_date = getDate(results[i].upload_date);
+                results[i].last_edit = getDate(results[i].last_edit);
+            }
             console.log(results);
             jsonWrite(res, results);
         }
@@ -185,4 +189,32 @@ router.get('/hasUnsolvedApps', (req, res) => {
         }
     })
 });
+
+/**
+ * You first need to create a formatting function to pad numbers to two digits…
+ **/
+function twoDigits(d) {
+    if(0 <= d && d < 10) return "0" + d.toString();
+    if(-10 < d && d < 0) return "-0" + (-1*d).toString();
+    return d.toString();
+}
+
+/**
+ * …and then create the method to output the date string as desired.
+ * Some people hate using prototypes this way, but if you are going
+ * to apply this to more than one Date object, having it as a prototype
+ * makes sense.
+ **/
+function getNow() {
+    return getDate(new Date());
+}
+
+function getDate(d) {
+    return d.getFullYear() +
+        "-" + twoDigits(1 + d.getMonth()) +
+        "-" + twoDigits(d.getDate()) +
+        " " + twoDigits(d.getHours()) +
+        ":" + twoDigits(d.getMinutes()) +
+        ":" + twoDigits(d.getSeconds());
+}
 module.exports = router;

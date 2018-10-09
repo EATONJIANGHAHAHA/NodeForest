@@ -1,6 +1,6 @@
 <template>
     <mu-container class="expension-panel">
-        <h1>Apply for a postcard for tree {{tree.id}} {{tree.name}}</h1>
+        <h1>Apply for a postcard for tree No.{{tree.treeId}} {{tree.name}}</h1>
         <mu-form ref="form" :model="application" class="mu-login-form" :label-position="labelPosition" label-width="100">
             <mu-form-item label="Postcode:" :rules="postCodeRules" prop="postCode" >
                 <mu-text-field type="text" v-model="application.postCode" placeholder="Postcode..."></mu-text-field>
