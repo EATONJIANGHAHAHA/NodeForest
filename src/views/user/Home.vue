@@ -1,4 +1,4 @@
-<!--Home page of the user, by default display the trees owned by the user..-->
+<!--UserHome page of the user, by default display the trees owned by the user..-->
 <!--Automatically opened when successfully logging in as user.-->
 <template>
     <div>
@@ -12,7 +12,7 @@
     import TreeInfo from '../../components/TreeInfo'
 
     export default {
-        name: 'Home',
+        name: 'UserHome',
         /*
         * When creating the page, use get method to get the trees owned by the user
         * Preparing for displaying the tree information.

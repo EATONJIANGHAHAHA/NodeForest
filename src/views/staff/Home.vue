@@ -2,7 +2,7 @@
     <mu-container style="padding: 20px">
         <mu-expansion-panel>
             <div slot="header">Trees</div>
-            <TreeInfo class="treeInfo" id="tree-info-list" v-for="tree in trees" v-bind="tree" :key="tree.treeId"></TreeInfo>
+            <TreeInfo class="treeInfo" v-for="tree in trees" v-bind="tree" :key="tree.treeId"></TreeInfo>
         </mu-expansion-panel>
         <mu-expansion-panel>
             <div slot="header">Tree Applications</div>
@@ -24,9 +24,9 @@
             }
         },
         created() {
-            console.log(this.$store.state.staff.staffId);
+            console.log(this.$store.state.staff.id);
             this.$http.post('http://127.0.0.1:3000/api/staff/trees', {
-                staffId: this.$store.state.staff.staffId
+                staffId: this.$store.state.staff.id
             }).then(response => {
                 console.log(response.data);
                 if (response.data.length !== 0) {

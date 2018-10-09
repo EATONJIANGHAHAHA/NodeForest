@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Index from './views/Index'
 import About from './views/About'
-import Home from './views/user/Home'
+import UserHome from './views/user/Home'
 import Login from './views/Login'
 import Register from './views/Register'
 import TreeManagement from './views/staff/TreeManagement'
@@ -32,8 +32,8 @@ export default new Router({
             component: About,
         },
         {
-            path: '/home',
-            component: Home,
+            path: '/user/home',
+            component: UserHome,
         },
         {
             path: '/account',

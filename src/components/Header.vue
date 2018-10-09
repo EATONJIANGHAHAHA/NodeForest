@@ -45,7 +45,6 @@
                 this.$router.push('/');
             },
             openDrawer() {
-                console.log(this.$store.state.staff.id);
                 if (this.$store.state.user.id || this.$store.state.admin.id || this.$store.state.staff.id) {
                     this.$store.dispatch('setDrawerOpen');
                 }
