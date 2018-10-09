@@ -90,10 +90,14 @@
                 this.$http.post(path + ":3000/api/tree/uploadPhoto", fd)
                     .then(response => {
                         console.log(response.data);
-                        loading.close();
+                        setTimeout(() => {
+                            loading.close();
+                        },1000)
                     }, response => {
                         console.log("upload failed.");
-                        loading.close();
+                        setTimeout(() => {
+                            loading.close();
+                        },1000)
                     });
                 this.selectedFile = 'undefined';
             }
