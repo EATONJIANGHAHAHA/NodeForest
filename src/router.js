@@ -19,6 +19,7 @@ import NewTreeApp from './views/user/NewTreeApp'
 import Applications from './views/user/Applications'
 import StaffApplications from './views/staff/Applications'
 import PostcardApp from './views/user/PostcardApp'
+import Postcards from './views/user/Postcards'
 
 Vue.use(Router);
 
@@ -53,7 +54,11 @@ export default new Router({
             component: Applications
         },
         {
-            path: '/postcard/:treeId',
+            path: '/postcards',
+            component: Postcards
+        },
+        {
+            path: '/postcards/add/:treeId',
             component: PostcardApp
         },
         {

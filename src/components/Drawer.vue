@@ -25,6 +25,10 @@
                 <mu-icon value="person_outline"></mu-icon>
                 <mu-list-item-title>Profile</mu-list-item-title>
             </mu-list-item>
+            <mu-list-item button v-if="this.$store.state.user.id" to="/postcards" @click="closeDrawer">
+                <mu-icon value="card_giftcard"></mu-icon>
+                <mu-list-item-title>Postcards</mu-list-item-title>
+            </mu-list-item>
             <mu-list-item  @click="closeDrawer" button>
                 <mu-icon value="close"></mu-icon>
                 <mu-list-item-title>Close</mu-list-item-title>

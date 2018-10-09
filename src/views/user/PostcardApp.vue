@@ -90,7 +90,7 @@
                             } else {
                                 this.dialogText = 'Your application is successfully submitted.'
                                 this.openDialog = true;
-                                // this.$router.push('/applications');
+                                this.$router.push('/postcards');
                             }
                         }, response => {
                             this.dialogText = 'Submission failed: system error.'

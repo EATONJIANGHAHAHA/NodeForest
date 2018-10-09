@@ -50,7 +50,7 @@
                 tree: Tree,
                 selectedFile: null,
                 shouldDisable: true,
-                routePath:'/postcard/',
+                routePath:'/postcards/add/',
                 infos: [
                     //here we have to leave the declaration of this array contains objects, we will modify
                     //this array later after we have passed the data locally during mounting.

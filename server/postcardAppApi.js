@@ -46,6 +46,85 @@ router.post('/add', (req, res) => {
 });
 
 /**
+ * Get unreceived postcards
+ */
+router.get('/user/unreceived', function (req, res) {
+    let sql = postcardSQL.unreceivedByUserId;
+    let params = req.query||req.params;
+    console.log(params);
+    pool.query(sql,[params.userId],  (error, results, fields) => {
+        if (error) throw error;
+        if (results) {
+            for(let i = 0; i<results.length; i++){
+                results[i].apply_date = getDate(results[i].apply_date);
+            }
+            console.log(results);
+            jsonWrite(res,results);
+        }
+    })
+})
+
+/**
+ * Get received postcards
+ */
+router.get('/user/received', function (req, res) {
+    let sql = postcardSQL.receivedByUserId;
+    let params = req.query||req.params;
+    console.log(params);
+    pool.query(sql,[params.userId],  (error, results, fields) => {
+        if (error) throw error;
+        if (results) {
+            for(let i = 0; i<results.length; i++){
+                results[i].apply_date = getDate(results[i].apply_date);
+                results[i].received_date = getDate(results[i].received_date);
+            }
+            console.log(results);
+            jsonWrite(res,results);
+        }
+    })
+})
+
+/**
+ * Get unsent postcards
+ */
+router.get('/staff/unsent', function (req, res) {
+    let sql = postcardSQL.unsentByStaffId;
+    let params = req.query||req.params;
+    console.log(params);
+    pool.query(sql,[params.staffId],  (error, results, fields) => {
+        if (error) throw error;
+        if (results) {
+            for(let i = 0; i<results.length; i++){
+                results[i].apply_date = getDate(results[i].apply_date);
+            }
+            console.log(results);
+            jsonWrite(res,results);
+        }
+    })
+})
+
+/**
+ * Get sent postcards
+ */
+router.get('/staff/sent', function (req, res) {
+    let sql = postcardSQL.sentByStaffId;
+    let params = req.query||req.params;
+    console.log(params);
+    pool.query(sql,[params.staffId],  (error, results, fields) => {
+        if (error) throw error;
+        if (results) {
+            for(let i = 0; i<results.length; i++){
+                results[i].apply_date = getDate(results[i].apply_date);
+                if(results[i].received_date) results[i].received_date = getDate(results[i].received_date);
+            }
+            console.log(results);
+            jsonWrite(res,results);
+        }
+    })
+})
+
+
+/**up
  * update the application status.
  * @params needed in the request body:
  * 1. status
@@ -73,11 +152,11 @@ router.put('/status', (req, res) => {
  * 2. postcardId
  * @returns boolean of operation status.
  */
-router.put('/receive_date', (req, res) => {
-    var sql = postcardSQL.updateReceiveDate;
+router.put('/receive', (req, res) => {
+    var sql = postcardSQL.updateReceive;
     var params = req.body;
     console.log(params);
-    pool.query(sql, [params.recieveDate, params.postcardId], (error, results, fields) => {
+    pool.query(sql, [getNow(),'RECEIVED', params.id], (error, results, fields) => {
         if (error) throw error;
         if (results) {
             console.log(results);
