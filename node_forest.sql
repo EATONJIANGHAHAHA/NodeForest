@@ -104,15 +104,16 @@ CREATE TABLE `postcard_app` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `address` varchar(100) DEFAULT NULL,
   `post_code` varchar(10) DEFAULT NULL,
-  `status` int(10) DEFAULT NULL,
+  `status` varchar(10) DEFAULT NULL,
   `apply_date` date DEFAULT NULL,
   `receive_date` date DEFAULT NULL,
   `tree_id` int(10) NOT NULL,
-  `comment` varchar(200) DEFAULT NULL,
+  `message` varchar(200) DEFAULT NULL,
+  `recipient` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `postcard_app_tree_id_fk` (`tree_id`),
   CONSTRAINT `postcard_app_tree_id_fk` FOREIGN KEY (`tree_id`) REFERENCES `tree` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -121,6 +122,7 @@ CREATE TABLE `postcard_app` (
 
 LOCK TABLES `postcard_app` WRITE;
 /*!40000 ALTER TABLE `postcard_app` DISABLE KEYS */;
+INSERT INTO `postcard_app` VALUES (1,'1341dasfafs','2342','SUBMITTED','2018-10-09',NULL,1,NULL,'we2'),(2,'difjapodjf','1231','SUBMITTED','2018-10-09',NULL,1,'I tried','recipent');
 /*!40000 ALTER TABLE `postcard_app` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -295,4 +297,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-09 21:11:55
+-- Dump completed on 2018-10-09 22:33:41
