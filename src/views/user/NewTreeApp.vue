@@ -2,8 +2,8 @@
     <mu-container class="expension-panel">
         <h1>Apply for a new tree</h1>
         <mu-form ref="form" :model="form" class="mu-login-form" :label-position="labelPosition" label-width="100">
-            <mu-form-item label="Tree Name:" :rules="nameRules" prop="tree.name">
-                <mu-text-field type="text" v-model="form.tree.name"></mu-text-field>
+            <mu-form-item label="Tree Name:" :rules="nameRules" prop="tree.name" >
+                <mu-text-field type="text" v-model="form.tree.name" placeholder="Give a name of your tree..."></mu-text-field>
             </mu-form-item>
             <mu-select label="Species: " v-model="form.tree.species" :rules="optionRules">
                 <mu-option v-for="specy in species" :key="specy" :label="specy" :value="specy"></mu-option>
@@ -11,11 +11,11 @@
             <mu-select label="Location: " v-model="form.tree.location" >
                 <mu-option v-for="location in locations" :key="location" :label="location" :value="location"></mu-option>
             </mu-select>
-            <mu-form-item label="Amount" prop="address">
-                <mu-text-field type="number" aria-readonly="true" v-model="form.tree.amount"></mu-text-field>
+            <mu-form-item label="Amount($):" prop="address">
+                <mu-text-field disabled v-model="form.tree.amount"></mu-text-field>
             </mu-form-item>
-            <mu-form-item label="Sayings" prop="address">
-                <mu-text-field multi-line :rows="4" type="text" v-model="form.tree.sayings"></mu-text-field>
+            <mu-form-item label="Sayings:" prop="sayings" >
+                <mu-text-field multi-line :rows="4" type="text" v-model="form.tree.sayings" placeholder="Say something to the tree..."></mu-text-field>
             </mu-form-item>
         </mu-form>
         <mu-button round @click="check" color="secondary">Apply</mu-button>
@@ -28,9 +28,9 @@
 
 <script>
     import md5 from "js-md5"
-    import Tree from "../model/Tree";
+    import Tree from "../../model/Tree";
 
-    let path = require("../common.js")
+    let path = require("../../common.js")
     let reg_str = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
 
     export default {

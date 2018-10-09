@@ -18,7 +18,7 @@
 </template>
 
 <script>
-    let path = require("../common.js")
+    let path = require("../../common.js")
     export default {
         name: "StaffManagement",
         data() {

@@ -19,7 +19,7 @@
 
 <script>
     import md5 from "js-md5";
-    var path = require("../common.js");
+    var path = require("../../common.js");
 
     export default {
         name: "AdminAccount",

@@ -9,7 +9,7 @@
 </template>
 
 <script>
-    import TreeInfo from '../components/TreeInfo'
+    import TreeInfo from '../../components/TreeInfo'
 
     export default {
         name: 'Home',

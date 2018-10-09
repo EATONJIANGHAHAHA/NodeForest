@@ -31,10 +31,10 @@
 </template>
 
 <script>
-    import Router from '../router'
-    import User from "../model/User";
+    import Router from '../../router'
+    import User from "../../model/User";
     import md5 from "js-md5";
-    let path = require("../common.js");
+    let path = require("../../common.js");
 
     export default {
         name: "Edit Account",
