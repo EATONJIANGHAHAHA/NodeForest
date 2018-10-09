@@ -1,15 +1,6 @@
 <template>
     <mu-container style="padding: 20px">
-        <mu-expansion-panel>
-            <div slot="header">Trees</div>
-            <TreeInfo class="treeInfo" v-for="tree in trees" v-bind="tree" :key="tree.treeId"></TreeInfo>
-        </mu-expansion-panel>
-        <mu-expansion-panel>
-            <div slot="header">Tree Applications</div>
-        </mu-expansion-panel>
-        <mu-expansion-panel>
-            <div slot="header">Postcard Applications</div>
-        </mu-expansion-panel>
+        <TreeInfo class="treeInfo" v-for="tree in trees" v-bind="tree" :key="tree.treeId"></TreeInfo>
     </mu-container>
 </template>
 

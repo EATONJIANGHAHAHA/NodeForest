@@ -61,7 +61,7 @@ CREATE TABLE `location` (
 
 LOCK TABLES `location` WRITE;
 /*!40000 ALTER TABLE `location` DISABLE KEYS */;
-INSERT INTO `location` VALUES (1,'Sahara Desert',NULL),(2,'North Canada',NULL),(3,'Taklimakan',NULL),(4,'Inner Mongolia grassland',NULL);
+INSERT INTO `location` VALUES (1,'Sahara Desert','server/uploads/sahara-desert.jpg'),(2,'North Canada','server/uploads/north-canada.jpg'),(3,'Taklimakan','server/uploads/taklimakan-desert-02.jpg'),(4,'Inner Mongolia grassland','server/uploads/inner-mongolia-grassland.jpg');
 /*!40000 ALTER TABLE `location` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -297,4 +297,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-09 22:33:41
+-- Dump completed on 2018-10-09 22:58:18
