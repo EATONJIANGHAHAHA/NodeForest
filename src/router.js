@@ -21,6 +21,7 @@ import PostcardApp from './views/user/PostcardApp'
 import Postcards from './views/user/Postcards'
 import StaffPostcards from './views/staff/Postcards'
 import HistorialPhotos from './views/HistoricalPhotos'
+import TreeEdit from './views/TreeEdit'
 import StaffAccount from './views/staff/Account'
 import StaffEditAccount from './views/staff/EditAccount'
 
@@ -124,6 +125,10 @@ export default new Router({
         {
             path: '/admin/staffs/edit',
             component: EditStaff
+        },
+        {
+            path: '/trees/edit/:treeId',
+            component: TreeEdit
         }
     ]
 })

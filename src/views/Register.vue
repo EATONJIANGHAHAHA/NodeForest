@@ -2,7 +2,7 @@
 <template>
     <div>
         <mu-container class="main">
-            <h1>Register</H1>
+            <h1 style="padding-left: 20px;">Register</H1>
             <mu-form ref="form" :model="form" :label-position="labelPosition" label-width="100" class="mu-login-form">
                 <mu-form-item prop="user.username" label="Username" :rules="usernameRules" icon="person">
                     <mu-text-field v-model="form.user.username"></mu-text-field>

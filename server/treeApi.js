@@ -121,17 +121,44 @@ router.get('/getPhotos/:treeId', (req, res) => {
     })
 });
 
-router.put('/user/update', (req, res) => {
+router.post('/user/update', (req, res) => {
    var sql = treeSQL.updateSandN;
    var param = req.body;
    console.log(param);
-   pool.query(sql, [param.sayings, params.name, params.id], function(error, results, fields) {
+   pool.query(sql, [param.sayings, param.name, param.id], function(error, results, fields) {
        if (error) throw error;
        if (results) {
            console.log(results);
-           jsonWrite(res, results);
+           var sql = treeSQL.updateLastEdit;
+           pool.query(sql, [getNow(), param.id], function(error, results, fields) {
+               if (error) throw error;
+               if (results) {
+                   console.log(results);
+                   jsonWrite(res, results);
+               }
+           })
        }
    })
+});
+
+router.post('/staff/update', (req, res) => {
+    var sql = treeSQL.updateHeiAndHeal;
+    var param = req.body;
+    console.log(param);
+    pool.query(sql, [param.height, param.health, param.id], function(error, results, fields) {
+        if (error) throw error;
+        if (results) {
+            console.log(results);
+            var sql = treeSQL.updateLastEdit;
+            pool.query(sql, [getNow(), param.id], function(error, results, fields) {
+                if (error) throw error;
+                if (results) {
+                    console.log(results);
+                    jsonWrite(res, results);
+                }
+            })
+        }
+    })
 });
 
 router.post('/uploadPhoto', upload.single('treeImage'), (req, res) => {
