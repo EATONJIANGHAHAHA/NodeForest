@@ -4,17 +4,20 @@
         <mu-container>
             <h1>Register</H1>
             <mu-form ref="form" :model="form" :label-position="labelPosition" label-width="100">
-                <mu-form-item prop="user.username" label="Username" :rules="usernameRules">
+                <mu-form-item prop="user.username" label="Username" :rules="usernameRules" icon="person">
                     <mu-text-field v-model="form.user.username"></mu-text-field>
                 </mu-form-item>
-                <mu-form-item prop="user.password" label="Password" :rules="passwordRules">
-                    <mu-text-field type="password" v-model="form.user.password"></mu-text-field>
+                <mu-form-item prop="user.password" icon="lock" label="Password" :rules="passwordRules">
+                    <mu-text-field type="password"  v-model="form.user.password" :action-click="() => (visibility = !visibility)" :type="visibility ? 'text' : 'password'" :action-icon="visibility ? 'visibility_off' : 'visibility'"></mu-text-field>
                 </mu-form-item>
-                <mu-form-item prop="user.email" label="Email" :rules="emailRules">
+                <mu-form-item prop="user.email" label="Email" :rules="emailRules" icon="email">
                     <mu-text-field v-model="form.user.email"></mu-text-field>
                 </mu-form-item>
             </mu-form>
-            <mu-button @click="submit" round color="secondary">Register</mu-button>
+            <mu-flex class="flex-wrapper" justify-content="end">
+                <mu-button @click="submit" round color="secondary"><mu-icon value="check_circle_outline"></mu-icon>Register</mu-button>
+            </mu-flex>
+
             <mu-dialog title="Warning!" width="360" :open.sync="isDialogOpen">
                 {{dialogText}}
                 <mu-button slot="actions" flat color="primary" @click="closeDialog">Close</mu-button>
@@ -44,7 +47,7 @@
                         message: 'User name has to be longer than 3 characters'
                     },
                     {
-                        validate:(val) => this.$http.get(path + ':3000/api/user/usernameExist', {
+                        validate:(val) => this.$http.post(path + ':3000/api/user/usernameExist', {
                             username: val,
                         }).then(response => {
                             return response.data.number === 0;
@@ -76,6 +79,7 @@
                 isDialogOpen: false,
                 dialogText: '',
                 labelPosition: 'top',
+                visibility: false
             }
         },
         components: {

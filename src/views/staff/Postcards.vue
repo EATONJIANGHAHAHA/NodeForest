@@ -115,19 +115,18 @@
                         console.log("Created postcard");
                         const url = window.URL.createObjectURL(new Blob([response.data]));
                         const link = document.createElement('a');
-                        // 返回的header Content-Disposition:attachment; filename=elmeast-report-2018-2.pdf
                         let head = response.headers['content-disposition'];
-                        let fname = 'report.pdf';
+                        let filename = 'postcard.pdf';
                         if (head) {
                             try {
-                                fname = head.split(';')[1].split('=')[1]
+                                filename = head.split(';')[1].split('=')[1]
                             } catch (err){
                                 console.log('can not get pdf name');
                             }
 
                         }
                         link.href = url;
-                        link.setAttribute('download', fname);
+                        link.setAttribute('download', filename);
                         document.body.appendChild(link);
                         link.click();
                         return response;
