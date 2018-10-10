@@ -13,11 +13,12 @@
                     <mu-list-item-content>{{item.value}}</mu-list-item-content>
                 </mu-list-item>
                 <mu-flex>
-                    <mu-button v-if="this.$store.state.user.id || this.$store.state.staff.id" :to="this.photosRoutePath">
+                    <mu-button v-if="this.$store.state.user.id || this.$store.state.staff.id"
+                               :to="this.photosRoutePath">
                         <mu-icon value="photo_album"></mu-icon>
                         Historical Photos
                     </mu-button>
-                    <mu-button :to= routePath v-if="this.$store.state.user.id">
+                    <mu-button :to=routePath v-if="this.$store.state.user.id">
                         <mu-icon value="card_giftcard"></mu-icon>
                         Postcard
                     </mu-button>
@@ -61,8 +62,8 @@
                 tree: Tree,
                 selectedFile: null,
                 shouldDisable: true,
-                routePath:'/postcards/add/',
-                treeImageSrc:'',
+                routePath: '/postcards/add/',
+                treeImageSrc: '',
                 infos: [
                     //here we have to leave the declaration of this array contains objects, we will modify
                     //this array later after we have passed the data locally during mounting.
@@ -113,17 +114,18 @@
                         setTimeout(() => {
                             loading.close();
                             this.normal.open = true;
-                        },1000);
+                        }, 1000);
                     }, response => {
                         console.log("upload failed.");
                         setTimeout(() => {
                             loading.close();
                             this.normal.color = 'error';
                             this.normal.open = true;
-                        },1000);
+                        }, 1000);
 
                     });
                 this.selectedFile = null;
+                this.shouldDisable = true;
             }
         }
     }

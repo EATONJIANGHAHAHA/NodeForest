@@ -75,12 +75,12 @@ DROP TABLE IF EXISTS `photo`;
 CREATE TABLE `photo` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `upload_date` datetime DEFAULT NULL,
-  `path` varchar(200) DEFAULT NULL,
+  `path` varchar(300) DEFAULT NULL,
   `tree_id` int(10) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `photo_tree__fk` (`tree_id`),
   CONSTRAINT `photo_tree__fk` FOREIGN KEY (`tree_id`) REFERENCES `tree` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -89,7 +89,7 @@ CREATE TABLE `photo` (
 
 LOCK TABLES `photo` WRITE;
 /*!40000 ALTER TABLE `photo` DISABLE KEYS */;
-INSERT INTO `photo` VALUES (1,'2018-08-23 00:00:00','server/uploads/2018-10-06T08:54:55.tree1.jpg',1),(2,'2018-08-03 00:00:00','server/uploads/2018-10-06T08:54:55.tree2.jpg',2),(3,'2018-08-27 00:00:00','server/uploads/2018-10-06T08:54:55.tree3.jpg',3),(4,'2018-08-18 00:00:00','server/uploads/2018-10-06T08:54:55.tree4.jpg',4),(5,'2018-08-16 00:00:00','server/uploads/2018-10-06T08:54:55.tree5.jpg',1),(6,'2018-10-06 00:00:00','server/uploads/2018-10-06T08:54:55.159Z46495182.jpg',1),(7,'2018-10-06 00:00:00','server/uploads/2018-10-06T08:57:14.054Z46495182.jpg',1),(8,'2018-10-06 00:00:00','server/uploads/2018-10-06T09:00:22.323Z46495182.jpg',1),(9,'2018-10-06 00:00:00','server/uploads/2018-10-06T09:01:54.913Z46495182.jpg',1),(10,'2018-10-09 18:09:09','server/uploads/2018-10-09T07:09:09.858ZInner Mongolia grassland.jpg',1),(11,'2018-10-10 15:22:39','server/uploads/2018-10-10T04:22:39.534Znature-photography-twisted-trees-crooked-forest-kilian-schonberger-4.jpg',3),(12,'2018-10-10 16:08:45','server/uploads/2018-10-10T05:08:45.865Zthe-majestic-beauty-of-trees-captured-in-infrared-photography__880.jpg',3),(13,'2018-10-10 16:10:15','server/uploads/2018-10-10T05:10:15.707Ztreephoto10.jpg',3),(14,'2018-10-10 16:18:24','server/uploads/2018-10-10T05:18:24.732Z8264159.jpg',3),(15,'2018-10-10 16:23:23','server/uploads/2018-10-10T05:23:23.514Ztreephoto31.jpg',2);
+INSERT INTO `photo` VALUES (1,'2018-08-23 00:00:00','server/uploads/2018-10-06T08:54:55.tree1.jpg',1),(2,'2018-08-03 00:00:00','server/uploads/2018-10-06T08:54:55.tree2.jpg',2),(3,'2018-08-27 00:00:00','server/uploads/2018-10-06T08:54:55.tree3.jpg',3),(4,'2018-08-18 00:00:00','server/uploads/2018-10-06T08:54:55.tree4.jpg',4),(5,'2018-08-16 00:00:00','server/uploads/2018-10-06T08:54:55.tree5.jpg',1),(6,'2018-10-06 00:00:00','server/uploads/2018-10-06T08:54:55.159Z46495182.jpg',1),(7,'2018-10-06 00:00:00','server/uploads/2018-10-06T08:57:14.054Z46495182.jpg',1),(8,'2018-10-06 00:00:00','server/uploads/2018-10-06T09:00:22.323Z46495182.jpg',1),(9,'2018-10-06 00:00:00','server/uploads/2018-10-06T09:01:54.913Z46495182.jpg',1),(10,'2018-10-09 18:09:09','server/uploads/2018-10-09T07:09:09.858ZInner Mongolia grassland.jpg',1),(11,'2018-10-11 00:55:34','server/uploads/default.jpg',11),(12,'2018-10-11 01:02:21','server/uploads/2018-10-10T14:02:21.191Z800px_COLOURBOX4283898.jpg',11),(13,'2018-10-11 01:52:41','server/uploads/2018-10-10T14:52:41.357Ztips-for-photographing-trees.jpg',11),(14,'2018-10-11 01:54:22','server/uploads/2018-10-10T14:54:22.280Z4eddb4a0d9b999.71501786.jpg',11),(15,'2018-10-11 01:58:46','server/uploads/2018-10-10T14:58:46.165Zbeautiful-fall-timeline-covers-for-facebook-copy-and-paste-emoji-art-text-autumn-finger-pointing-down-meaning-arrow-home-decor-is-my-favorite-season-because-i-love-when-the-trees-change.jpg',11),(16,'2018-10-11 01:59:50','server/uploads/2018-10-10T14:59:50.879Z4eddb4a0d9b999.71501786.jpg',11),(17,'2018-10-11 02:01:44','server/uploads/2018-10-10T15:01:44.786Ztips-for-photographing-trees.jpg',11);
 /*!40000 ALTER TABLE `photo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -113,7 +113,7 @@ CREATE TABLE `postcard_app` (
   PRIMARY KEY (`id`),
   KEY `postcard_app_tree_id_fk` (`tree_id`),
   CONSTRAINT `postcard_app_tree_id_fk` FOREIGN KEY (`tree_id`) REFERENCES `tree` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -122,7 +122,7 @@ CREATE TABLE `postcard_app` (
 
 LOCK TABLES `postcard_app` WRITE;
 /*!40000 ALTER TABLE `postcard_app` DISABLE KEYS */;
-INSERT INTO `postcard_app` VALUES (1,'1341dasfafs','2342','SENT','2018-10-09 00:00:00',NULL,1,NULL,'we2'),(2,'difjapodjf','1231','RECEIVED','2018-10-09 00:00:00','2018-10-09 00:00:00',2,'I tried','recipent'),(3,'24 Bristol Rd, Burwood, NSW','2220','SUBMITTED','2018-10-09 00:00:00',NULL,1,'Love you very mush','Puppy');
+INSERT INTO `postcard_app` VALUES (1,'1341dasfafs','2342','SENT','2018-10-09 00:00:00',NULL,1,NULL,'we2'),(2,'difjapodjf','1231','RECEIVED','2018-10-09 00:00:00','2018-10-09 00:00:00',2,'I tried','recipent'),(3,'24 Bristol Rd, Burwood, NSW','2220','SENT','2018-10-09 00:00:00',NULL,1,'Love you very mush','Puppy'),(4,'aaddeee','2000','SENT','2018-10-11 00:58:49',NULL,11,'I love you, as always. ','Tong Tong');
 /*!40000 ALTER TABLE `postcard_app` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -174,7 +174,7 @@ CREATE TABLE `staff` (
 
 LOCK TABLES `staff` WRITE;
 /*!40000 ALTER TABLE `staff` DISABLE KEYS */;
-INSERT INTO `staff` VALUES (1,'staff','f6b6aad4e094c7d2dedef4d5cf5822c1','12416881@student.uts.edu.au','7688980','UTS Building 11'),(2,'Beilll','d2bac9e8a025eb1ff70b459104cff103','12193583@student.uts.edu.au','908098089808','Town hall'),(3,'eric','6bea86ac5bec762a1e18327feed60396','might_103@yeah.net',NULL,NULL);
+INSERT INTO `staff` VALUES (1,'staff','f6b6aad4e094c7d2dedef4d5cf5822c1','staff@uts.edu.au','7688980','UTS Building 11'),(2,'Beilll','d2bac9e8a025eb1ff70b459104cff103','beilling@gmail.com','908098089808','Town hall'),(3,'eric','6bea86ac5bec762a1e18327feed60396','email@email.com',NULL,NULL);
 /*!40000 ALTER TABLE `staff` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -203,7 +203,7 @@ CREATE TABLE `tree` (
   CONSTRAINT `tree_location__fk` FOREIGN KEY (`location_id`) REFERENCES `location` (`id`),
   CONSTRAINT `tree_staff__fk` FOREIGN KEY (`staff_id`) REFERENCES `staff` (`id`),
   CONSTRAINT `tree_user__fk` FOREIGN KEY (`owner_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -212,7 +212,7 @@ CREATE TABLE `tree` (
 
 LOCK TABLES `tree` WRITE;
 /*!40000 ALTER TABLE `tree` DISABLE KEYS */;
-INSERT INTO `tree` VALUES (1,20.1,'White birch','Protecting the environment is everyone’s responsibility','Ahihi',1,2,'','2018-08-27 00:00:00',1),(2,15.66,'Cherry tree','I love Canada','Puppy',1,1,'Weak','2018-10-10 16:23:23',2),(3,77.88,'White birch','For the tribe','Jinping Xi',3,1,'Good','2018-10-10 16:18:24',3),(4,50.7,'Poplar','Expecto Patronum','Patronus Charm',2,1,'Good','2018-08-28 00:00:00',4),(7,0.5,'Poplar','Tebieman','Given',1,3,'GOOD','2018-10-09 18:23:17',1),(8,15,'White birch','Tried','Baby',1,1,'GOOD','2018-10-09 21:03:23',4),(9,15,'White birch','asdfa','dsfa',1,1,'GOOD','2018-10-09 21:10:31',1),(10,15,'Pine','Protecting the environment is everyone\'s responsibility.','LOVE PUPPY',2,2,'GOOD','2018-10-10 14:46:14',3);
+INSERT INTO `tree` VALUES (1,20.1,'White birch','Protecting the environment is everyone’s responsibility','Ahihi',1,2,'','2018-08-27 00:00:00',1),(2,80,'Cherry tree','don\'t know what to say','whatever',1,1,'Good','2018-10-10 23:11:11',2),(3,88,'White birch','For the tribe','Jinping Xi',3,1,'Good','2018-10-11 01:45:03',3),(4,50.7,'Poplar','Expecto Patronum','Patronus Charm',2,1,'Good','2018-08-28 00:00:00',4),(7,0.5,'Poplar','Tebieman','Given',1,3,'GOOD','2018-10-09 18:23:17',1),(8,15,'White birch','Tried','Baby',1,1,'GOOD','2018-10-09 21:03:23',4),(9,15,'White birch','asdfa','dsfa',1,1,'GOOD','2018-10-09 21:10:31',1),(10,15,'Ginkgo Tree','May ever trouble turns to dust','Daughter Of the Sea',17,2,'GOOD','2018-10-11 00:22:02',3),(11,15,'Pine','I love you as always','tongtonghi',17,3,'GOOD','2018-10-11 02:01:44',1);
 /*!40000 ALTER TABLE `tree` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -255,7 +255,7 @@ CREATE TABLE `tree_app` (
 
 LOCK TABLES `tree_app` WRITE;
 /*!40000 ALTER TABLE `tree_app` DISABLE KEYS */;
-INSERT INTO `tree_app` VALUES (1,'2018-10-09 11:32:50','White birch','Tried','Patty','APPROVED',1,1,1,'2018-10-09 01:12:43',20,'Very good',1),(2,'2018-10-09 12:41:44','White birch','Ok','Test','SUBMITTED',NULL,1,2,NULL,20,NULL,2),(3,'2018-10-09 12:44:44','Poplar','Tebieman','Given','APPROVED',7,1,3,'2018-10-09 18:23:17',20,'',3),(4,'2018-10-09 20:18:18','White birch','Tried','Baby','APPROVED',8,1,1,'2018-10-09 21:03:23',20,'',2),(5,'2018-10-09 21:00:14','White birch','asdfa','dsfa','APPROVED',9,1,1,'2018-10-09 21:10:31',20,'',1),(6,'2018-10-09 21:01:32','White birch','Say something','Tried','SUBMITTED',NULL,1,1,NULL,20,NULL,3),(7,'2018-10-10 14:42:34','Pine','Protecting the environment is everyone\'s responsibility.','LOVE PUPPY','APPROVED',10,2,2,'2018-10-10 14:46:14',20,'',3),(8,'2018-10-10 14:43:57','Cherry tree','Cute','Try again','DISAPPROVED',NULL,2,2,'2018-10-10 14:46:09',20,'You are too ugly',4);
+INSERT INTO `tree_app` VALUES (1,'2018-10-09 11:32:50','White birch','Tried','Patty','APPROVED',1,1,1,'2018-10-09 01:12:43',20,'Very good',1),(2,'2018-10-09 12:41:44','White birch','Ok','Test','SUBMITTED',NULL,1,2,NULL,20,NULL,2),(3,'2018-10-09 12:44:44','Poplar','Tebieman','Given','APPROVED',7,1,3,'2018-10-09 18:23:17',20,'',3),(4,'2018-10-09 20:18:18','White birch','Tried','Baby','APPROVED',8,1,1,'2018-10-09 21:03:23',20,'',2),(5,'2018-10-09 21:00:14','White birch','asdfa','dsfa','APPROVED',9,1,1,'2018-10-09 21:10:31',20,'',1),(6,'2018-10-09 21:01:32','White birch','Say something','Tried','DISAPPROVED',NULL,1,1,'2018-10-11 00:01:08',20,'You are too young too simple',3),(7,'2018-10-10 23:53:18','Ginkgo Tree','May ever trouble turns to dust','Daughter Of the Sea','APPROVED',10,17,2,'2018-10-11 00:22:02',20,'',3),(8,'2018-10-11 00:54:54','Pine','I love you','tongtong','APPROVED',11,17,3,'2018-10-11 00:55:34',20,'',1);
 /*!40000 ALTER TABLE `tree_app` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -275,7 +275,7 @@ CREATE TABLE `user` (
   `address` varchar(100) DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -284,7 +284,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'test','70664c664af04ecb370378420fb76270','might_103@yeah.net',100,'UTS Library','12345678'),(2,'ahihi','6caac9179499d83988122e19792229c9','eatonjiangtonlei@gmail.com',0,'Central park','6666666'),(3,'eaton','e026e56b060f3027847fd1149e8af91e','eatonjiangtonlei@gmail.com',0,NULL,NULL),(4,'ton','d5cf2d085865d7dd82869bb63c13367d','might_103@yeah.net',0,NULL,NULL),(15,'asdfasdf','d462b934122830fd6a2696b625fd48e1','leighton070103@gmail.com',0,NULL,NULL),(16,'test','70664c664af04ecb370378420fb76270','leighton070103@gmail.com',0,NULL,NULL);
+INSERT INTO `user` VALUES (1,'test','70664c664af04ecb370378420fb76270','might_103@yeah.net',100,'UTS Library','12345678'),(2,'ahihi','6caac9179499d83988122e19792229c9','eatonjiangtonlei@gmail.com',0,'Central park','6666666'),(3,'eaton','e026e56b060f3027847fd1149e8af91e','eatonjiangtonlei@gmail.com',0,NULL,NULL),(4,'ton','d5cf2d085865d7dd82869bb63c13367d','might_103@yeah.net',0,NULL,NULL),(15,'asdfasdf','d462b934122830fd6a2696b625fd48e1','asdf@asdf.com',0,NULL,NULL),(16,'test','70664c664af04ecb370378420fb76270','asdf@asdf.com',0,NULL,NULL),(17,'eatonfinaltest','61256cfe9450c3e1f7ff3ce78a9bf8c1','eatonjiangtonlei@gmail.com',0,'some where on earth','0415030592');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -297,4 +297,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-10 16:25:06
+-- Dump completed on 2018-10-11  2:03:23
