@@ -5,22 +5,22 @@
         <mu-container>
             <mu-card style="width: 100%; max-width: 375px; margin: 0 auto;">
                 <!--to bind a data to a component's property, use v-bind syntax instead of {{}}-->
-                <mu-card-header v-bind:title="location" >
+                <mu-card-header :title="location" >
                     <mu-avatar slot="avatar">
                         <img v-lazy='this.location_img_src'>
                         <!--<progressive-img src="https://unsplash.it/1920/1080?image=10" />-->
                     </mu-avatar>
                 </mu-card-header>
-                <mu-card-media v-bind:title="species" >
+                <mu-card-media :title="species" >
                     <img v-lazy='this.tree_img_src'>
                 </mu-card-media>
-                <mu-card-title v-bind:title="species" ></mu-card-title>
+                <mu-card-title :title="species" ></mu-card-title>
                 <mu-card-text>
                     {{sayings}}
                 </mu-card-text>
                 <mu-card-actions>
-                    <mu-button flat v-bind:to="routePath">View</mu-button>
-                    <mu-button flat v-bind:to="routePath">Edit</mu-button>
+                    <mu-button flat :to="routePath">View</mu-button>
+                    <mu-button flat :to="routePath">Edit</mu-button>
                 </mu-card-actions>
             </mu-card>
         </mu-container>

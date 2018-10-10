@@ -108,9 +108,9 @@ router.route('/:treeId')
  * 1. treeId
  * @returns boolean of process status
  */
-router.get('/getPhotos', (req, res) => {
+router.get('/getPhotos/:treeId', (req, res) => {
     var sql = treeSQL.getPhotos;
-    var params = req.query || req.params;
+    var params = req.params;
     console.log(params);
     pool.query(sql, [params.treeId], function (error, results, fields) {
         if (error) throw error;

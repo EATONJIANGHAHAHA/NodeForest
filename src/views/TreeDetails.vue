@@ -1,7 +1,7 @@
 <!--Detail page of the tree-->
 <!--Can be used both by the user and staff-->
 <template>
-    <div>
+    <div style="padding-left: 200px; padding-right: 200px">
         <h1>Tree No. {{tree.treeId}}</h1>
         <mu-flex class="flex-wrapper" justify-content="center" fill>
             <mu-flex justify-content="end" fill>
@@ -13,7 +13,7 @@
                     <mu-list-item-content>{{item.value}}</mu-list-item-content>
                 </mu-list-item>
                 <mu-flex>
-                    <mu-button v-if="this.$store.state.user.id">
+                    <mu-button v-if="this.$store.state.user.id || this.$store.state.staff.id" :to="this.photosRoutePath">
                         <mu-icon value="photo_album"></mu-icon>
                         Historical Photos
                     </mu-button>
@@ -46,6 +46,7 @@
         name: "TreeDetails",
         data() {
             return {
+                photosRoutePath: '',
                 tree: Tree,
                 selectedFile: null,
                 shouldDisable: true,
@@ -73,7 +74,7 @@
             this.infos.push({id: 5, label: 'Sayings:', value: this.tree.sayings});
             this.infos.push({id: 6, label: 'Species:', value: this.tree.species});
             this.treeImageSrc = path + ':3000/' + this.tree.photo_src;
-
+            this.photosRoutePath = '/trees/photos/' + this.tree.treeId;
         },
         mounted() {
             this.routePath += this.tree.treeId;

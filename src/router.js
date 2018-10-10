@@ -21,6 +21,7 @@ import StaffApplications from './views/staff/Applications'
 import PostcardApp from './views/user/PostcardApp'
 import Postcards from './views/user/Postcards'
 import StaffPostcards from './views/staff/Postcards'
+import HistorialPhotos from './views/HistoricalPhotos'
 
 Vue.use(Router);
 
@@ -90,6 +91,10 @@ export default new Router({
             //dynamic routing passing location value into TreeDetails component.
             path: '/trees/detail/:treeId',
             component: TreeDetails,
+        },
+        {
+            path: '/trees/photos/:treeId',
+            component: HistorialPhotos,
         },
         {
             path: '/treemanagement',
