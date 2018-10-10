@@ -89,7 +89,7 @@ CREATE TABLE `photo` (
 
 LOCK TABLES `photo` WRITE;
 /*!40000 ALTER TABLE `photo` DISABLE KEYS */;
-INSERT INTO `photo` VALUES (1,'2018-08-23 00:00:00','../img/tree1.jpg',1),(2,'2018-08-03 00:00:00','../img/tree2.jpg',2),(3,'2018-08-27 00:00:00','../img/tree1.jpg',3),(4,'2018-08-18 00:00:00','../img/tree3.jpg',4),(5,'2018-08-16 00:00:00','../img/tree3.jpg',1),(6,'2018-10-06 00:00:00','server/uploads/2018-10-06T08:54:55.159Z46495182.jpg',1),(7,'2018-10-06 00:00:00','server/uploads/2018-10-06T08:57:14.054Z46495182.jpg',1),(8,'2018-10-06 00:00:00','server/uploads/2018-10-06T09:00:22.323Z46495182.jpg',1),(9,'2018-10-06 00:00:00','server/uploads/2018-10-06T09:01:54.913Z46495182.jpg',1),(10,'2018-10-09 18:09:09','server/uploads/2018-10-09T07:09:09.858ZInner Mongolia grassland.jpg',1);
+INSERT INTO `photo` VALUES (1,'2018-08-23 00:00:00','server/uploads/2018-10-06T08:54:55.tree1.jpg',1),(2,'2018-08-03 00:00:00','server/uploads/2018-10-06T08:54:55.tree2.jpg',2),(3,'2018-08-27 00:00:00','server/uploads/2018-10-06T08:54:55.tree3.jpg',3),(4,'2018-08-18 00:00:00','server/uploads/2018-10-06T08:54:55.tree4.jpg',4),(5,'2018-08-16 00:00:00','server/uploads/2018-10-06T08:54:55.tree5.jpg',1),(6,'2018-10-06 00:00:00','server/uploads/2018-10-06T08:54:55.159Z46495182.jpg',1),(7,'2018-10-06 00:00:00','server/uploads/2018-10-06T08:57:14.054Z46495182.jpg',1),(8,'2018-10-06 00:00:00','server/uploads/2018-10-06T09:00:22.323Z46495182.jpg',1),(9,'2018-10-06 00:00:00','server/uploads/2018-10-06T09:01:54.913Z46495182.jpg',1),(10,'2018-10-09 18:09:09','server/uploads/2018-10-09T07:09:09.858ZInner Mongolia grassland.jpg',1);
 /*!40000 ALTER TABLE `photo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -297,4 +297,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-10  0:11:27
+-- Dump completed on 2018-10-10 14:04:18
