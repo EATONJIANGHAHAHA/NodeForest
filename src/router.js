@@ -5,7 +5,6 @@ import About from './views/About'
 import UserHome from './views/user/Home'
 import Login from './views/Login'
 import Register from './views/Register'
-import TreeManagement from './views/staff/TreeManagement'
 import TreeDetails from './views/TreeDetails'
 import AdminHome from './views/admin/Home'
 import StaffHome from './views/staff/Home'
@@ -96,10 +95,10 @@ export default new Router({
             path: '/trees/photos/:treeId',
             component: HistorialPhotos,
         },
-        {
+/*        {
             path: '/treemanagement',
             component: TreeManagement,
-        },
+        },*/
         {
             path: '/admin/account',
             component: AdminAccount
