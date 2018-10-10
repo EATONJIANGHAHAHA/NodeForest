@@ -23,6 +23,7 @@
     "mysql": "^2.16.0",
     "nodemailer": "^4.6.8",
     "nodemon": "^1.18.4",
+    "pdfkit": "^0.8.3",
     "vue": "^2.5.17",
     "vue-cookies": "^1.5.7",
     "vue-lazyload": "^1.2.6",
