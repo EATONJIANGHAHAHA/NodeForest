@@ -4,7 +4,10 @@
     <div>
         <!--when iterating through components, make sure :key"id" is used to optimize performance.-->
         <!--display the trees owned by the user briefly.-->
-        <TreeInfo id="tree-info-list" v-for="tree in trees" v-bind="tree" :key="tree.treeId"></TreeInfo>
+        <mu-container style="padding-top: 20px">
+
+            <TreeInfo id="tree-info-list" v-for="tree in trees" v-bind="tree" :key="tree.treeId"></TreeInfo>
+        </mu-container>
     </div>
 </template>
 

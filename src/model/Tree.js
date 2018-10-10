@@ -6,7 +6,7 @@ export default class {
         treeId,
         height,
         location,
-        locationImaSrc,
+        location_src,
         species,
         photo_src,
         health,
@@ -19,7 +19,7 @@ export default class {
         this.treeId = treeId;
         this.height = height;
         this.location = location;
-        this.locationImaSrc = locationImaSrc;
+        this.location_src = location_src;
         this.species = species;
         this.photo_src = photo_src;
         this.health = health;

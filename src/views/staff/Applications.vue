@@ -14,13 +14,12 @@
                 <mu-sub-header>Amount: {{incomplete.amount}}</mu-sub-header>
                 <mu-sub-header>Sayings: {{incomplete.sayings}}</mu-sub-header>
                 <h1>{{incomplete.reason}}</h1>
-                <mu-text-field placeholder="Reason..." v-model="inCompletes[index]['reason']"
-                               slot="action"></mu-text-field>
+                <mu-text-field placeholder="Reason..." v-model="inCompletes[index]['reason']" slot="action"/>
                 <mu-button slot="action" icon @click="complete(index, 'APPROVED')">
-                    <mu-icon value="done_all"></mu-icon>
+                    <mu-icon value="done_all"/>
                 </mu-button>
                 <mu-button slot="action" icon @click="complete(index, 'DISAPPROVED')">
-                    <mu-icon value="cancel"></mu-icon>
+                    <mu-icon value="cancel"/>
                 </mu-button>
             </mu-expansion-panel>
         </div>
@@ -36,7 +35,7 @@
                 <mu-sub-header>Result Date: {{complete.complete_date}}</mu-sub-header>
             </mu-expansion-panel>
         </div>
-        <mu-dialog title="Warning!" width="360" :open.sync="isDialogOpen">
+        <mu-dialog title="Attention:" width="360" :open.sync="isDialogOpen">
             {{dialogText}}
             <mu-button slot="actions" flat color="primary" @click="closeDialog">Close</mu-button>
         </mu-dialog>

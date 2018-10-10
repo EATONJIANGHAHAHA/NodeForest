@@ -37,6 +37,7 @@
         name: "Login",
         data() {
             return {
+                regex: '(?:\')|(?:--)|(/\\\\*(?:.|[\\\\n\\\\r])*?\\\\*/)|(\\\\b(select|update|union|and|or|delete|insert|trancate|char|into|substr|ascii|declare|exec|count|master|into|drop|execute)\\\\b)',
                 types: [
                     'User',
                     'Staff',

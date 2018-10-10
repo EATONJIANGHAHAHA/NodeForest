@@ -86,6 +86,7 @@ router.route('/:treeId')
             }
         })
     })
+
     /**
      * Update a information of a tree.
      */

@@ -4,7 +4,7 @@
             <mu-appbar color="secondary">
                 My Account
             </mu-appbar>
-            <mu-list style="margin: 20px" textline="two-line" class="main" nested-indent="true"
+            <mu-list style="margin: 20px" textline="two-line" class="main" :nested-indent="true"
                      toggle-nested-type="popover">
                 <mu-list-item v-for="item in infos" v-bind="item">
                     <mu-list-item-content>

@@ -15,7 +15,7 @@ var StaffSQL = {
     insert:'INSERT INTO staff(username, password, email, address, phone) VALUES(?,?,?,?,?) ',
     queryAll:'SELECT * FROM staff',
     checkStaff:'SELECT id, username, password, email, phone, address FROM staff WHERE username = ? and password = ? ',
-    getTrees:'SELECT max(p.upload_date) AS upload_date, ANY_VALUE(t.id) treeId, ANY_VALUE(t.name) name, ANY_VALUE(t.sayings) sayings, ANY_VALUE(t.species) species, ANY_VALUE(l.location) location, ANY_VALUE(l.path) location_image, ANY_VALUE(t.health) health, ANY_VALUE(t.last_edit) last_edit, ANY_VALUE(p.path) photo_src, ANY_VALUE(t.height) height from photo p join tree t on t.id = p.tree_id join location l on l.id = t.location_id WHERE t.staff_id = ? group by p.tree_id; ',
+    getTrees:'select t.id AS treeId, t.height, t.species, t.sayings, t.name, t.owner_id, t.staff_id, t.health, t.last_edit, t.location_id, p.upload_date, p.path AS photo_src, l.location, l.path AS location_src from tree t join photo p on t.id = p.tree_id join location l on l.id = t.location_id where p.upload_date = (select max(upload_date) from photo where tree_id = t.id) AND t.staff_id=? ',
     getTreeApplications:'SELECT * FROM tree_app WHERE staff_id = ? ',
     getPostcardApplications:'SELECT p.id, p.address, p.post_code, p.status, p.apply_date, p.receive_date, tree_id FROM postcard_app p JOIN tree t on p.tree_id = t.id where staff_id = ? ',
     updatePassword:'UPDATE staff SET password = ? WHERE id = ? ',

@@ -11,16 +11,15 @@
             <mu-select label="Location: " v-model="form.tree.location_id" >
                 <mu-option v-for="location in locations" :key="location.id" :label="location.location" :value="location.id"></mu-option>
             </mu-select>
-            <mu-form-item label="Amount($):" prop="address">
-                <mu-text-field disabled v-model="form.tree.amount"></mu-text-field>
-            </mu-form-item>
+            <mu-tooltip content="FREE FOR NOW">
+                <mu-form-item label="Amount($):" prop="address">
+                    <mu-text-field disabled v-model="form.tree.amount"></mu-text-field>
+                </mu-form-item>
+            </mu-tooltip>
             <mu-form-item label="Sayings:" prop="sayings" >
                 <mu-text-field multi-line :rows="4" type="text" v-model="form.tree.sayings" placeholder="Say something to the tree..."></mu-text-field>
             </mu-form-item>
         </mu-form>
-
-
-
         <mu-dialog title="Notice" width="360" :open.sync="openDialog">
             {{dialogText}}
             <mu-button slot="actions" flat color="primary" @click="closeDialog">Close</mu-button>

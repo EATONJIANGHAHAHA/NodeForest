@@ -40,7 +40,7 @@
             'height',
             'location',
             'health',
-            'location_image',
+            'location_src',
             'species',
             'photo_src',
             'sayings',
@@ -55,7 +55,7 @@
             }
         },
         created() {
-            this.location_img_src = pass + ':3000/' + this.location_image;
+            this.location_img_src = pass + ':3000/' + this.location_src;
             this.tree_img_src = pass + ':3000/' + this.photo_src;
             this.routePath = this.routePath + 'trees/detail/' + this.treeId;
             this.treeEditRoutePath = this.treeEditRoutePath + 'trees/edit/' + this.treeId;

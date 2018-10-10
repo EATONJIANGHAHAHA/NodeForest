@@ -32,7 +32,7 @@ var jsonWrite = function (res, ret) {
  * 5. phone
  * @returns: boolean of process status.
  */
-router.use('/register', function (req, res) {
+router.post('/register', function (req, res) {
     var sql = userSQL.insert;
     var params = req.body;
     console.log(params);

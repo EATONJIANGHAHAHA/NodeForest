@@ -86,9 +86,10 @@
         methods: {
             //TODO: validation of the user input.
             submit() {
-
                 this.$refs.form.validate().then((result) => {
                     if(result) {
+                        console.log('username');
+                        console.log(this.form.user.username);
                         this.form.user.password = md5(md5(this.form.user.password) + this.form.user.username);
                         this.$http.post(path + ':3000/api/user/register',
                             {

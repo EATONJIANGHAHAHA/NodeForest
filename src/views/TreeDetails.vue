@@ -84,6 +84,7 @@
             this.infos.push({id: 4, label: 'Updated at:', value: this.tree.upload_date});
             this.infos.push({id: 5, label: 'Sayings:', value: this.tree.sayings});
             this.infos.push({id: 6, label: 'Species:', value: this.tree.species});
+            this.infos.push({id: 7, label: 'height:', value: this.tree.height});
             this.treeImageSrc = path + ':3000/' + this.tree.photo_src;
             this.photosRoutePath = '/trees/photos/' + this.tree.treeId;
         },

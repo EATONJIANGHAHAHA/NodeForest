@@ -37,7 +37,7 @@
     let path = require("../../common.js");
 
     export default {
-        name: "Edit Account",
+        name: "EditAccount",
         data() {
             return {
                 reg: /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/,

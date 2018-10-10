@@ -250,6 +250,13 @@ router.route('/')
                         if (error) throw error
                         if (results) {
                             console.log(results);
+                            /*jsonWrite(res, results);*/
+                        }
+                    });
+                    pool.query(treeSQL.insertPhoto, [getNow(),'server/uploads/default.jpg', treeId], function(error, results, fields) {
+                        if (error) throw error;
+                        if (results) {
+                            console.log(results);
                             jsonWrite(res, results);
                         }
                     })
