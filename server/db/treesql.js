@@ -9,6 +9,7 @@ var TreeSQL = {
     getPhotos:'SELECT * FROM photo WHERE tree_id = ? ',
     update:'UPDATE tree SET height = ?, health = ?, last_edit = ? WHERE id = ? ',
     updateLastEdit:'UPDATE tree SET last_edit = ? WHERE id = ?',
+    updateSandN:'UPDATE tree SET sayings = ?, name = ? WHERE id = ?',
     insertPhoto:' INSERT INTO photo(upload_date, path, tree_id) VALUES (?,?,?)',
 };
 module.exports = TreeSQL;

@@ -121,6 +121,19 @@ router.get('/getPhotos/:treeId', (req, res) => {
     })
 });
 
+router.put('/user/update', (req, res) => {
+   var sql = treeSQL.updateSandN;
+   var param = req.body;
+   console.log(param);
+   pool.query(sql, [param.sayings, params.name, params.id], function(error, results, fields) {
+       if (error) throw error;
+       if (results) {
+           console.log(results);
+           jsonWrite(res, results);
+       }
+   })
+});
+
 router.post('/uploadPhoto', upload.single('treeImage'), (req, res) => {
     var file = req.file;
     console.log(file);

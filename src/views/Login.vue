@@ -14,7 +14,7 @@
                     <mu-radio :value="type" v-model="radio.loginType" :label="type"></mu-radio>
                 </mu-flex>
             </mu-form>
-            <mu-button round @click="check" color="secondary">Login</mu-button>
+            <mu-button round @click="check" color="">Login</mu-button>
             <mu-dialog title="Warning!" width="360" :open.sync="openDialog">
                 {{dialogText}}
                 <mu-button slot="actions" flat color="primary" @click="closeDialog">Close</mu-button>
