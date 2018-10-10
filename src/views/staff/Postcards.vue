@@ -14,6 +14,9 @@
                 <mu-button slot="action" icon @click="send(index)">
                     <mu-icon value="send"></mu-icon>
                 </mu-button>
+                <mu-button slot="action" icon @click="getTemplate(index)">
+                    <mu-icon value="vertical_align_bottom"></mu-icon>
+                </mu-button>
             </mu-expansion-panel>
         </div>
         <div class="demo-text" v-if="tabIndex === 1">
@@ -100,6 +103,41 @@
                     this.openDialog = true
                 })
             },
+
+            getTemplate(i){
+                this.$http.get(path + ':3000/api/postcard_app/download/' + this.inCompletes[i].tree_id, {responseType: 'arraybuffer'}).then(response => {
+                    // console.log(response.data);
+                    if (response.data.code === "1") {
+                        this.dialogText = 'Error: please try again later.'
+                        this.openDialog = true
+                    } else {
+
+                        console.log("Created postcard");
+                        const url = window.URL.createObjectURL(new Blob([response.data]));
+                        const link = document.createElement('a');
+                        // 返回的header Content-Disposition:attachment; filename=elmeast-report-2018-2.pdf
+                        let head = response.headers['content-disposition'];
+                        let fname = 'report.pdf';
+                        if (head) {
+                            try {
+                                fname = head.split(';')[1].split('=')[1]
+                            } catch (err){
+                                console.log('can not get pdf name');
+                            }
+
+                        }
+                        link.href = url;
+                        link.setAttribute('download', fname);
+                        document.body.appendChild(link);
+                        link.click();
+                        return response;
+                    }
+                }, response => {
+                    this.dialogText = 'Error: please try again later.'
+                    this.openDialog = true
+                })
+            },
+
             closeDialog() {
                 this.openDialog = false
             },

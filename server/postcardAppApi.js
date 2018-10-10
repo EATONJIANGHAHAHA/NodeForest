@@ -56,26 +56,43 @@ router.get('/download/:treeId', (req, res) => {
         if (results) {
             let path = results[0].photo_src;
             console.log(results);
-            let doc = new PDFDocument;
+            let doc = new PDFDocument({layout:'landscape'});
 
-            res.setHeader('Content-disposition', 'inline; filename="test"');
-            res.setHeader('Content-type', 'application/pdf');
-            doc.fontSize(15)
-                .text('Node Forest, a project that protects our planet.', 50, 50);
+            res.writeHead(200, {
+                'Content-Type': 'application/pdf',
+                'Content-Disposition': 'attachment; filename=Untitled.pdf'
+            });
 
-            doc.image(path, 50, 100, {
+            doc.rect(420, 50, 30, 30)
+                .stroke('grey');
+            doc.rect(470, 50, 30, 30)
+                .stroke('grey');
+            doc.rect(520, 50, 30, 30)
+                .stroke('grey');
+            doc.rect(570, 50, 30, 30)
+                .stroke('grey');
+
+            doc.rect(650, 50, 100, 150)
+                .dash(5, {space: 7})
+                .stroke();
+
+            doc.image(path, 50, 50, {
                 // fit: [300, 400],
-                width: 400,
+                width: 300,
                     align: 'center',
                     valign: 'center'
             });
-            doc.rect(100, 500, 350, 350)
+            doc.rect(420, 270, 330, 300)
                 .dash(5, {space: 10})
-        .stroke();
+                .stroke();
 
-
+            doc.fontSize(10).fillColor('grey')
+                .text('Node Forest, a project that protects our planet.', 50, 520);
+            // var data = '';
+            // doc.pipe(data);
             doc.pipe(res);
             doc.end();
+            // jsonWrite(res, data);
         }
     });
 
