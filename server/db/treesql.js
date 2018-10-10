@@ -8,6 +8,7 @@ var TreeSQL = {
     getById:'SELECT max(p.upload_date) AS upload_date, t.id, t.name, t.sayings, t.species, l.location, l.path AS location_image, t.health, t.last_edit, ANY_VALUE(p.path) AS photo_src from photo p join tree t on t.id = p.tree_id join location l on l.id = t.location_id WHERE p.tree_id = ? ',
     getPhotos:'SELECT * FROM photo WHERE tree_id = ? ',
     update:'UPDATE tree SET height = ?, health = ?, last_edit = ? WHERE id = ? ',
+    updateLastEdit:'UPDATE tree SET last_edit = ? WHERE id = ?',
     insertPhoto:' INSERT INTO photo(upload_date, path, tree_id) VALUES (?,?,?)',
 };
 module.exports = TreeSQL;

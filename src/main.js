@@ -8,10 +8,7 @@ import Loading from 'muse-ui-loading'
 import VueLazyLoad from 'vue-lazyload'
 
 Vue.use(Loading);
-Vue.use(VueLazyLoad, {
-    error: 'img/failure_image.jpg',
-    loading: 'img/loading.gif',
-});
+Vue.use(VueLazyLoad);
 Vue.config.productionTip = true;
 Vue.prototype.$http = axios.create({
     withCredentials: true
