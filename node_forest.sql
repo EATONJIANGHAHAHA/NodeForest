@@ -80,7 +80,7 @@ CREATE TABLE `photo` (
   PRIMARY KEY (`id`),
   KEY `photo_tree__fk` (`tree_id`),
   CONSTRAINT `photo_tree__fk` FOREIGN KEY (`tree_id`) REFERENCES `tree` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -89,7 +89,7 @@ CREATE TABLE `photo` (
 
 LOCK TABLES `photo` WRITE;
 /*!40000 ALTER TABLE `photo` DISABLE KEYS */;
-INSERT INTO `photo` VALUES (1,'2018-08-23 00:00:00','server/uploads/2018-10-06T08:54:55.tree1.jpg',1),(2,'2018-08-03 00:00:00','server/uploads/2018-10-06T08:54:55.tree2.jpg',2),(3,'2018-08-27 00:00:00','server/uploads/2018-10-06T08:54:55.tree3.jpg',3),(4,'2018-08-18 00:00:00','server/uploads/2018-10-06T08:54:55.tree4.jpg',4),(5,'2018-08-16 00:00:00','server/uploads/2018-10-06T08:54:55.tree5.jpg',1),(6,'2018-10-06 00:00:00','server/uploads/2018-10-06T08:54:55.159Z46495182.jpg',1),(7,'2018-10-06 00:00:00','server/uploads/2018-10-06T08:57:14.054Z46495182.jpg',1),(8,'2018-10-06 00:00:00','server/uploads/2018-10-06T09:00:22.323Z46495182.jpg',1),(9,'2018-10-06 00:00:00','server/uploads/2018-10-06T09:01:54.913Z46495182.jpg',1),(10,'2018-10-09 18:09:09','server/uploads/2018-10-09T07:09:09.858ZInner Mongolia grassland.jpg',1);
+INSERT INTO `photo` VALUES (1,'2018-08-23 00:00:00','server/uploads/2018-10-06T08:54:55.tree1.jpg',1),(2,'2018-08-03 00:00:00','server/uploads/2018-10-06T08:54:55.tree2.jpg',2),(3,'2018-08-27 00:00:00','server/uploads/2018-10-06T08:54:55.tree3.jpg',3),(4,'2018-08-18 00:00:00','server/uploads/2018-10-06T08:54:55.tree4.jpg',4),(5,'2018-08-16 00:00:00','server/uploads/2018-10-06T08:54:55.tree5.jpg',1),(6,'2018-10-06 00:00:00','server/uploads/2018-10-06T08:54:55.159Z46495182.jpg',1),(7,'2018-10-06 00:00:00','server/uploads/2018-10-06T08:57:14.054Z46495182.jpg',1),(8,'2018-10-06 00:00:00','server/uploads/2018-10-06T09:00:22.323Z46495182.jpg',1),(9,'2018-10-06 00:00:00','server/uploads/2018-10-06T09:01:54.913Z46495182.jpg',1),(10,'2018-10-09 18:09:09','server/uploads/2018-10-09T07:09:09.858ZInner Mongolia grassland.jpg',1),(11,'2018-10-10 15:22:39','server/uploads/2018-10-10T04:22:39.534Znature-photography-twisted-trees-crooked-forest-kilian-schonberger-4.jpg',3),(12,'2018-10-10 16:08:45','server/uploads/2018-10-10T05:08:45.865Zthe-majestic-beauty-of-trees-captured-in-infrared-photography__880.jpg',3),(13,'2018-10-10 16:10:15','server/uploads/2018-10-10T05:10:15.707Ztreephoto10.jpg',3),(14,'2018-10-10 16:18:24','server/uploads/2018-10-10T05:18:24.732Z8264159.jpg',3),(15,'2018-10-10 16:23:23','server/uploads/2018-10-10T05:23:23.514Ztreephoto31.jpg',2);
 /*!40000 ALTER TABLE `photo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -212,7 +212,7 @@ CREATE TABLE `tree` (
 
 LOCK TABLES `tree` WRITE;
 /*!40000 ALTER TABLE `tree` DISABLE KEYS */;
-INSERT INTO `tree` VALUES (1,20.1,'White birch','Protecting the environment is everyone’s responsibility','Ahihi',1,2,'','2018-08-27 00:00:00',1),(2,15.66,'Cherry tree','I love Canada','Puppy',1,1,'Weak','2018-08-26 00:00:00',2),(3,77.88,'White birch','For the tribe','Jinping Xi',3,1,'Good','2018-08-27 00:00:00',3),(4,50.7,'Poplar','Expecto Patronum','Patronus Charm',2,1,'Good','2018-08-28 00:00:00',4),(7,0.5,'Poplar','Tebieman','Given',1,3,'GOOD','2018-10-09 18:23:17',1),(8,15,'White birch','Tried','Baby',1,1,'GOOD','2018-10-09 21:03:23',4),(9,15,'White birch','asdfa','dsfa',1,1,'GOOD','2018-10-09 21:10:31',1),(10,15,'Pine','Protecting the environment is everyone\'s responsibility.','LOVE PUPPY',2,2,'GOOD','2018-10-10 14:46:14',3);
+INSERT INTO `tree` VALUES (1,20.1,'White birch','Protecting the environment is everyone’s responsibility','Ahihi',1,2,'','2018-08-27 00:00:00',1),(2,15.66,'Cherry tree','I love Canada','Puppy',1,1,'Weak','2018-10-10 16:23:23',2),(3,77.88,'White birch','For the tribe','Jinping Xi',3,1,'Good','2018-10-10 16:18:24',3),(4,50.7,'Poplar','Expecto Patronum','Patronus Charm',2,1,'Good','2018-08-28 00:00:00',4),(7,0.5,'Poplar','Tebieman','Given',1,3,'GOOD','2018-10-09 18:23:17',1),(8,15,'White birch','Tried','Baby',1,1,'GOOD','2018-10-09 21:03:23',4),(9,15,'White birch','asdfa','dsfa',1,1,'GOOD','2018-10-09 21:10:31',1),(10,15,'Pine','Protecting the environment is everyone\'s responsibility.','LOVE PUPPY',2,2,'GOOD','2018-10-10 14:46:14',3);
 /*!40000 ALTER TABLE `tree` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -297,4 +297,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-10 14:52:18
+-- Dump completed on 2018-10-10 16:25:06

@@ -1,7 +1,7 @@
 <!--Detail page of the tree-->
 <!--Can be used both by the user and staff-->
 <template>
-    <div style="padding-left: 200px; padding-right: 200px">
+    <mu-container>
         <h1>Tree No. {{tree.treeId}}</h1>
         <mu-flex class="flex-wrapper" justify-content="center" fill>
             <mu-flex justify-content="end" fill>
@@ -34,7 +34,11 @@
                 </mu-flex>
             </mu-list>
         </mu-flex>
-    </div>
+        <mu-snackbar :color="normal.color" position="bottom" :open.sync="normal.open">
+            {{normal.message}}
+            <mu-button flat slot="action" color="secondary" @click="normal.open = false">Close</mu-button>
+        </mu-snackbar>
+    </mu-container>
 </template>
 
 <script>
@@ -46,6 +50,13 @@
         name: "TreeDetails",
         data() {
             return {
+                normal: {
+                    position: 'bottom',
+                    message: 'Successfully uploaded !',
+                    open: false,
+                    timeout: 3000,
+                    color: 'success'
+                },
                 photosRoutePath: '',
                 tree: Tree,
                 selectedFile: null,
@@ -94,16 +105,24 @@
                 this.$http.post(path + ":3000/api/tree/uploadPhoto", fd)
                     .then(response => {
                         console.log(response.data);
+                        let trees = this.$store.state.trees;
+                        let index = trees.indexOf(this.tree);
+                        trees[index].upload_date = response.data;
+                        this.$store.dispatch('setTrees', trees);
                         setTimeout(() => {
                             loading.close();
-                        },1000)
+                            this.normal.open = true;
+                        },1000);
                     }, response => {
                         console.log("upload failed.");
                         setTimeout(() => {
                             loading.close();
-                        },1000)
+                            this.normal.color = 'error';
+                            this.normal.open = true;
+                        },1000);
+
                     });
-                this.selectedFile = 'undefined';
+                this.selectedFile = null;
             }
         }
     }

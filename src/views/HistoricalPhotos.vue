@@ -1,9 +1,11 @@
 <template>
-    <mu-carousel transition="fade">
-        <mu-carousel-item v-for="photoPath in photoPaths">
-            <img :src="photoPath">
-        </mu-carousel-item>
-    </mu-carousel>
+    <mu-container>
+        <mu-carousel transition="fade" style="padding-top: 50px;">
+            <mu-carousel-item v-for="photoPath in photoPaths">
+                <img :src="photoPath">
+            </mu-carousel-item>
+        </mu-carousel>
+    </mu-container>
 </template>
 
 <script>

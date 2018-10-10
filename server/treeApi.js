@@ -19,7 +19,7 @@ var upload = multer({
 });
 
 /**
- * You first need to create a formatting function to pad numbers to two digits…
+ * formatting function to pad numbers to two digits…
  **/
 function twoDigits(d) {
     if(0 <= d && d < 10) return "0" + d.toString();
@@ -127,14 +127,24 @@ router.post('/uploadPhoto', upload.single('treeImage'), (req, res) => {
     var sql = treeSQL.insertPhoto;
     var params = req.body;
     console.log(params);
-    pool.query(sql, [getNow(), file.path, params.treeId], function (error, results, fields) {
+    var now = getNow();
+    pool.query(sql, [now, file.path, params.treeId], function (error, results, fields) {
         if (error) throw error;
         if (results) {
             console.log(results);
             if (results.insertId !== 0) {
-                jsonWrite(res, file.path);
+                // jsonWrite(res, file.path);
+                var sql = treeSQL.updateLastEdit;
+                pool.query(sql, [now, params.treeId], function (intererror, interresults, interfields) {
+                    if (intererror) throw intererror;
+                    if (interresults) {
+                        var sql = treeSQL.getById;
+                        jsonWrite(res, now);
+                    }
+                })
             }
         }
     });
+
 });
 module.exports = router;
