@@ -14,13 +14,13 @@
                 <mu-card-media :title="species" >
                     <img v-lazy='this.tree_img_src'>
                 </mu-card-media>
-                <mu-card-title :title="species" ></mu-card-title>
+                <mu-card-title :title="name" ></mu-card-title>
                 <mu-card-text>
                     {{sayings}}
                 </mu-card-text>
                 <mu-card-actions>
                     <mu-button flat :to="routePath">View</mu-button>
-                    <mu-button flat :to="routePath">Edit</mu-button>
+                    <mu-button flat :to="treeEditRoutePath">Edit</mu-button>
                 </mu-card-actions>
             </mu-card>
         </mu-container>
@@ -43,20 +43,22 @@
             'location_image',
             'species',
             'photo_src',
-            'sayings'
+            'sayings',
+            'name'
         ],
         data() {
             return {
-                // photo: require(this.photo_src),
+                treeEditRoutePath: '/',
                 routePath: '/',
                 location_img_src: '',
-                tree_img_src:'',
+                tree_img_src:''
             }
         },
         created() {
             this.location_img_src = pass + ':3000/' + this.location_image;
             this.tree_img_src = pass + ':3000/' + this.photo_src;
-            this.routePath = this.routePath + "trees/detail/" + this.treeId
+            this.routePath = this.routePath + 'trees/detail/' + this.treeId;
+            this.treeEditRoutePath = this.treeEditRoutePath + 'trees/edit/' + this.treeId;
         }
     }
 </script>

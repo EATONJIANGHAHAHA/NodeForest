@@ -3,18 +3,18 @@
  */
 export default class {
     constructor(
-        treeId, //treenumber
+        treeId,
         height,
         location,
         locationImaSrc,
         species,
         photo_src,
-        contentText,
         health,
         upload_date,
-        sayings,//the word you give to your tree.
+        sayings,
         location_id,
-        name
+        name,
+        last_edit,
     ) {
         this.treeId = treeId;
         this.height = height;
@@ -22,11 +22,11 @@ export default class {
         this.locationImaSrc = locationImaSrc;
         this.species = species;
         this.photo_src = photo_src;
-        this.contentText = contentText;
         this.health = health;
         this.upload_date = upload_date;
         this.sayings = sayings;
         this.location_id = location_id;
         this.name = name;
+        this.last_edit = last_edit;
     }
 }
