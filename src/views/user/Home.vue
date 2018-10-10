@@ -10,6 +10,7 @@
 
 <script>
     import TreeInfo from '../../components/TreeInfo'
+    import path from '../../common'
 
     export default {
         name: 'UserHome',
@@ -18,7 +19,7 @@
         * Preparing for displaying the tree information.
         */
         created() {
-            this.$http.get('http://127.0.0.1:3000/api/user/getTrees',
+            this.$http.get(path + ':3000/api/user/getTrees',
                 {
                     params: {
                         userId: this.$store.state.user.id

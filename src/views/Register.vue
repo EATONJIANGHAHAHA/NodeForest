@@ -27,6 +27,7 @@
     import Router from '../router'
     import User from "../model/User";
     import md5 from "js-md5";
+    import path from "../common";
 
     export default {
         name: "Register",
@@ -86,7 +87,7 @@
                 this.$refs.form.validate().then((result) => {
                     if(result) {
                         this.form.user.password = md5(md5(this.form.user.password) + this.form.user.username);
-                        this.$http.post('http://127.0.0.1:3000/api/user/register',
+                        this.$http.post(path + ':3000/api/user/register',
                             {
                                 username: this.form.user.username,
                                 password: this.form.user.password,

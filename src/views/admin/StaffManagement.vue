@@ -35,7 +35,7 @@
         methods: {
 
             getStaffs(){
-                console.log("Admin: manageStaff")
+                console.log("Admin: manageStaff");
                 this.$http.get(path + ':3000/api/admin/staffs', {}).then(response => {
                     console.log(response.data);
                     this.staffs = [];

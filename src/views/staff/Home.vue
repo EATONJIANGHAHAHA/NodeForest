@@ -6,6 +6,7 @@
 
 <script>
     import TreeInfo from '../../components/TreeInfo'
+    import path from '../../common'
 
     export default {
         name: 'StaffHome',
@@ -15,7 +16,7 @@
             }
         },
         created() {
-            this.$http.post('http://127.0.0.1:3000/api/staff/trees', {
+            this.$http.post(path + ':3000/api/staff/trees', {
                 staffId: this.$store.state.staff.id
             }).then(response => {
                 if (response.data.length !== 0) {
