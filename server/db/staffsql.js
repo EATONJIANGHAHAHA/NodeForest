@@ -19,7 +19,7 @@ var StaffSQL = {
     getTreeApplications:'SELECT * FROM tree_app WHERE staff_id = ? ',
     getPostcardApplications:'SELECT p.id, p.address, p.post_code, p.status, p.apply_date, p.receive_date, tree_id FROM postcard_app p JOIN tree t on p.tree_id = t.id where staff_id = ? ',
     updatePassword:'UPDATE staff SET password = ? WHERE id = ? ',
-    updateAccount:'UPDATE staff SET password = ?, email = ?, address = ?, phone = ? WHERE id = ? ',
+    update:'UPDATE staff SET password = ?, email = ?, address = ?, phone = ? WHERE id = ? ',
     getAllStaffs: 'SELECT * FROM staff',
     addStaff:'INSERT INTO staff (username, password, email, phone, address) VALUES (?, ?, ?, ?, ?)',
     getStaffById:'SELECT * FROM staff WHERE id = ? ',

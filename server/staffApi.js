@@ -47,17 +47,18 @@ router.post('/login', (req, res) => {
 /**
  * update staff's information
  * @params needed in the request body:
- * 1. email
- * 2. address,
- * 3. phone,
- * 4. staffId
+ * 1. password
+ * 2. email
+ * 3. address,
+ * 4. phone,
+ * 5. staffId
  * @returns boolean of process status.
  */
-router.post('/update', (req, res) => {
-    var sql = staffSQL.updateAccount;
+router.put('/update', (req, res) => {
+    var sql = staffSQL.update;
     var params = req.body;
     console.log(params);
-    pool.query(sql, [params.email, params.address, params.phone, params.staffId], (error, results, fields) => {
+    pool.query(sql, [params.password, params.email, params.address, params.phone, params.id], (error, results, fields) => {
         if (error) throw error;
         if (results) {
             console.log(results);

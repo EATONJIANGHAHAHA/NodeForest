@@ -21,6 +21,8 @@ import PostcardApp from './views/user/PostcardApp'
 import Postcards from './views/user/Postcards'
 import StaffPostcards from './views/staff/Postcards'
 import HistorialPhotos from './views/HistoricalPhotos'
+import StaffAccount from './views/staff/Account'
+import StaffEditAccount from './views/staff/EditAccount'
 
 Vue.use(Router);
 
@@ -85,6 +87,14 @@ export default new Router({
         {
             path: '/staff/postcards',
             component: StaffPostcards
+        },
+        {
+            path: '/staff/account',
+            component: StaffAccount
+        },
+        {
+            path: '/staff/account/edit',
+            component: StaffEditAccount
         },
         {
             //dynamic routing passing location value into TreeDetails component.
