@@ -94,9 +94,9 @@ router.use('/searchByEmail', (req, res) => {
  * 1. username
  * @returns user
  */
-router.get('/usernameExist', (req, res) => {
+router.post('/usernameExist', (req, res) => {
     let sql = userSQL.usernameExist;
-    let params = req.query || req.params;
+    let params = req.body;
     console.log(params);
     pool.query(sql, [params.username], function (error, results, fields) {
         if (error) throw error;

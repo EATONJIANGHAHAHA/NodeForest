@@ -38,7 +38,7 @@ new Vue({
     methods:{
         checkLogin(){
 
-            if(!getCookie('session')){
+            if(!getCookie('session') && this.$route.path !== '/register' && this.$route.path !== '/about'){
                 this.$router.push('/login');
             }
         }
