@@ -174,7 +174,7 @@ CREATE TABLE `staff` (
 
 LOCK TABLES `staff` WRITE;
 /*!40000 ALTER TABLE `staff` DISABLE KEYS */;
-INSERT INTO `staff` VALUES (1,'staff','f6b6aad4e094c7d2dedef4d5cf5822c1','staff@uts.edu.au','7688980','UTS Building 11'),(2,'Beilll','d2bac9e8a025eb1ff70b459104cff103','beilling@gmail.com','908098089808','Town hall'),(3,'eric','6bea86ac5bec762a1e18327feed60396','email@email.com',NULL,NULL);
+INSERT INTO `staff` VALUES (1,'staff','f6b6aad4e094c7d2dedef4d5cf5822c1','12416881@student.uts.edu.au','7688980','UTS Building 11'),(2,'Beilll','d2bac9e8a025eb1ff70b459104cff103','12193583@student.uts.edu.au','908098089808','Town hall'),(3,'eric','6bea86ac5bec762a1e18327feed60396','might_103@yeah.net',NULL,NULL);
 /*!40000 ALTER TABLE `staff` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -203,7 +203,7 @@ CREATE TABLE `tree` (
   CONSTRAINT `tree_location__fk` FOREIGN KEY (`location_id`) REFERENCES `location` (`id`),
   CONSTRAINT `tree_staff__fk` FOREIGN KEY (`staff_id`) REFERENCES `staff` (`id`),
   CONSTRAINT `tree_user__fk` FOREIGN KEY (`owner_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -212,7 +212,7 @@ CREATE TABLE `tree` (
 
 LOCK TABLES `tree` WRITE;
 /*!40000 ALTER TABLE `tree` DISABLE KEYS */;
-INSERT INTO `tree` VALUES (1,20.1,'White birch','Protecting the environment is everyone’s responsibility','Ahihi',1,2,'','2018-08-27 00:00:00',1),(2,15.66,'Cherry tree','I love Canada','Puppy',1,1,'Weak','2018-08-26 00:00:00',2),(3,77.88,'White birch','For the tribe','Jinping Xi',3,1,'Good','2018-08-27 00:00:00',3),(4,50.7,'Poplar','Expecto Patronum','Patronus Charm',2,1,'Good','2018-08-28 00:00:00',4),(7,0.5,'Poplar','Tebieman','Given',1,3,'GOOD','2018-10-09 18:23:17',1),(8,15,'White birch','Tried','Baby',1,1,'GOOD','2018-10-09 21:03:23',4),(9,15,'White birch','asdfa','dsfa',1,1,'GOOD','2018-10-09 21:10:31',1);
+INSERT INTO `tree` VALUES (1,20.1,'White birch','Protecting the environment is everyone’s responsibility','Ahihi',1,2,'','2018-08-27 00:00:00',1),(2,15.66,'Cherry tree','I love Canada','Puppy',1,1,'Weak','2018-08-26 00:00:00',2),(3,77.88,'White birch','For the tribe','Jinping Xi',3,1,'Good','2018-08-27 00:00:00',3),(4,50.7,'Poplar','Expecto Patronum','Patronus Charm',2,1,'Good','2018-08-28 00:00:00',4),(7,0.5,'Poplar','Tebieman','Given',1,3,'GOOD','2018-10-09 18:23:17',1),(8,15,'White birch','Tried','Baby',1,1,'GOOD','2018-10-09 21:03:23',4),(9,15,'White birch','asdfa','dsfa',1,1,'GOOD','2018-10-09 21:10:31',1),(10,15,'Pine','Protecting the environment is everyone\'s responsibility.','LOVE PUPPY',2,2,'GOOD','2018-10-10 14:46:14',3);
 /*!40000 ALTER TABLE `tree` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -246,7 +246,7 @@ CREATE TABLE `tree_app` (
   CONSTRAINT `tree_app_staff_id_fk` FOREIGN KEY (`staff_id`) REFERENCES `staff` (`id`) ON UPDATE CASCADE,
   CONSTRAINT `tree_app_tree__fk` FOREIGN KEY (`tree_id`) REFERENCES `tree` (`id`),
   CONSTRAINT `tree_app_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -255,7 +255,7 @@ CREATE TABLE `tree_app` (
 
 LOCK TABLES `tree_app` WRITE;
 /*!40000 ALTER TABLE `tree_app` DISABLE KEYS */;
-INSERT INTO `tree_app` VALUES (1,'2018-10-09 11:32:50','White birch','Tried','Patty','APPROVED',1,1,1,'2018-10-09 01:12:43',20,'Very good',1),(2,'2018-10-09 12:41:44','White birch','Ok','Test','SUBMITTED',NULL,1,2,NULL,20,NULL,2),(3,'2018-10-09 12:44:44','Poplar','Tebieman','Given','APPROVED',7,1,3,'2018-10-09 18:23:17',20,'',3),(4,'2018-10-09 20:18:18','White birch','Tried','Baby','APPROVED',8,1,1,'2018-10-09 21:03:23',20,'',2),(5,'2018-10-09 21:00:14','White birch','asdfa','dsfa','APPROVED',9,1,1,'2018-10-09 21:10:31',20,'',1),(6,'2018-10-09 21:01:32','White birch','Say something','Tried','SUBMITTED',NULL,1,1,NULL,20,NULL,3);
+INSERT INTO `tree_app` VALUES (1,'2018-10-09 11:32:50','White birch','Tried','Patty','APPROVED',1,1,1,'2018-10-09 01:12:43',20,'Very good',1),(2,'2018-10-09 12:41:44','White birch','Ok','Test','SUBMITTED',NULL,1,2,NULL,20,NULL,2),(3,'2018-10-09 12:44:44','Poplar','Tebieman','Given','APPROVED',7,1,3,'2018-10-09 18:23:17',20,'',3),(4,'2018-10-09 20:18:18','White birch','Tried','Baby','APPROVED',8,1,1,'2018-10-09 21:03:23',20,'',2),(5,'2018-10-09 21:00:14','White birch','asdfa','dsfa','APPROVED',9,1,1,'2018-10-09 21:10:31',20,'',1),(6,'2018-10-09 21:01:32','White birch','Say something','Tried','SUBMITTED',NULL,1,1,NULL,20,NULL,3),(7,'2018-10-10 14:42:34','Pine','Protecting the environment is everyone\'s responsibility.','LOVE PUPPY','APPROVED',10,2,2,'2018-10-10 14:46:14',20,'',3),(8,'2018-10-10 14:43:57','Cherry tree','Cute','Try again','DISAPPROVED',NULL,2,2,'2018-10-10 14:46:09',20,'You are too ugly',4);
 /*!40000 ALTER TABLE `tree_app` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -284,7 +284,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'test','70664c664af04ecb370378420fb76270','might_103@yeah.net',100,'UTS Library','12345678'),(2,'ahihi','6caac9179499d83988122e19792229c9','eatonjiangtonlei@gmail.com',0,'Central park','6666666'),(3,'eaton','e026e56b060f3027847fd1149e8af91e','eatonjiangtonlei@gmail.com',0,NULL,NULL),(4,'ton','d5cf2d085865d7dd82869bb63c13367d','might_103@yeah.net',0,NULL,NULL),(15,'asdfasdf','d462b934122830fd6a2696b625fd48e1','asdf@asdf.com',0,NULL,NULL),(16,'test','70664c664af04ecb370378420fb76270','asdf@asdf.com',0,NULL,NULL);
+INSERT INTO `user` VALUES (1,'test','70664c664af04ecb370378420fb76270','might_103@yeah.net',100,'UTS Library','12345678'),(2,'ahihi','6caac9179499d83988122e19792229c9','eatonjiangtonlei@gmail.com',0,'Central park','6666666'),(3,'eaton','e026e56b060f3027847fd1149e8af91e','eatonjiangtonlei@gmail.com',0,NULL,NULL),(4,'ton','d5cf2d085865d7dd82869bb63c13367d','might_103@yeah.net',0,NULL,NULL),(15,'asdfasdf','d462b934122830fd6a2696b625fd48e1','leighton070103@gmail.com',0,NULL,NULL),(16,'test','70664c664af04ecb370378420fb76270','leighton070103@gmail.com',0,NULL,NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -297,4 +297,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-10 14:04:18
+-- Dump completed on 2018-10-10 14:52:18

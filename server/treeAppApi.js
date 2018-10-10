@@ -5,7 +5,22 @@ var dbConfig = require('./db/DBConfig')
 var treeAppSQL = require('./db/treeappsql')
 let staffSQL = require('./db/staffsql')
 let treeSQL = require('./db/treesql');
+let userSQL = require('./db/usersql')
 var pool = mysql.createPool(dbConfig.mysql)
+
+var nodemailer = require('nodemailer');
+
+var mailTransport = nodemailer.createTransport({
+    host : 'smtp.gmail.com',
+    port: 587,
+    auth : {
+        user : 'nodeforest2018',
+        pass : 'nodeforest123'
+    },
+});
+
+
+
 
 /**
  * Sending response as json format.
@@ -37,18 +52,40 @@ var jsonWrite = function (res, ret) {
  * @returns boolean of process status
  */
 router.post('/add', function (req, res) {
-    let sql = staffSQL.getWorkloadOrder;
+
+    let sql = staffSQL.getWorkloadOrder; //Get the staff that has the least workload.
     pool.query(sql, function (error, results, fields) {
         if (error) throw error
         if (results) {
-            console.log("Staff id: " + results[0].id);
-            sql = treeAppSQL.insert;
+            let staffId = results[0].id;
+            console.log("Assigned to staff: " + results[0].id);
+
+            sql = treeAppSQL.insert;//Add a new application to the database.
             let params = req.body;
             console.log(params);
             pool.query(sql, [getNow(), params.species, params.location_id, params.sayings, params.name, params.status, params.amount, params.userId, results[0].id], function (error, results, fields) {
                 if (error) throw error
                 if (results) {
-                    console.log(results)
+                    let appId = results.insertId;
+                    console.log("New application created: " +  appId);
+
+
+                    pool.query(staffSQL.getStaffById, [staffId], function (error, results, fields) {
+                        if (error) throw error;
+                        if (results){
+                            //Send an email to notify staff.
+                            sendEmail(results[0].email, ' application No.' + appId + ' is assigned to you.')
+                        }
+                    })
+
+                    pool.query(userSQL.getUserById, [params.userId], function (error, results, fields) {
+                        if (error) throw error;
+                        if (results){
+                            //Send an email to notify User.
+                            sendEmail(results[0].email, ' application No.' + appId + ' is successfully submitted.')
+                        }
+                    })
+
                     jsonWrite(res, results)
                 }
             })
@@ -115,7 +152,7 @@ router.get('/complete', function (req, res) {
     pool.query(sql,[params.userId],  (error, results, fields) => {
         if (error) throw error;
         if (results) {
-            for(var i = 0; i<results.length; i++){
+            for(let i = 0; i<results.length; i++){
                 results[i].apply_date = getDate(results[i].apply_date);
                 results[i].complete_date = getDate(results[i].complete_date);
             }
@@ -220,6 +257,7 @@ router.route('/')
             })
         }
         else {
+            sql = treeAppSQL.update;
             pool.query(sql, [params.status, getNow(), params.reason, null, params.id], function (error, results, fields) {
                 if (error) throw error
                 if (results) {
@@ -228,6 +266,14 @@ router.route('/')
                 }
             })
         }
+
+        //Notify the user.
+        pool.query(userSQL.getUserById, [params.ownerId], function (error, results, fields) {
+            if (error) throw error
+            if (results) {
+                sendEmail(results[0].email, ' application No.' + params.id + ' is ' + params.status + '.');
+            }
+        })
 
 
     })
@@ -260,4 +306,22 @@ function getDate(d) {
         ":" + twoDigits(d.getSeconds());
 }
 
+function sendEmail(recipient, content) {
+    var options = {
+        from 		: '"Node Forest" <nodeforest2018@gmail.com>',
+        to 			: recipient,
+        subject 	: 'Tree Application Notification',
+        text 		: 'An email from node forest system.',
+        html		: '<p>Hi</p><br/><p>We are here to inform you that '+ content + '</p><br/><p>For more information, please check details within your account.</p><br/><p>Best Regards,</p><br/><p>Node Forest System</p>',
+    };
+
+    mailTransport.sendMail(options, function(err, msg){
+        if(err){
+            console.log(err);
+        }
+        else {
+            console.log(msg);
+        }
+    });
+}
 module.exports = router;
