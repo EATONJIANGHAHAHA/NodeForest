@@ -112,7 +112,7 @@ router.post('/staffs/add', (req, res) =>{
  * Update staff.
  */
 router.post('/staffs/update', (req, res) =>{
-    var sql = staffSQL.updateAccount;
+    var sql = staffSQL.update;
     var params = req.body;
     console.log(params);
     pool.query(sql, [params.password, params.email, params.address, params.phone, params.staffId], (error, results, fields) => {
