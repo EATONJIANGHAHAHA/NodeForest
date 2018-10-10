@@ -1,9 +1,9 @@
 <!--Register user page.-->
 <template>
     <div>
-        <mu-container>
+        <mu-container class="main">
             <h1>Register</H1>
-            <mu-form ref="form" :model="form" :label-position="labelPosition" label-width="100">
+            <mu-form ref="form" :model="form" :label-position="labelPosition" label-width="100" class="mu-login-form">
                 <mu-form-item prop="user.username" label="Username" :rules="usernameRules" icon="person">
                     <mu-text-field v-model="form.user.username"></mu-text-field>
                 </mu-form-item>
@@ -13,11 +13,10 @@
                 <mu-form-item prop="user.email" label="Email" :rules="emailRules" icon="email">
                     <mu-text-field v-model="form.user.email"></mu-text-field>
                 </mu-form-item>
+                <mu-flex class="flex-wrapper" justify-content="end">
+                    <mu-button @click="submit" round color="secondary"><mu-icon value="check_circle_outline"></mu-icon>Register</mu-button>
+                </mu-flex>
             </mu-form>
-            <mu-flex class="flex-wrapper" justify-content="end">
-                <mu-button @click="submit" round color="secondary"><mu-icon value="check_circle_outline"></mu-icon>Register</mu-button>
-            </mu-flex>
-
             <mu-dialog title="Warning!" width="360" :open.sync="isDialogOpen">
                 {{dialogText}}
                 <mu-button slot="actions" flat color="primary" @click="closeDialog">Close</mu-button>
@@ -149,5 +148,8 @@
 </script>
 
 <style scoped>
-
+    .mu-login-form {
+        width: 100%;
+        max-width: 460px;
+    }
 </style>

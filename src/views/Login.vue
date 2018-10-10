@@ -2,19 +2,22 @@
 <template>
     <div>
         <mu-container class="main">
-            <h1>Welcome</H1>
+            <h1>Welcome</h1>
             <mu-form ref="form" :model="form" class="mu-login-form" :label-position="labelPosition" label-width="100">
-                <mu-form-item label="Username" :rules="usernameRules" prop="user.username">
+                <mu-form-item label="Username" :rules="usernameRules" prop="user.username" icon="person">
                     <mu-text-field v-model="form.user.username"></mu-text-field>
                 </mu-form-item>
-                <mu-form-item label="Password" :rules="passwordRules" prop="user.password">
+                <mu-form-item label="Password" :rules="passwordRules" prop="user.password" icon="lock">
                     <mu-text-field v-model="form.user.password" :action-click="() => (visibility = !visibility)" :type="visibility ? 'text' : 'password'" :action-icon="visibility ? 'visibility_off' : 'visibility'" ></mu-text-field>
                 </mu-form-item>
-                <mu-flex class="select-control-row" :key="type" v-for="type in types">
+                <mu-flex class="select-control-row" :key="type" v-for="type in types" style="margin-left: 20px">
                     <mu-radio :value="type" v-model="radio.loginType" :label="type"></mu-radio>
                 </mu-flex>
+                <mu-flex class="flex-wrapper" justify-content="end">
+                    <mu-button round @click="check" color="secondary"><mu-icon value="check_circle_outline"></mu-icon>Login</mu-button>
+                </mu-flex>
             </mu-form>
-            <mu-button round @click="check" color="secondary">Login</mu-button>
+
             <mu-dialog title="Warning!" width="360" :open.sync="openDialog">
                 {{dialogText}}
                 <mu-button slot="actions" flat color="primary" @click="closeDialog">Close</mu-button>

@@ -5,7 +5,7 @@
             <mu-button icon slot="left" @click="openDrawer">
                 <img src="../../public/logo.png" height="30px" width="30px">
             </mu-button>
-            NodeForest
+            Node Forest
             <mu-button v-if="!isLoggedIn" flat slot="right" to="/register">
                 <mu-icon value="perm_identity"/>
                 Register
