@@ -6,11 +6,26 @@
                 <img src="../../public/logo.png" height="30px" width="30px">
             </mu-button>
             NodeForest
-            <mu-button v-if="!isLoggedIn" flat slot="right" to="/register">Register</mu-button>
-            <mu-button flat slot="right" to="/about">About</mu-button>
-            <mu-button v-if="!isLoggedIn" flat slot="right" to="/login">Login</mu-button>
-            <mu-button v-if="isLoggedIn" flat slot="right" @click="home"><mu-icon value="home"></mu-icon></mu-button>
-            <mu-button v-if="isLoggedIn" flat slot="right" @click="logout">Logout</mu-button>
+            <mu-button v-if="!isLoggedIn" flat slot="right" to="/register">
+                <mu-icon value="perm_identity"/>
+                Register
+            </mu-button>
+            <mu-button flat slot="right" to="/about">
+                <mu-icon value="info"/>
+                About
+            </mu-button>
+            <mu-button v-if="!isLoggedIn" flat slot="right" to="/login">
+                <mu-icon value="input"/>
+                Login
+            </mu-button>
+            <mu-button v-if="isLoggedIn" flat slot="right" @click="home">
+                <mu-icon value="home"/>
+                Home
+            </mu-button>
+            <mu-button v-if="isLoggedIn" flat slot="right" @click="logout">
+                <mu-icon value="input"/>
+                Logout
+            </mu-button>
         </mu-appbar>
     </div>
 </template>
