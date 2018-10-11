@@ -66,7 +66,7 @@
                 }
             },
             home(){
-                if (this.$store.state.user.id) this.$router.push('/home');
+                if (this.$store.state.user.id) this.$router.push('/user/home');
                 if (this.$store.state.admin.id) this.$router.push('/admin/home');
                 if (this.$store.state.staff.id) this.$router.push('/staff/home')
             }
