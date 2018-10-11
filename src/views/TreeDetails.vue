@@ -5,7 +5,7 @@
         <h1>Tree No. {{tree.treeId}}</h1>
         <mu-flex class="flex-wrapper" justify-content="center" fill>
             <mu-flex justify-content="end" fill>
-                <img v-lazy="this.treeImageSrc" height="200px" width="200px"/>
+                <img v-lazy="this.treeImageSrc" :key="this.treeImageSrc" height="200px" width="200px"/>
             </mu-flex>
             <mu-list>
                 <mu-list-item v-for="item in infos" v-bind="item">
@@ -25,7 +25,7 @@
                     <input style="display: none" type="file" @change="onFileChanged" ref="fileInput"/>
                     <mu-button v-if="this.$store.state.staff.id" @click="$refs.fileInput.click()">
                         <mu-icon value="folder"></mu-icon>
-                        Select File
+                        Select Picture
                     </mu-button>
                     <mu-text-field v-if="selectedFile" v-model="selectedFile.name" disabled=""/>
                     <mu-button v-if="this.$store.state.staff.id" @click="onSubmitClicked" :disabled="shouldDisable">
@@ -76,23 +76,28 @@
            Initialize the tree information.
         */
         created() {
-            this.tree = this.$store.getters.getTreebyId(this.$route.params.treeId);
-            //here we reinitialize this array as a new empty array.
-            this.infos = [];
-            this.infos.push({id: 1, label: 'Name:', value: this.tree.name});
-            this.infos.push({id: 2, label: 'Health:', value: this.tree.health});
-            this.infos.push({id: 3, label: 'Location:', value: this.tree.location});
-            this.infos.push({id: 4, label: 'Updated at:', value: this.tree.upload_date});
-            this.infos.push({id: 5, label: 'Sayings:', value: this.tree.sayings});
-            this.infos.push({id: 6, label: 'Species:', value: this.tree.species});
-            this.infos.push({id: 7, label: 'height:', value: this.tree.height});
-            this.treeImageSrc = path + ':3000/' + this.tree.photo_src;
-            this.photosRoutePath = '/trees/photos/' + this.tree.treeId;
+            this.setInfos();
         },
         mounted() {
             this.routePath += this.tree.treeId;
         },
         methods: {
+            setInfos(){
+                this.tree = this.$store.getters.getTreebyId(this.$route.params.treeId);
+                console.log(this.tree);
+                this.infos = [];
+                this.infos.push({id: 1, label: 'Name:', value: this.tree.name});
+                this.infos.push({id: 2, label: 'Health:', value: this.tree.health});
+                this.infos.push({id: 3, label: 'Location:', value: this.tree.location});
+                this.infos.push({id: 4, label: 'Updated at:', value: this.tree.upload_date});
+                this.infos.push({id: 5, label: 'Sayings:', value: this.tree.sayings});
+                this.infos.push({id: 6, label: 'Species:', value: this.tree.species});
+                this.infos.push({id: 7, label: 'height:', value: this.tree.height});
+                this.treeImageSrc = path + ':3000/' + this.tree.photo_src;
+                this.photosRoutePath = '/trees/photos/' + this.tree.treeId;
+                console.log(this.infos);
+            },
+
             onFileChanged() {
                 this.selectedFile = event.target.files[0];
                 this.shouldDisable = false;
@@ -111,6 +116,23 @@
                         let index = trees.indexOf(this.tree);
                         trees[index].upload_date = response.data;
                         this.$store.dispatch('setTrees', trees);
+                        this.$http.get(path + ':3000/api/user/getTrees',
+                            {
+                                params: {
+                                    userId: this.$store.state.staff.id
+                                }
+                            }
+                        ).then((response) => {
+                            //Store the trees information in the session.
+                            this.$store.dispatch('setTrees', response.data);
+                            //TODO: Display message when there is no tree owned by the user yet.
+                            // this.tree = this.$store.getters.getTreebyId(this.$route.params.treeId);
+                            this.setInfos();
+                        }, (response) => {
+                            console.log('error')
+                        });
+                        this.selectedFile = null;
+                        this.shouldDisable = true;
                         setTimeout(() => {
                             loading.close();
                             this.normal.open = true;
@@ -122,10 +144,9 @@
                             this.normal.color = 'error';
                             this.normal.open = true;
                         }, 1000);
-
                     });
-                this.selectedFile = null;
-                this.shouldDisable = true;
+
+
             }
         }
     }
