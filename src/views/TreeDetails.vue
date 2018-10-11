@@ -83,19 +83,24 @@
         },
         methods: {
             setInfos(){
-                this.tree = this.$store.getters.getTreebyId(this.$route.params.treeId);
-                console.log(this.tree);
-                this.infos = [];
-                this.infos.push({id: 1, label: 'Name:', value: this.tree.name});
-                this.infos.push({id: 2, label: 'Health:', value: this.tree.health});
-                this.infos.push({id: 3, label: 'Location:', value: this.tree.location});
-                this.infos.push({id: 4, label: 'Updated at:', value: this.tree.upload_date});
-                this.infos.push({id: 5, label: 'Sayings:', value: this.tree.sayings});
-                this.infos.push({id: 6, label: 'Species:', value: this.tree.species});
-                this.infos.push({id: 7, label: 'height:', value: this.tree.height});
-                this.treeImageSrc = path + ':3000/' + this.tree.photo_src;
-                this.photosRoutePath = '/trees/photos/' + this.tree.treeId;
-                console.log(this.infos);
+                this.$http.get(path + ':3000/api/tree/' + this.$route.params.treeId,
+                ).then((response) => {
+                    console.log("Get tree ");
+                    console.log(response.data[0]);
+                    this.tree = response.data[0];
+                    this.infos = [];
+                    this.infos.push({id: 1, label: 'Name:', value: this.tree.name});
+                    this.infos.push({id: 2, label: 'Health:', value: this.tree.health});
+                    this.infos.push({id: 3, label: 'Location:', value: this.tree.location});
+                    this.infos.push({id: 4, label: 'Updated at:', value: this.tree.upload_date});
+                    this.infos.push({id: 5, label: 'Sayings:', value: this.tree.sayings});
+                    this.infos.push({id: 6, label: 'Species:', value: this.tree.species});
+                    this.infos.push({id: 7, label: 'height:', value: this.tree.height});
+                    this.treeImageSrc = path + ':3000/' + this.tree.photo_src;
+                    this.photosRoutePath = '/trees/photos/' + this.tree.treeId;
+                }, (response) => {
+                    console.log('error')
+                });
             },
 
             onFileChanged() {
@@ -112,35 +117,20 @@
                 this.$http.post(path + ":3000/api/tree/uploadPhoto", fd)
                     .then(response => {
                         console.log(response.data);
-                        let trees = this.$store.state.trees;
-                        let index = trees.indexOf(this.tree);
-                        trees[index].upload_date = response.data;
-                        this.$store.dispatch('setTrees', trees);
-                        this.$http.get(path + ':3000/api/user/getTrees',
-                            {
-                                params: {
-                                    userId: this.$store.state.staff.id
-                                }
-                            }
-                        ).then((response) => {
-                            //Store the trees information in the session.
-                            this.$store.dispatch('setTrees', response.data);
-                            //TODO: Display message when there is no tree owned by the user yet.
-                            // this.tree = this.$store.getters.getTreebyId(this.$route.params.treeId);
-                            this.setInfos();
-                        }, (response) => {
-                            console.log('error')
-                        });
+                        this.setInfos();
                         this.selectedFile = null;
                         this.shouldDisable = true;
                         setTimeout(() => {
                             loading.close();
+                            this.normal.message = "Successfully uploaded !";
+                            this.normal.color = 'success';
                             this.normal.open = true;
                         }, 1000);
                     }, response => {
                         console.log("upload failed.");
                         setTimeout(() => {
                             loading.close();
+                            this.normal.message = "Upload failed! Please Try again.";
                             this.normal.color = 'error';
                             this.normal.open = true;
                         }, 1000);
