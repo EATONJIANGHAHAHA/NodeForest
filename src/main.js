@@ -6,7 +6,9 @@ import muse from './muse'
 import axios from 'axios'
 import Loading from 'muse-ui-loading'
 import VueLazyLoad from 'vue-lazyload'
+import animated from 'animate.css'
 
+Vue.use(animated);
 Vue.use(Loading);
 Vue.use(VueLazyLoad);
 Vue.config.productionTip = true;
