@@ -23,9 +23,9 @@ var StaffSQL = {
     getAllStaffs: 'SELECT * FROM staff',
     addStaff:'INSERT INTO staff (username, password, email, phone, address) VALUES (?, ?, ?, ?, ?)',
     getStaffById:'SELECT * FROM staff WHERE id = ? ',
-    usernameExist:'SELECT COUNT(*) AS number FROM staff WHERE username = ?',
-    hasTrees: ' SELECT COUNT(*) AS number from tree WHERE staff_id = ?',
-    hasUnsolvedApplication:'SELECT COUNT(*) AS number from tree_app WHERE staff_id = ? AND complete_date IS NULL',
+    usernameExist:'SELECT COUNT(1) AS number FROM staff WHERE username = ?',
+    hasTrees: ' SELECT COUNT(1) AS number from tree WHERE staff_id = ?',
+    hasUnsolvedApplication:'SELECT COUNT(1) AS number from tree_app WHERE staff_id = ? AND complete_date IS NULL',
     delete:'DELETE FROM staff WHERE id = ?',
     getWorkloadOrder:'SELECT any_value(s.id) AS id, COUNT(t.staff_id) AS num FROM staff s LEFT JOIN tree t ON t.staff_id = s.id GROUP BY t.staff_id ORDER BY num'
 };
