@@ -46,13 +46,22 @@
                         message: 'User name has to be longer than 3 characters'
                     },
                     {
-                        validate:(val) => this.$http.post(path + ':3000/api/user/usernameExist', {
+                        validate:(val) => {
+
+                            let before = performance.now()
+                            console.log("Before request: " + before);
+                            this.$http.post(path + ':3000/api/user/usernameExist', {
                             username: val,
                         }).then(response => {
+                            let after = performance.now();
+                            let difference = after - before;
+                            console.log("After response: " + after + ", difference: " + difference);
                             return response.data.number === 0;
                         }, response => {
                             return true;
-                        }),
+                        })
+                        },
+
                         message: 'Username already exists.'
                     }
                 ],
