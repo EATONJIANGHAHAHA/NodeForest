@@ -12,9 +12,12 @@
                 <mu-sub-header>Address: {{incomplete.address}}</mu-sub-header>
                 <mu-sub-header>Status: {{incomplete.status}}</mu-sub-header>
                 <mu-sub-header>Message: {{incomplete.message}}</mu-sub-header>
-                <mu-button v-if="inCompletes[index].status === 'SENT'" slot="action" icon @click="receive(index)">
-                    <mu-icon value="done_all"></mu-icon>
-                </mu-button>
+                <mu-container v-if="$store.state.user.id">
+                    <mu-button v-if="inCompletes[index].status === 'SENT'" slot="action" icon @click="receive(index)">
+                        <mu-icon value="done_all"></mu-icon>
+                    </mu-button>
+                </mu-container>
+
             </mu-expansion-panel>
         </div>
         <div class="demo-text" v-if="tabIndex === 1">
@@ -31,9 +34,10 @@
 </template>
 
 <script>
-    let path = require("../../common.js")
+    let path = require("../../common.js");
+
     export default {
-        name: "Applications",
+        name: "UserApplications",
         data() {
             return {
                 tabIndex: 0,
@@ -52,7 +56,7 @@
 
             getCompletes() {
 
-                this.$http.get(path + ':3000/api/postcard_app/user/received?userId=' + this.$store.state.user.id, {}).then(response => {
+                this.$http.get(path.path + ':3000/api/postcard_app/user/received?userId=' + this.$store.state.user.id, {}).then(response => {
                     console.log(response.data);
                     this.completes = [];
                     for (let i = 0; i < response.data.length; i++)
@@ -63,7 +67,7 @@
             },
 
             getIncompletes() {
-                this.$http.get(path + ':3000/api/postcard_app/user/unreceived?userId=' + this.$store.state.user.id, {}).then(response => {
+                this.$http.get(path.path + ':3000/api/postcard_app/user/unreceived?userId=' + this.$store.state.user.id, {}).then(response => {
                     console.log(response.data);
                     this.inCompletes = [];
                     for (let i = 0; i < response.data.length; i++)
@@ -74,7 +78,7 @@
             },
 
             receive(i){
-                this.$http.put(path + ':3000/api/postcard_app/receive',
+                this.$http.put(path.path + ':3000/api/postcard_app/receive',
                     {
                         id: this.inCompletes[i].id
                 }).then(response => {

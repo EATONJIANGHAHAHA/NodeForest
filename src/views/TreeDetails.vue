@@ -46,7 +46,7 @@
     import Tree from "../model/Tree";
     import 'muse-ui-loading/dist/muse-ui-loading.css';
 
-    const path = require("../common");
+    const Const = require("../common");
     export default {
         name: "TreeDetails",
         data() {
@@ -83,7 +83,7 @@
         },
         methods: {
             setInfos(){
-                this.$http.get(path + ':3000/api/tree/' + this.$route.params.treeId,
+                this.$http.get(Const.path + ':3000/api/tree/' + this.$route.params.treeId,
                 ).then((response) => {
                     console.log("Get tree ");
                     console.log(response.data[0]);
@@ -96,7 +96,7 @@
                     this.infos.push({id: 5, label: 'Sayings:', value: this.tree.sayings});
                     this.infos.push({id: 6, label: 'Species:', value: this.tree.species});
                     this.infos.push({id: 7, label: 'height:', value: this.tree.height});
-                    this.treeImageSrc = path + ':3000/' + this.tree.photo_src;
+                    this.treeImageSrc = Const.path + ':3000/' + this.tree.photo_src;
                     this.photosRoutePath = '/trees/photos/' + this.tree.treeId;
                 }, (response) => {
                     console.log('error')
@@ -114,7 +114,7 @@
                 const fd = new FormData();
                 fd.append('treeImage', this.selectedFile);
                 fd.append('treeId', this.tree.treeId);
-                this.$http.post(path + ":3000/api/tree/uploadPhoto", fd)
+                this.$http.post(Const.path + ":3000/api/tree/uploadPhoto", fd)
                     .then(response => {
                         console.log(response.data);
                         this.setInfos();

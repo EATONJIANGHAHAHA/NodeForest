@@ -34,7 +34,7 @@
     import User from '../model/User';
     import Admin from '../model/Admin';
     import Staff from '../model/Staff';
-    const path = require('../common');
+    const Const = require('../common');
 
     export default {
         name: 'Header',
@@ -54,21 +54,21 @@
         methods: {
             logout() {
                 //todo: add logout functions
-                this.$store.dispatch('setUser', new User());
-                this.$store.dispatch('setAdmin', new Admin());
-                this.$store.dispatch('setStaff', new Staff());
+                this.$store.dispatch(Const.store.setUser, new User());
+                this.$store.dispatch(Const.store.setAdmin, new Admin());
+                this.$store.dispatch(Const.store.setStaff, new Staff());
                 this.delCookie('session');
                 this.$router.push('/');
             },
             openDrawer() {
                 if (this.$store.state.user.id || this.$store.state.admin.id || this.$store.state.staff.id) {
-                    this.$store.dispatch('setDrawerOpen');
+                    this.$store.dispatch(Const.store.setDrawerOpen);
                 }
             },
             home(){
-                if (this.$store.state.user.id) this.$router.push('/user/home');
-                if (this.$store.state.admin.id) this.$router.push('/admin/home');
-                if (this.$store.state.staff.id) this.$router.push('/staff/home')
+                if (this.$store.state.user.id) this.$router.push(Const.user + Const.home);
+                if (this.$store.state.admin.id) this.$router.push(Const.admin + Const.home);
+                if (this.$store.state.staff.id) this.$router.push(Const.staff + Const.home)
             }
         }
     }

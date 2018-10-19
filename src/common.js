@@ -1,2 +1,30 @@
-var path = 'http://127.0.0.1';
-module.exports=path;
+var Const = {
+    path: 'http://127.0.0.1',
+    root: '/',
+    user: '/user',
+    staff: '/staff',
+    admin: '/admin',
+    home: '/home',
+    account: '/account',
+    about: '/about',
+    edit: '/edit',
+    dTreeId: '/:treeId',
+    applications: '/applications',
+    add: '/add',
+    postcards: 'postcards',
+    login: '/login',
+    register: '/register',
+    trees: '/trees',
+    detail: '/detail',
+    photos: '/photos',
+    staffs: '/staffs',
+    store: {
+        setUser: 'setUser',
+        setAdmin: 'setAdmin',
+        setStaff: 'setStaff',
+        setTrees: 'setTrees',
+        setDrawerOpen: 'setDrawerOpen',
+        setDrawerClose: 'setDrawerClose',
+    }
+};
+module.exports = Const;

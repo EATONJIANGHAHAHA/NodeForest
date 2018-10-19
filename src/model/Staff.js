@@ -1,3 +1,6 @@
+/**
+ * Class that represents the staff object.
+ */
 export default class {
     constructor (
         id,

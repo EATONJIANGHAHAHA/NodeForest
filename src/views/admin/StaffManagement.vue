@@ -18,7 +18,7 @@
 </template>
 
 <script>
-    let path = require("../../common.js")
+    let Const = require("../../common.js")
     export default {
         name: "StaffManagement",
         data() {
@@ -36,7 +36,7 @@
 
             getStaffs(){
                 console.log("Admin: manageStaff");
-                this.$http.get(path + ':3000/api/admin/staffs', {}).then(response => {
+                this.$http.get(Const.path + ':3000/api/admin/staffs', {}).then(response => {
                     console.log(response.data);
                     this.staffs = [];
                     for (let i = 0; i < response.data.length; i++)
@@ -57,36 +57,36 @@
 
             deleteStaff(staffId) {
                 console.log(staffId);
-                this.$http.get(path + ':3000/api/staff/hasTrees?staffId=' + staffId)
+                this.$http.get(Const.path + ':3000/api/staff/hasTrees?staffId=' + staffId)
                     .then(response => {
                         if (response.data[0].number !== 0) {
-                            this.dialogText = "Cannot delete: the staff has work to do!"
+                            this.dialogText = "Cannot delete: the staff has work to do!";
                             this.openDialog = true;
                         }
                         else {
-                            this.$http.get(path + ':3000/api/staff/hasUnsolvedApps?staffId=' + staffId)
+                            this.$http.get(Const.path + ':3000/api/staff/hasUnsolvedApps?staffId=' + staffId)
                                 .then(response => {
                                     if (response.data[0].number !== 0) {
-                                        this.dialogText = "Cannot delete: the staff has work to do!"
+                                        this.dialogText = "Cannot delete: the staff has work to do!";
                                         this.openDialog = true;
                                     }
                                     else {
 
-                                        this.$http.post(path + ':3000/api/admin/staffs/delete', {
+                                        this.$http.post(Const.path + ':3000/api/admin/staffs/delete', {
                                             staffId: staffId
                                         }).then(response => {
                                             if (response.data.code === "1") {
-                                                this.dialogText = 'Deleting staff failed.'
+                                                this.dialogText = 'Deleting staff failed.';
                                                 this.openDialog = true
                                             } else {
-                                                this.dialogText = 'Staff deleted'
-                                                this.openDialog = true
-                                                console.log("Admin: staff " + staffId + " deleted.")
+                                                this.dialogText = 'Staff deleted';
+                                                this.openDialog = true;
+                                                console.log("Admin: staff " + staffId + " deleted.");
                                                 this.$router.push('/admin/staffs');
                                                 this.getStaffs();
                                             }
                                         }, response => {
-                                            this.dialogText = 'Deleting staff failed: system error.'
+                                            this.dialogText = 'Deleting staff failed: system error.';
                                             this.openDialog = true
                                         })
 

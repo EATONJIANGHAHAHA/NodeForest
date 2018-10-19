@@ -25,8 +25,8 @@
 
 <script>
     import md5 from "js-md5"
-    let path = require("../../common.js")
-    let reg_str = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
+    let Const = require("../../common.js");
+    let reg_str = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
 
     export default {
         name: "EditStaff",
@@ -91,9 +91,9 @@
         created() {
             let staffId = this.$route.query.staffId;
             console.log("Edit Staff: " + staffId);
-            this.$http.get(path + ':3000/api/admin/staffs/getById?staffId=' + staffId)
+            this.$http.get(Const.path + ':3000/api/admin/staffs/getById?staffId=' + staffId)
                 .then(response => {
-                    console.log(response.data)
+                    console.log(response.data);
                     this.form.username = response.data[0].username;
                     this.form.password = response.data[0].password;
                     this.form.email = response.data[0].email;
@@ -109,7 +109,7 @@
                 this.$refs.form.validate().then((result) => {
                     if (result) {
                         if( this.form.password !== this.form.originalPassword) this.form.password = md5(md5(this.form.password) + this.form.username);
-                        this.$http.post(path + ':3000/api/admin/staffs/update', {
+                        this.$http.post(Const.path + ':3000/api/admin/staffs/update', {
                             password: this.form.password,
                             email: this.form.email,
                             address: this.form.address,
@@ -117,29 +117,29 @@
                             staffId: this.form.staffId
                         }).then(response => {
                             if (response.data.code === "1") {
-                                this.dialogText = 'Update staff failed.'
-                                this.openDialog = true
+                                this.dialogText = 'Update staff failed.';
+                                this.openDialog = true;
                             } else {
-                                this.dialogText = 'Information saved.'
-                                this.openDialog = true
-                                console.log("Admin: staff " + this.form.staffId + " updated.")
+                                this.dialogText = 'Information saved.';
+                                this.openDialog = true;
+                                console.log("Admin: staff " + this.form.staffId + " updated.");
                                 this.$router.push('/admin/staffs')
                             }
                         }, response => {
-                            this.dialogText = 'Update staff failed: system error.'
+                            this.dialogText = 'Update staff failed: system error.';
                             this.openDialog = true
                         })
 
                     }
                     else {
-                        this.dialogText = 'Please correct your input.'
+                        this.dialogText = 'Please correct your input.';
                         this.openDialog = true
                     }
                 })
             },
 
             closeDialog() {
-                this.clear()
+                this.clear();
                 this.openDialog = false
             },
 
@@ -147,9 +147,9 @@
                Called when the update password operation finished.
             */
             clear() {
-                this.$refs.form.clear()
-                this.form.password = ''
-                this.form.repeatPassword = ''
+                this.$refs.form.clear();
+                this.form.password = '';
+                this.form.repeatPassword = '';
             },
         }
 

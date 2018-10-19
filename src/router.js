@@ -2,133 +2,123 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Index from './views/Index'
 import About from './views/About'
-import UserHome from './views/user/Home'
 import Login from './views/Login'
 import Register from './views/Register'
 import TreeDetails from './views/TreeDetails'
-import AdminHome from './views/admin/Home'
-import StaffHome from './views/staff/Home'
-import AdminAccount from './views/admin/Account'
 import StaffManagement from './views/admin/StaffManagement'
 import NewStaff from './views/admin/NewStaff'
 import EditStaff from './views/admin/EditStaff'
-import MyAccount from './views/user/Account'
-import EditAccount from './views/user/EditAccount'
 import NewTreeApp from './views/user/NewTreeApp'
-import Applications from './views/user/Applications'
-import StaffApplications from './views/staff/Applications'
 import PostcardApp from './views/user/PostcardApp'
 import Postcards from './views/user/Postcards'
 import StaffPostcards from './views/staff/Postcards'
 import HistorialPhotos from './views/HistoricalPhotos'
 import TreeEdit from './views/TreeEdit'
-import StaffAccount from './views/staff/Account'
-import StaffEditAccount from './views/staff/EditAccount'
+import Home from './views/Home'
+import Account from './views/Account'
+import Applications from './views/Applications'
+import EditAccount from './views/EditAccount'
+const Const = require('./common');
 
 Vue.use(Router);
 
 export default new Router({
     routes: [
         {
-            path: '/',
+            path: Const.root,
             component: Index,
         },
         {
-            path: '/about',
+            path: Const.about,
             component: About,
         },
         {
-            path: '/user/home',
-            component: UserHome,
+            path: Const.user + Const.home,
+            component: Home,
         },
         {
-            path: '/account',
-            component: MyAccount
+            path: Const.user + Const.account,
+            component: Account
         },
         {
-            path: '/account/edit',
-            component: EditAccount
-        },
-        {
-            path: '/applications/add',
-            component: NewTreeApp
-        },
-        {
-            path: '/applications',
+            path: Const.user + Const.applications,
             component: Applications
         },
         {
-            path: '/postcards',
+            path: Const.user + Const.account + Const.edit,
+            component: EditAccount
+        },
+        {
+            path: Const.applications + Const.add,
+            component: NewTreeApp
+        },
+        {
+            path: Const.user + Const.postcards,
             component: Postcards
         },
         {
-            path: '/postcards/add/:treeId',
+            path: Const.postcards + Const.add + Const.dTreeId,
             component: PostcardApp
         },
         {
-            path: '/login',
+            path: Const.login,
             component: Login,
         },
         {
-            path: '/register',
+            path: Const.register,
             component: Register,
         },
         {
-            path: '/admin/home',
-            component: AdminHome,
+            path: Const.staff + Const.home,
+            component: Home,
         },
         {
-            path: '/staff/home',
-            component: StaffHome,
+            path: Const.staff + Const.applications,
+            component: Applications
         },
         {
-            path: '/staff/applications',
-            component: StaffApplications
-        },
-        {
-            path: '/staff/postcards',
+            path: Const.staff + Const.postcards,
             component: StaffPostcards
         },
         {
-            path: '/staff/account',
-            component: StaffAccount
+            path: Const.staff + Const.account,
+            component: Account
         },
         {
-            path: '/staff/account/edit',
-            component: StaffEditAccount
+            path: Const.staff + Const.account + Const.edit,
+            component: EditAccount
         },
         {
-            //dynamic routing passing location value into TreeDetails component.
-            path: '/trees/detail/:treeId',
+            path: Const.trees + Const.detail + Const.dTreeId,
             component: TreeDetails,
         },
         {
-            path: '/trees/photos/:treeId',
+            path: Const.trees + Const.photos + Const.dTreeId,
             component: HistorialPhotos,
         },
-/*        {
-            path: '/treemanagement',
-            component: TreeManagement,
-        },*/
         {
-            path: '/admin/account',
-            component: AdminAccount
+            path: Const.trees + Const.edit + Const.dTreeId,
+            component: TreeEdit
         },
         {
-            path: '/admin/staffs',
+            path: Const.admin + Const.home,
+            component: Home,
+        },
+        {
+            path: Const.admin + Const.account,
+            component: Account
+        },
+        {
+            path: Const.admin + Const.staffs,
             component: StaffManagement
         },
         {
-            path: '/admin/staffs/add',
+            path: Const.admin + Const.staffs + Const.add,
             component: NewStaff
         },
         {
-            path: '/admin/staffs/edit',
+            path: Const.admin + Const.staffs + Const.edit,
             component: EditStaff
-        },
-        {
-            path: '/trees/edit/:treeId',
-            component: TreeEdit
         }
     ]
 })

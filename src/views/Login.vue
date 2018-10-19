@@ -31,7 +31,7 @@
     import md5 from "js-md5";
     import Admin from "../model/Admin";
     import Staff from "../model/Staff";
-    var path = require("../common.js");
+    var Const = require("../common.js");
 
     export default {
         name: "Login",
@@ -99,7 +99,7 @@
                         if (this.radio.loginType === 'User') {
                             console.log(window.location.host);
 
-                            this.$http.post(path + ':3000/api/user/login', {
+                            this.$http.post(Const.path + ':3000/api/user/login', {
                                     username: this.form.user.username,
                                     password: this.form.user.password
                                 }).then(response => {
@@ -118,7 +118,7 @@
                                 this.openDialog = true;
                             });
                         } else if (this.radio.loginType === 'Staff'){
-                            this.$http.post( path + ':3000/api/staff/login', {
+                            this.$http.post( Const.path + ':3000/api/staff/login', {
                                 username: this.form.user.username,
                                 password: this.form.user.password
                             }).then(response => {
@@ -137,7 +137,7 @@
                                 this.openDialog = true;
                             })
                         } else {
-                            this.$http.post( path + ':3000/api/admin/login', {
+                            this.$http.post( Const.path + ':3000/api/admin/login', {
                                 username: this.form.user.username,
                                 password: this.form.user.password
                             }).then(response => {

@@ -1,24 +1,23 @@
-<!--Register user page.-->
 <template>
     <div>
         <mu-container>
             <h1>Edit Account</h1>
-            <h3>Username: {{this.form.staff.username}}</h3>
+            <h3>Username: {{this.form.user.username}}</h3>
             <mu-form ref="form" :model="form" :label-position="labelPosition" label-width="100">
-                <mu-form-item prop="staff.password" label="Password" :rules="passwordRules">
-                    <mu-text-field type="password" v-model="form.staff.password"></mu-text-field>
+                <mu-form-item prop="user.password" label="Password" :rules="passwordRules">
+                    <mu-text-field type="password" v-model="form.user.password"></mu-text-field>
                 </mu-form-item>
-                <mu-form-item prop="repeatPassword" label="Repeat" :rules="repeatPasswordRules" v-if="form.staff.password !== this.$store.state.staff.password">
+                <mu-form-item prop="repeatPassword" label="Repeat" :rules="repeatPasswordRules" v-if="form.user.password !== this.$store.state.user.password">
                     <mu-text-field type="password" v-model="form.repeatPassword"></mu-text-field>
                 </mu-form-item>
-                <mu-form-item prop="staff.email" label="Email" :rules="emailRules">
-                    <mu-text-field v-model="form.staff.email"></mu-text-field>
+                <mu-form-item prop="user.email" label="Email" :rules="emailRules">
+                    <mu-text-field v-model="form.user.email"></mu-text-field>
                 </mu-form-item>
-                <mu-form-item prop="staff.phone" label="Phone" :rules="phoneRules">
-                    <mu-text-field type="number" v-model="form.staff.phone"></mu-text-field>
+                <mu-form-item prop="user.phone" label="Phone" :rules="phoneRules">
+                    <mu-text-field type="number" v-model="form.user.phone"></mu-text-field>
                 </mu-form-item>
-                <mu-form-item prop="staff.address" label="Address">
-                    <mu-text-field v-model="form.staff.address"></mu-text-field>
+                <mu-form-item prop="user.address" label="Address">
+                    <mu-text-field v-model="form.user.address"></mu-text-field>
                 </mu-form-item>
             </mu-form>
             <mu-button @click="submit" round color="secondary">Save</mu-button>
@@ -31,13 +30,12 @@
 </template>
 
 <script>
-    import Router from '../../router'
+    import Router from '../router'
     import md5 from "js-md5";
-    import Staff from "../../model/Staff";
-    let path = require("../../common.js");
+    let Const = require("../common.js");
 
     export default {
-        name: "Edit Account",
+        name: "EditAccount",
         data() {
             return {
                 reg: /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/,
@@ -70,7 +68,7 @@
 
                 repeatPasswordRules: [
                     {
-                        validate: (val) => val === this.form.staff.password,
+                        validate: (val) => val === this.form.user.password,
                         message: 'Repeat password should be the same.'
                     },
                 ],
@@ -81,7 +79,7 @@
                     }
                 ],
                 form: {
-                    staff: new Staff(),
+                    user: {},
                     repeatPassword: '',
                 },
                 isDialogOpen: false,
@@ -90,34 +88,40 @@
             }
         },
         created(){
-            this.form.staff.username = this.$store.state.staff.username;
-            this.form.staff.id = this.$store.state.staff.id;
-            this.form.staff.password = this.$store.state.staff.password;
-            this.form.repeatPassword = this.$store.state.staff.password;
-            this.form.staff.email = this.$store.state.staff.email;
-            this.form.staff.address = this.$store.state.staff.address;
-            this.form.staff.phone = this.$store.state.staff.phone;
-
-        },
-        components: {
+            if (this.$store.state.user.id) {
+                this.form.user.username = this.$store.state.user.username;
+                this.form.user.id = this.$store.state.user.id;
+                this.form.user.password = this.$store.state.user.password;
+                this.form.repeatPassword = this.$store.state.user.password;
+                this.form.user.email = this.$store.state.user.email;
+                this.form.user.address = this.$store.state.user.address;
+                this.form.user.phone = this.$store.state.user.phone;
+            }
+            else if (this.$store.state.staff.id) {
+                this.form.user.username = this.$store.state.staff.username;
+                this.form.user.id = this.$store.state.staff.id;
+                this.form.user.password = this.$store.state.staff.password;
+                this.form.repeatPassword = this.$store.state.staff.password;
+                this.form.user.email = this.$store.state.staff.email;
+                this.form.user.address = this.$store.state.staff.address;
+                this.form.user.phone = this.$store.state.staff.phone;
+            }
         },
         methods: {
-
             submit() {
-
                 this.$refs.form.validate().then((result) => {
                     if(result) {
-                        if (this.form.staff.password !== this.$store.state.staff.password) {
-                            this.form.staff.password = md5(md5(this.form.staff.password) + this.form.staff.username);
-                            this.form.repeatPassword = this.form.staff.password
+                        if (this.form.user.password !== this.$store.state.user.password) {
+                            this.form.user.password = md5(md5(this.form.user.password) + this.form.user.username);
+                            this.form.repeatPassword = this.form.user.password
                         }
-                        this.$http.put( path + ':3000/api/staff/update',
+                        this.$http.post( Const + ':3000/api/user/update',
                             {
-                                password: this.form.staff.password,
-                                email: this.form.staff.email,
-                                address: this.form.staff.address,
-                                phone: this.form.staff.phone,
-                                id: this.form.staff.id
+                                password: this.form.user.password,
+                                email: this.form.user.email,
+                                address: this.form.user.address,
+                                phone: this.form.user.phone,
+                                id: this.form.user.id
                             }
                         ).then(response => {
                             console.log(response.data);
@@ -126,8 +130,8 @@
                             }
                             else {
                                 this.openDialog('Information saved.')
-                                this.$store.dispatch("setStaff", this.form.staff);
-                                Router.push('/staff/account');
+                                this.$store.dispatch("setUser", this.form.user);
+                                Router.push('/account');
                             }
                         }, response => {
                             console.log(response.data);

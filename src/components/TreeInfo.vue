@@ -28,7 +28,7 @@
 </template>
 
 <script>
-    const pass = require('../common');
+    const Const = require('../common');
 
     export default {
         name: "TreeInfo",
@@ -55,10 +55,10 @@
             }
         },
         created() {
-            this.location_img_src = pass + ':3000/' + this.location_src;
-            this.tree_img_src = pass + ':3000/' + this.photo_src;
-            this.routePath = this.routePath + 'trees/detail/' + this.treeId;
-            this.treeEditRoutePath = this.treeEditRoutePath + 'trees/edit/' + this.treeId;
+            this.location_img_src = Const.path + ':3000/' + this.location_src;
+            this.tree_img_src = Const.path + ':3000/' + this.photo_src;
+            this.routePath = Const.trees + Const.detail + Const.root + this.treeId;
+            this.treeEditRoutePath = Const.trees + Const.edit + Const.root + this.treeId;
         }
     }
 </script>

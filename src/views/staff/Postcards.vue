@@ -40,7 +40,7 @@
 <script>
     let path = require("../../common.js")
     export default {
-        name: "Applications",
+        name: "UserApplications",
         data() {
             return {
                 tabIndex: 0,

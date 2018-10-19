@@ -28,9 +28,8 @@
 
 <script>
     import md5 from "js-md5"
-
-    let path = require("../../common.js")
-    let reg_str = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
+    let Const = require("../../common.js");
+    let reg_str = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
 
     export default {
         name: "NewStaff",
@@ -47,7 +46,7 @@
                         message: 'Username should be longer than 3 characters'
                     },
                     {
-                        validate: (val) => this.$http.post(path + ':3000/api/admin/staffs/usernameExist', {
+                        validate: (val) => this.$http.post(Const.path + ':3000/api/admin/staffs/usernameExist', {
                             username: val,
                         }).then(response => {
                             return response.data[0].number === 0;
@@ -113,8 +112,8 @@
                 this.$refs.form.validate().then((result) => {
                     if (result) {
 
-                        this.form.password = md5(md5(this.form.password) + this.form.username)
-                        this.$http.post(path + ':3000/api/admin/staffs/add', {
+                        this.form.password = md5(md5(this.form.password) + this.form.username);
+                        this.$http.post(Const.path + ':3000/api/admin/staffs/add', {
                             username: this.form.username,
                             password: this.form.password,
                             email: this.form.email,
@@ -122,29 +121,29 @@
                             phone: this.form.phone
                         }).then(response => {
                             if (response.data.code === "1") {
-                                this.dialogText = 'Adding new staff failed.'
+                                this.dialogText = 'Adding new staff failed.';
                                 this.openDialog = true
                             } else {
-                                this.dialogText = 'New staff added.'
-                                this.openDialog = true
-                                console.log("Admin: new staff saved.")
-                                this.$router.push('/admin/staffs')
+                                this.dialogText = 'New staff added.';
+                                this.openDialog = true;
+                                console.log("Admin: new staff saved.");
+                                this.$router.push('/admin/staffs');
                             }
                         }, response => {
-                            this.dialogText = 'Adding new staff failed: system error.'
+                            this.dialogText = 'Adding new staff failed: system error.';
                             this.openDialog = true
                         })
 
                     }
                     else {
-                        this.dialogText = 'Please correct your input.'
+                        this.dialogText = 'Please correct your input.';
                         this.openDialog = true
                     }
                 })
             },
 
             closeDialog() {
-                this.clear()
+                this.clear();
                 this.openDialog = false
             },
 
@@ -152,8 +151,8 @@
                Called when the update password operation finished.
             */
             clear() {
-                this.$refs.form.clear()
-                this.form.password = ''
+                this.$refs.form.clear();
+                this.form.password = '';
                 this.form.repeatPassword = ''
             },
         }

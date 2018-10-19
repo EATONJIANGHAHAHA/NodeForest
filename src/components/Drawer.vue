@@ -1,9 +1,6 @@
 <template>
     <mu-drawer :open.sync="$store.state.openDrawer" :docked="docked" :right="position === 'right'" :z-depth="2">
         <mu-appbar color="secondary">
-            <!--<mu-button icon slot="left">
-                <mu-icon value="menu"></mu-icon>
-            </mu-button>-->
             Menu
         </mu-appbar>
         <mu-list>
@@ -38,6 +35,8 @@
 </template>
 
 <script>
+    const Const = require('../common');
+
     export default {
         name: "Drawer",
         data() {
@@ -49,29 +48,29 @@
         },
         methods: {
             home() {
-                if(this.$store.state.user.id) this.$router.push('/user/home');
-                if(this.$store.state.staff.id) this.$router.push('/staff/home');
-                if(this.$store.state.admin.id) this.$router.push('/admin/home');
+                if(this.$store.state.user.id) this.$router.push(Const.user + Const.home);
+                if(this.$store.state.staff.id) this.$router.push(Const.staff + Const.home);
+                if(this.$store.state.admin.id) this.$router.push(Const.admin + Const.home);
                 this.closeDrawer();
             },
             trees(){
-              if(this.$store.state.user.id) this.$router.push('/applications');
-              if(this.$store.state.staff.id) this.$router.push('/staff/applications');
+              if(this.$store.state.user.id) this.$router.push(Const.user + Const.applications);
+              if(this.$store.state.staff.id) this.$router.push(Const.staff + Const.applications);
               this.closeDrawer()
             },
             postcards(){
-                if(this.$store.state.user.id) this.$router.push('/postcards');
-                if(this.$store.state.staff.id) this.$router.push('/staff/postcards');
+                if(this.$store.state.user.id) this.$router.push(Const.user + Const.postcards);
+                if(this.$store.state.staff.id) this.$router.push(Const.staff + Const.postcards);
                 this.closeDrawer()
             },
             account(){
-                if(this.$store.state.user.id) this.$router.push('/account');
-                if(this.$store.state.staff.id) this.$router.push('/staff/account');
-                if(this.$store.state.admin.id) this.$router.push('/admin/account');
+                if(this.$store.state.user.id) this.$router.push(Const.user + Const.account,);
+                if(this.$store.state.staff.id) this.$router.push(Const.staff + Const.account);
+                if(this.$store.state.admin.id) this.$router.push(Const.admin + Const.account);
                 this.closeDrawer()
             },
             closeDrawer() {
-                this.$store.dispatch('setDrawerClose');
+                this.$store.dispatch(Const.store.setDrawerClose);
             }
         }
     }
